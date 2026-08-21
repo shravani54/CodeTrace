@@ -1,0 +1,57 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             x:Class="CodeTrace.Teacher.Views.CreateExamView">
+
+    <ScrollViewer>
+
+        <StackPanel Spacing="15"
+                    Width="600">
+
+            <TextBlock Text="Create Examination"
+                       FontSize="32"
+                       FontWeight="Bold"/>
+
+            <TextBlock Text="Examination Name"
+                       FontSize="16"
+                       Margin="0,20,0,0"/>
+
+            <TextBox x:Name="ExamNameBox"
+                     Height="42"
+                     Watermark="Enter examination name"/>
+
+            <TextBlock Text="Duration (minutes)"
+                       FontSize="16"
+                       Margin="0,10,0,0"/>
+
+            <NumericUpDown x:Name="DurationBox"
+                           Height="42"
+                           Minimum="1"
+                           Maximum="300"
+                           Value="60"/>
+
+            <TextBlock Text="Description"
+                       FontSize="16"
+                       Margin="0,10,0,0"/>
+
+            <TextBox x:Name="DescriptionBox"
+                     Height="120"
+                     Watermark="Enter examination description"
+                     AcceptsReturn="True"
+                     TextWrapping="Wrap"/>
+
+            <Button Content="Create Examination"
+                    Width="220"
+                    Height="45"
+                    HorizontalAlignment="Left"
+                    Margin="0,20,0,0"
+                    Click="CreateExamButton_Click"/>
+
+            <TextBlock x:Name="StatusText"
+                       FontSize="15"
+                       TextWrapping="Wrap"/>
+
+        </StackPanel>
+
+    </ScrollViewer>
+
+</UserControl>

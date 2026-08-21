@@ -1,0 +1,50 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             x:Class="CodeTrace.Teacher.TeacherDashboard">
+
+    <Grid ColumnDefinitions="220,*">
+
+        <Border Grid.Column="0"
+                Padding="20">
+
+            <StackPanel Spacing="15">
+
+                <TextBlock Text="CodeTrace"
+                           FontSize="26"
+                           FontWeight="Bold"
+                           Margin="0,0,0,25"/>
+
+                <Button Content="Create Examination"
+                        Height="45"
+                        Click="CreateExamButton_Click"/>
+
+                <Button Content="Manage Examinations"
+                        Height="45"
+                        Click="ManageExamsButton_Click"/>
+
+                <Button Content="Monitor Students"
+                        Height="45"
+                        Click="MonitorStudentsButton_Click"/>
+
+                <Button Content="View Submissions"
+                        Height="45"
+                        Click="ViewSubmissionsButton_Click"/>
+
+                <Button Content="Manage IDEs"
+                        Height="45"
+                        Click="ManageIDEsButton_Click"/>
+
+            </StackPanel>
+
+        </Border>
+
+        <Border Grid.Column="1"
+                Padding="30">
+
+            <ContentControl x:Name="MainContent"/>
+
+        </Border>
+
+    </Grid>
+
+</UserControl>

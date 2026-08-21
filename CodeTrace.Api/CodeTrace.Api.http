@@ -1,0 +1,6 @@
+@CodeTrace.Api_HostAddress = http://localhost:5177
+
+GET {{CodeTrace.Api_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

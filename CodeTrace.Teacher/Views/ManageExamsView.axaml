@@ -1,0 +1,23 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             x:Class="CodeTrace.Teacher.Views.ManageExamsView">
+
+    <Grid RowDefinitions="Auto,*"
+          Margin="30">
+
+        <TextBlock Grid.Row="0"
+                   Text="Manage Examinations"
+                   FontSize="32"
+                   FontWeight="Bold"
+                   Margin="0,0,0,25"/>
+
+        <ScrollViewer Grid.Row="1">
+
+            <StackPanel x:Name="ExamListPanel"
+                        Spacing="15"/>
+
+        </ScrollViewer>
+
+    </Grid>
+
+</UserControl>
