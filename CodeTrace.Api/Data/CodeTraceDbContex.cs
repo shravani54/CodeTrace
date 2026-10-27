@@ -16,4 +16,12 @@ public class CodeTraceDbContext : DbContext
     public DbSet<ExamIDE> ExamIDEs => Set<ExamIDE>();
 
     public DbSet<Student> Students => Set<Student>();
+
+    public DbSet<IDEConfiguration> IDEConfigurations => Set<IDEConfiguration>();
+
+    public DbSet<Teacher> Teachers => Set<Teacher>();
+    public DbSet<Submission> Submissions => Set<Submission>();
+
+    public DbSet<StudentSession> StudentSessions => Set<StudentSession>();
+    public DbSet<Violation> Violations => Set<Violation>();
 }

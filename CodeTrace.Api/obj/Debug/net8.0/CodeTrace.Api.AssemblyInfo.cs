@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("CodeTrace.Api")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+61e18bb27a5085697604ca9ea9df25262ac94bca")]
 [assembly: System.Reflection.AssemblyProductAttribute("CodeTrace.Api")]
 [assembly: System.Reflection.AssemblyTitleAttribute("CodeTrace.Api")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

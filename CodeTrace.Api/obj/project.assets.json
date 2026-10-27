@@ -47,6 +47,15 @@
           }
         }
       },
+      "BCrypt.Net-Next/4.2.0": {
+        "type": "package",
+        "compile": {
+          "lib/netstandard2.1/BCrypt-Net-Next.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.1/BCrypt-Net-Next.dll": {}
+        }
+      },
       "Humanizer.Core/2.14.1": {
         "type": "package",
         "compile": {
@@ -406,11 +415,11 @@
           }
         }
       },
-      "Microsoft.EntityFrameworkCore/8.0.30": {
+      "Microsoft.EntityFrameworkCore/8.0.33": {
         "type": "package",
         "dependencies": {
-          "Microsoft.EntityFrameworkCore.Abstractions": "8.0.30",
-          "Microsoft.EntityFrameworkCore.Analyzers": "8.0.30",
+          "Microsoft.EntityFrameworkCore.Abstractions": "8.0.33",
+          "Microsoft.EntityFrameworkCore.Analyzers": "8.0.33",
           "Microsoft.Extensions.Caching.Memory": "8.0.1",
           "Microsoft.Extensions.Logging": "8.0.1"
         },
@@ -428,7 +437,7 @@
           "buildTransitive/net8.0/Microsoft.EntityFrameworkCore.props": {}
         }
       },
-      "Microsoft.EntityFrameworkCore.Abstractions/8.0.30": {
+      "Microsoft.EntityFrameworkCore.Abstractions/8.0.33": {
         "type": "package",
         "compile": {
           "lib/net8.0/Microsoft.EntityFrameworkCore.Abstractions.dll": {
@@ -441,7 +450,7 @@
           }
         }
       },
-      "Microsoft.EntityFrameworkCore.Analyzers/8.0.30": {
+      "Microsoft.EntityFrameworkCore.Analyzers/8.0.33": {
         "type": "package",
         "compile": {
           "lib/netstandard2.0/_._": {}
@@ -450,12 +459,12 @@
           "lib/netstandard2.0/_._": {}
         }
       },
-      "Microsoft.EntityFrameworkCore.Design/8.0.30": {
+      "Microsoft.EntityFrameworkCore.Design/8.0.33": {
         "type": "package",
         "dependencies": {
           "Humanizer.Core": "2.14.1",
           "Microsoft.CodeAnalysis.CSharp.Workspaces": "4.5.0",
-          "Microsoft.EntityFrameworkCore.Relational": "8.0.30",
+          "Microsoft.EntityFrameworkCore.Relational": "8.0.33",
           "Microsoft.Extensions.DependencyModel": "8.0.2",
           "Mono.TextTemplating": "2.2.1"
         },
@@ -473,10 +482,10 @@
           "build/net8.0/Microsoft.EntityFrameworkCore.Design.props": {}
         }
       },
-      "Microsoft.EntityFrameworkCore.Relational/8.0.30": {
+      "Microsoft.EntityFrameworkCore.Relational/8.0.33": {
         "type": "package",
         "dependencies": {
-          "Microsoft.EntityFrameworkCore": "8.0.30",
+          "Microsoft.EntityFrameworkCore": "8.0.33",
           "Microsoft.Extensions.Configuration.Abstractions": "8.0.0"
         },
         "compile": {
@@ -490,11 +499,11 @@
           }
         }
       },
-      "Microsoft.EntityFrameworkCore.SqlServer/8.0.30": {
+      "Microsoft.EntityFrameworkCore.SqlServer/8.0.33": {
         "type": "package",
         "dependencies": {
           "Microsoft.Data.SqlClient": "5.1.9",
-          "Microsoft.EntityFrameworkCore.Relational": "8.0.30",
+          "Microsoft.EntityFrameworkCore.Relational": "8.0.33",
           "System.Formats.Asn1": "8.0.2"
         },
         "compile": {
@@ -1613,6 +1622,31 @@
         "lib/netstandard2.0/Azure.Identity.xml"
       ]
     },
+    "BCrypt.Net-Next/4.2.0": {
+      "sha512": "gwLD2KfCuwQesP17aVh4h6lpiMPEVt5Lbpndo0ej903hNUUTtyxt3ARdDjmuydBRTAUICc7OVKVbaOvc6SQYXA==",
+      "type": "package",
+      "path": "bcrypt.net-next/4.2.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "bcrypt.net-next.4.2.0.nupkg.sha512",
+        "bcrypt.net-next.nuspec",
+        "ico.png",
+        "lib/net10.0/BCrypt-Net-Next.dll",
+        "lib/net10.0/BCrypt.Net-Next.xml",
+        "lib/net462/BCrypt-Net-Next.dll",
+        "lib/net462/BCrypt.Net-Next.xml",
+        "lib/net472/BCrypt-Net-Next.dll",
+        "lib/net472/BCrypt.Net-Next.xml",
+        "lib/net48/BCrypt-Net-Next.dll",
+        "lib/net48/BCrypt.Net-Next.xml",
+        "lib/netstandard2.0/BCrypt-Net-Next.dll",
+        "lib/netstandard2.0/BCrypt.Net-Next.xml",
+        "lib/netstandard2.1/BCrypt-Net-Next.dll",
+        "lib/netstandard2.1/BCrypt.Net-Next.xml",
+        "readme.md"
+      ]
+    },
     "Humanizer.Core/2.14.1": {
       "sha512": "lQKvtaTDOXnoVJ20ibTuSIOf2i0uO0MPbDhd1jm238I+U/2ZnRENj0cktKZhtchBMtCUSRQ5v4xBCUbKNmyVMw==",
       "type": "package",
@@ -2243,10 +2277,10 @@
         "runtimes/win-x86/native/Microsoft.Data.SqlClient.SNI.dll"
       ]
     },
-    "Microsoft.EntityFrameworkCore/8.0.30": {
-      "sha512": "Y6GP16iuqAUkcXSgMqjgao9w0UHSz8x04LRDadsi++sn7yBI9C/sy61xNLzPKM+6DZEbyPRHGq3M58f6DhB25g==",
+    "Microsoft.EntityFrameworkCore/8.0.33": {
+      "sha512": "484sjwPQsnTbRhfhkZyE3NwW8MdMB0zaktDlZTzbWwuVHM5ZL6LktMIkxdFEx6zChKrFb8MPeN46vJ5fJ225Qw==",
       "type": "package",
-      "path": "microsoft.entityframeworkcore/8.0.30",
+      "path": "microsoft.entityframeworkcore/8.0.33",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
@@ -2255,14 +2289,14 @@
         "buildTransitive/net8.0/Microsoft.EntityFrameworkCore.props",
         "lib/net8.0/Microsoft.EntityFrameworkCore.dll",
         "lib/net8.0/Microsoft.EntityFrameworkCore.xml",
-        "microsoft.entityframeworkcore.8.0.30.nupkg.sha512",
+        "microsoft.entityframeworkcore.8.0.33.nupkg.sha512",
         "microsoft.entityframeworkcore.nuspec"
       ]
     },
-    "Microsoft.EntityFrameworkCore.Abstractions/8.0.30": {
-      "sha512": "JoVu3708PrMcA3BUeo1+gTcD4nRI8o3g3kwNXwgTPUDhe0dqN2CQmHmEPDD0uZlI1v2oq3F7tR46VycUHzP9ng==",
+    "Microsoft.EntityFrameworkCore.Abstractions/8.0.33": {
+      "sha512": "RYv2sksae7RCzaVMw9Ik8dWY51gjAv9UNYXTxHqupQKhJAq2v4eUgxCm8HNJUuszK+Wpl/n2WOooncuaNVHzzg==",
       "type": "package",
-      "path": "microsoft.entityframeworkcore.abstractions/8.0.30",
+      "path": "microsoft.entityframeworkcore.abstractions/8.0.33",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
@@ -2270,14 +2304,14 @@
         "PACKAGE.md",
         "lib/net8.0/Microsoft.EntityFrameworkCore.Abstractions.dll",
         "lib/net8.0/Microsoft.EntityFrameworkCore.Abstractions.xml",
-        "microsoft.entityframeworkcore.abstractions.8.0.30.nupkg.sha512",
+        "microsoft.entityframeworkcore.abstractions.8.0.33.nupkg.sha512",
         "microsoft.entityframeworkcore.abstractions.nuspec"
       ]
     },
-    "Microsoft.EntityFrameworkCore.Analyzers/8.0.30": {
-      "sha512": "+ZVRBR3CzGu0AGWTbewOWTzV+UG//yDrA0gdvb9i1dTidSvwG9qRRggEI9fie0MPC0LAcS9Z8X5HRYWWxefutg==",
+    "Microsoft.EntityFrameworkCore.Analyzers/8.0.33": {
+      "sha512": "oIkgTUSovwFwv7qwIxce6x/+9yZThtdG0cRHjXlyV2i5mZR8gIL7uDzziIUV4Ju9FFbjUpVK2477+wpWQli9wA==",
       "type": "package",
-      "path": "microsoft.entityframeworkcore.analyzers/8.0.30",
+      "path": "microsoft.entityframeworkcore.analyzers/8.0.33",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
@@ -2285,14 +2319,14 @@
         "analyzers/dotnet/cs/Microsoft.EntityFrameworkCore.Analyzers.dll",
         "docs/PACKAGE.md",
         "lib/netstandard2.0/_._",
-        "microsoft.entityframeworkcore.analyzers.8.0.30.nupkg.sha512",
+        "microsoft.entityframeworkcore.analyzers.8.0.33.nupkg.sha512",
         "microsoft.entityframeworkcore.analyzers.nuspec"
       ]
     },
-    "Microsoft.EntityFrameworkCore.Design/8.0.30": {
-      "sha512": "0LopmLD4AR9PaheF4hE4slhndDBEI/qmT1B1QcQGdKsIaxbUfSvdug2J25iJNfPGZkezvNhL6W1Rng6kEncNdA==",
+    "Microsoft.EntityFrameworkCore.Design/8.0.33": {
+      "sha512": "jojZHscAG/zcgkF0Lm7Gf+d/2/d1nZemQMTKurkb96XHWL2ZETRv20/GdunHvSNbtrHOmBoKyIOxxXfKaIb5sQ==",
       "type": "package",
-      "path": "microsoft.entityframeworkcore.design/8.0.30",
+      "path": "microsoft.entityframeworkcore.design/8.0.33",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
@@ -2301,14 +2335,14 @@
         "build/net8.0/Microsoft.EntityFrameworkCore.Design.props",
         "lib/net8.0/Microsoft.EntityFrameworkCore.Design.dll",
         "lib/net8.0/Microsoft.EntityFrameworkCore.Design.xml",
-        "microsoft.entityframeworkcore.design.8.0.30.nupkg.sha512",
+        "microsoft.entityframeworkcore.design.8.0.33.nupkg.sha512",
         "microsoft.entityframeworkcore.design.nuspec"
       ]
     },
-    "Microsoft.EntityFrameworkCore.Relational/8.0.30": {
-      "sha512": "uGWv6fvDUvJDKAYXfVwPVLmit2i6WCmfdzwrHHuw4OJ30s9GDVLsvV62Gi8TIgFSUlTVgSVW/c+hAvDwmY1TDw==",
+    "Microsoft.EntityFrameworkCore.Relational/8.0.33": {
+      "sha512": "zF4o7EUbL/ukAZNOddynhC3LDP96/jZ9ijlfC7A/jhJ7lBtAGimdDmH+O3aj0qZKqdBCxsVUTv8jTCd0eR12+Q==",
       "type": "package",
-      "path": "microsoft.entityframeworkcore.relational/8.0.30",
+      "path": "microsoft.entityframeworkcore.relational/8.0.33",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
@@ -2316,14 +2350,14 @@
         "PACKAGE.md",
         "lib/net8.0/Microsoft.EntityFrameworkCore.Relational.dll",
         "lib/net8.0/Microsoft.EntityFrameworkCore.Relational.xml",
-        "microsoft.entityframeworkcore.relational.8.0.30.nupkg.sha512",
+        "microsoft.entityframeworkcore.relational.8.0.33.nupkg.sha512",
         "microsoft.entityframeworkcore.relational.nuspec"
       ]
     },
-    "Microsoft.EntityFrameworkCore.SqlServer/8.0.30": {
-      "sha512": "qboxXr70cqioVdxLv31LduMuVc5dJd8Q3aPRUkN29OheFS4ncfaRZ8yRPMy82imKz/ALm+GM4LhVydkqE9pwag==",
+    "Microsoft.EntityFrameworkCore.SqlServer/8.0.33": {
+      "sha512": "6JpWV4mlp0w2mEk5pZGc3LvfN6AgSYA/R7FZPkP85B+FTBYfHPHKIQZNL0mNVaW9QaQbrM+WPZk5J9jcHJKnCQ==",
       "type": "package",
-      "path": "microsoft.entityframeworkcore.sqlserver/8.0.30",
+      "path": "microsoft.entityframeworkcore.sqlserver/8.0.33",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
@@ -2331,7 +2365,7 @@
         "PACKAGE.md",
         "lib/net8.0/Microsoft.EntityFrameworkCore.SqlServer.dll",
         "lib/net8.0/Microsoft.EntityFrameworkCore.SqlServer.xml",
-        "microsoft.entityframeworkcore.sqlserver.8.0.30.nupkg.sha512",
+        "microsoft.entityframeworkcore.sqlserver.8.0.33.nupkg.sha512",
         "microsoft.entityframeworkcore.sqlserver.nuspec"
       ]
     },
@@ -4397,6 +4431,7 @@
   },
   "projectFileDependencyGroups": {
     "net8.0": [
+      "BCrypt.Net-Next >= 4.2.0",
       "Microsoft.AspNetCore.OpenApi >= 8.0.30",
       "Microsoft.EntityFrameworkCore.Design >= 8.*",
       "Microsoft.EntityFrameworkCore.SqlServer >= 8.*",
@@ -4409,11 +4444,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "c:\\Users\\prathamesh\\Desktop\\CodeTrace\\CodeTrace.Api\\CodeTrace.Api.csproj",
+      "projectUniqueName": "C:\\Users\\prathamesh\\Desktop\\CodeTrace\\CodeTrace.Api\\CodeTrace.Api.csproj",
       "projectName": "CodeTrace.Api",
-      "projectPath": "c:\\Users\\prathamesh\\Desktop\\CodeTrace\\CodeTrace.Api\\CodeTrace.Api.csproj",
+      "projectPath": "C:\\Users\\prathamesh\\Desktop\\CodeTrace\\CodeTrace.Api\\CodeTrace.Api.csproj",
       "packagesPath": "C:\\Users\\prathamesh\\.nuget\\packages\\",
-      "outputPath": "c:\\Users\\prathamesh\\Desktop\\CodeTrace\\CodeTrace.Api\\obj\\",
+      "outputPath": "C:\\Users\\prathamesh\\Desktop\\CodeTrace\\CodeTrace.Api\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\prathamesh\\AppData\\Roaming\\NuGet\\NuGet.Config"
@@ -4445,6 +4480,10 @@
       "net8.0": {
         "targetAlias": "net8.0",
         "dependencies": {
+          "BCrypt.Net-Next": {
+            "target": "Package",
+            "version": "[4.2.0, )"
+          },
           "Microsoft.AspNetCore.OpenApi": {
             "target": "Package",
             "version": "[8.0.30, )"

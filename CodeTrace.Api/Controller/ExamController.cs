@@ -1,5 +1,6 @@
 using CodeTrace.Api.Data;
 using CodeTrace.Api.Models;
+using CodeTrace.Api.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -20,8 +21,11 @@ public class ExamsController : ControllerBase
     [HttpGet]
     public async Task<IActionResult> GetAllExams()
     {
+        var cutoff = DateTime.UtcNow - ExpiredExamCleaner.Lifetime;   // NEW
+
         var exams = await _context.Exams
             .Include(e => e.AllowedIDEs)
+            .Where(e => e.CreatedAt >= cutoff)                        // NEW: expired exams are not shown
             .ToListAsync();
 
         return Ok(exams);
@@ -31,9 +35,11 @@ public class ExamsController : ControllerBase
     [HttpGet("{id}")]
     public async Task<IActionResult> GetExam(int id)
     {
+        var cutoff = DateTime.UtcNow - ExpiredExamCleaner.Lifetime;   // NEW
+
         var exam = await _context.Exams
             .Include(e => e.AllowedIDEs)
-            .FirstOrDefaultAsync(e => e.Id == id);
+            .FirstOrDefaultAsync(e => e.Id == id && e.CreatedAt >= cutoff);   // NEW
 
         if (exam == null)
             return NotFound($"Exam with ID {id} not found.");
@@ -52,6 +58,7 @@ public class ExamsController : ControllerBase
             return BadRequest("Duration must be greater than zero.");
 
         exam.Id = 0;
+        exam.CreatedAt = DateTime.UtcNow;   // NEW: the 24 hours start now
 
         foreach (var ide in exam.AllowedIDEs)
         {
@@ -90,6 +97,8 @@ public class ExamsController : ControllerBase
         existingExam.Description = exam.Description;
         existingExam.DurationMinutes = exam.DurationMinutes;
         existingExam.IsActive = exam.IsActive;
+        existingExam.StartTime = exam.StartTime;
+        // CreatedAt is not changed here: editing an exam does not give it more time
 
         // Replace the allowed IDE list
         _context.ExamIDEs.RemoveRange(existingExam.AllowedIDEs);
