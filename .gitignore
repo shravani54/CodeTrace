@@ -490,3 +490,6 @@ deploy/
 deploy/
 
 Uploads/
+
+CodeTrace.Student/
+*.zip
