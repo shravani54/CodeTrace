@@ -2,186 +2,181 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              x:Class="CodeTrace.Teacher.Views.WelcomeView">
 
-    <UserControl.Styles>
+  <UserControl.Styles>
 
-        <Style Selector="TextBlock.hero">
-            <Setter Property="FontSize" Value="40"/>
-            <Setter Property="FontWeight" Value="Bold"/>
-            <Setter Property="Foreground" Value="White"/>
-        </Style>
+    <Style Selector="TextBlock.hero">
+      <Setter Property="FontSize" Value="40"/>
+      <Setter Property="FontWeight" Value="Bold"/>
+      <Setter Property="Foreground" Value="#0C4A6E"/>
+    </Style>
 
-        <Style Selector="TextBlock.sub">
-            <Setter Property="FontSize" Value="16"/>
-            <Setter Property="Foreground" Value="#98A4D6"/>
-        </Style>
+    <Style Selector="TextBlock.sub">
+      <Setter Property="FontSize" Value="16"/>
+      <Setter Property="Foreground" Value="#475569"/>
+    </Style>
 
-        <!-- Pills (same as Secure Exams / Live Monitoring on the home page) -->
+    <!-- Pills (same as Secure Exams / Live Monitoring on the login page) -->
 
-        <Style Selector="Border.pill">
-            <Setter Property="Background" Value="#131B4A"/>
-            <Setter Property="BorderBrush" Value="#2A3A8C"/>
-            <Setter Property="BorderThickness" Value="1"/>
-            <Setter Property="CornerRadius" Value="16"/>
-            <Setter Property="Padding" Value="14,6"/>
-        </Style>
+    <Style Selector="Border.pill">
+      <Setter Property="Background" Value="#FFFFFF"/>
+      <Setter Property="BorderBrush" Value="#BAE6FD"/>
+      <Setter Property="BorderThickness" Value="1"/>
+      <Setter Property="CornerRadius" Value="8"/>
+      <Setter Property="Padding" Value="12,7"/>
+    </Style>
 
-        <Style Selector="Border.pill TextBlock">
-            <Setter Property="Foreground" Value="#B9C6FF"/>
-            <Setter Property="FontSize" Value="12"/>
-            <Setter Property="VerticalAlignment" Value="Center"/>
-        </Style>
+    <Style Selector="Border.pill TextBlock">
+      <Setter Property="Foreground" Value="#334155"/>
+      <Setter Property="FontSize" Value="12"/>
+      <Setter Property="VerticalAlignment" Value="Center"/>
+    </Style>
 
-        <!-- Quick-action cards -->
+    <!-- Quick-action cards -->
 
-        <Style Selector="Button.tile">
-            <Setter Property="Background" Value="#0D1330"/>
-            <Setter Property="BorderBrush" Value="#1E2A63"/>
-            <Setter Property="BorderThickness" Value="1"/>
-            <Setter Property="CornerRadius" Value="18"/>
-            <Setter Property="Padding" Value="22"/>
-            <Setter Property="Cursor" Value="Hand"/>
-            <Setter Property="HorizontalAlignment" Value="Stretch"/>
-            <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
-            <Setter Property="VerticalContentAlignment" Value="Center"/>
-        </Style>
+    <Style Selector="Button.tile">
+      <Setter Property="Background" Value="#FFFFFF"/>
+      <Setter Property="BorderBrush" Value="#BAE6FD"/>
+      <Setter Property="BorderThickness" Value="1"/>
+      <Setter Property="CornerRadius" Value="20"/>
+      <Setter Property="Padding" Value="22"/>
+      <Setter Property="Cursor" Value="Hand"/>
+      <Setter Property="HorizontalAlignment" Value="Stretch"/>
+      <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+      <Setter Property="VerticalContentAlignment" Value="Center"/>
+    </Style>
 
-        <Style Selector="Button.tile:pointerover /template/ ContentPresenter#PART_ContentPresenter">
-            <Setter Property="Background" Value="#121A48"/>
-            <Setter Property="BorderBrush" Value="#3B6CF5"/>
-        </Style>
+    <Style Selector="Button.tile:pointerover /template/ ContentPresenter#PART_ContentPresenter">
+      <Setter Property="Background" Value="#F0F9FF"/>
+      <Setter Property="BorderBrush" Value="#0EA5E9"/>
+    </Style>
 
-        <Style Selector="Button.tile:pressed /template/ ContentPresenter#PART_ContentPresenter">
-            <Setter Property="Background" Value="#16205A"/>
-            <Setter Property="BorderBrush" Value="#3B6CF5"/>
-        </Style>
+    <Style Selector="Button.tile:pressed /template/ ContentPresenter#PART_ContentPresenter">
+      <Setter Property="Background" Value="#E0F2FE"/>
+      <Setter Property="BorderBrush" Value="#0EA5E9"/>
+    </Style>
 
-        <Style Selector="Button.tile TextBlock.tileTitle">
-            <Setter Property="Foreground" Value="White"/>
-            <Setter Property="FontSize" Value="17"/>
-            <Setter Property="FontWeight" Value="SemiBold"/>
-        </Style>
+    <Style Selector="Button.tile TextBlock.tileTitle">
+      <Setter Property="Foreground" Value="#0C4A6E"/>
+      <Setter Property="FontSize" Value="17"/>
+      <Setter Property="FontWeight" Value="SemiBold"/>
+    </Style>
 
-        <Style Selector="Button.tile TextBlock.tileText">
-            <Setter Property="Foreground" Value="#98A4D6"/>
-            <Setter Property="FontSize" Value="13"/>
-            <Setter Property="TextWrapping" Value="Wrap"/>
-        </Style>
+    <Style Selector="Button.tile TextBlock.tileText">
+      <Setter Property="Foreground" Value="#475569"/>
+      <Setter Property="FontSize" Value="13"/>
+      <Setter Property="TextWrapping" Value="Wrap"/>
+    </Style>
 
-        <Style Selector="Button.tile TextBlock.arrow">
-            <Setter Property="Foreground" Value="#4F7BFF"/>
-            <Setter Property="FontSize" Value="20"/>
-            <Setter Property="VerticalAlignment" Value="Center"/>
-        </Style>
+    <Style Selector="Button.tile TextBlock.arrow">
+      <Setter Property="Foreground" Value="#0284C7"/>
+      <Setter Property="FontSize" Value="20"/>
+      <Setter Property="VerticalAlignment" Value="Center"/>
+    </Style>
 
-        <Style Selector="Border.iconTile">
-            <Setter Property="Width" Value="52"/>
-            <Setter Property="Height" Value="52"/>
-            <Setter Property="CornerRadius" Value="14"/>
-            <Setter Property="Background" Value="#131B4A"/>
-            <Setter Property="BorderBrush" Value="#2A3A8C"/>
-            <Setter Property="BorderThickness" Value="1"/>
-            <Setter Property="Margin" Value="0,0,16,0"/>
-        </Style>
+    <Style Selector="Border.iconTile">
+      <Setter Property="Width" Value="52"/>
+      <Setter Property="Height" Value="52"/>
+      <Setter Property="CornerRadius" Value="14"/>
+      <Setter Property="Background" Value="#E0F2FE"/>
+      <Setter Property="BorderBrush" Value="#BAE6FD"/>
+      <Setter Property="BorderThickness" Value="1"/>
+      <Setter Property="Margin" Value="0,0,16,0"/>
+    </Style>
 
-    </UserControl.Styles>
+  </UserControl.Styles>
 
-    <Border Background="#070B1F" ClipToBounds="True">
+  <Grid ClipToBounds="True" Background="#F0F9FF">
 
-        <Grid>
+    <!-- Background lighting -->
+    <Grid IsHitTestVisible="False">
+      <Ellipse Width="560" Height="560"
+               HorizontalAlignment="Right" VerticalAlignment="Top"
+               Margin="0,-320,-170,0" Fill="#BAE6FD" Opacity="0.55"/>
+      <Ellipse Width="500" Height="420"
+               HorizontalAlignment="Left" VerticalAlignment="Bottom"
+               Margin="-300,0,0,-260" Fill="#E0F2FE" Opacity="0.9"/>
+    </Grid>
 
-            <!-- Decorative circles, same as the home page -->
+    <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
 
-            <Ellipse Width="460" Height="460" Fill="#0B1233"
-                     HorizontalAlignment="Right" VerticalAlignment="Top"
-                     Margin="0,-200,-160,0" IsHitTestVisible="False"/>
+      <StackPanel Margin="48,48,48,40" MaxWidth="1000" HorizontalAlignment="Stretch">
 
-            <Ellipse Width="420" Height="420" Fill="#091029"
-                     HorizontalAlignment="Left" VerticalAlignment="Bottom"
-                     Margin="120,0,0,-260" IsHitTestVisible="False"/>
+        <!-- GREETING -->
 
-            <ScrollViewer>
+        <StackPanel Orientation="Horizontal" Spacing="12">
+          <TextBlock Text="Welcome back," Classes="hero"/>
+          <TextBlock x:Name="UsernameText" Text="teacher" Classes="hero" Foreground="#0284C7"/>
+          <TextBlock Text="👋" Classes="hero" FontSize="34" VerticalAlignment="Center"/>
+        </StackPanel>
 
-                <StackPanel Margin="48,48,48,40" MaxWidth="1000" HorizontalAlignment="Stretch">
+        <TextBlock Text="Select an option from the sidebar, or jump straight in below."
+                   Classes="sub"
+                   Margin="0,10,0,0"/>
 
-                    <!-- GREETING -->
+        <StackPanel Orientation="Horizontal" Spacing="10" Margin="0,22,0,0">
+          <Border Classes="pill"><TextBlock Text="●  Secure Exams"/></Border>
+          <Border Classes="pill"><TextBlock Text="●  Live Monitoring"/></Border>
+        </StackPanel>
 
-                    <StackPanel Orientation="Horizontal" Spacing="12">
-                        <TextBlock Text="Welcome back," Classes="hero"/>
-                        <TextBlock x:Name="UsernameText" Text="teacher" Classes="hero" Foreground="#4F7BFF"/>
-                        <TextBlock Text="👋" Classes="hero" FontSize="34" VerticalAlignment="Center"/>
-                    </StackPanel>
+        <!-- QUICK ACTIONS -->
 
-                    <TextBlock Text="Select an option from the sidebar, or jump straight in below."
-                               Classes="sub"
-                               Margin="0,10,0,0"/>
+        <TextBlock Text="QUICK ACTIONS"
+                   Foreground="#64748B"
+                   FontSize="12"
+                   FontWeight="SemiBold"
+                   Margin="0,44,0,14"/>
 
-                    <StackPanel Orientation="Horizontal" Spacing="10" Margin="0,22,0,0">
-                        <Border Classes="pill"><TextBlock Text="●  Secure Exams"/></Border>
-                        <Border Classes="pill"><TextBlock Text="●  Live Monitoring"/></Border>
-                    </StackPanel>
+        <Grid ColumnDefinitions="*,*" RowDefinitions="Auto,Auto" ColumnSpacing="18" RowSpacing="18">
 
-                    <!-- QUICK ACTIONS -->
+          <Button Grid.Row="0" Grid.Column="0" Classes="tile" Tag="create" Click="Tile_Click">
+            <Grid ColumnDefinitions="Auto,*,Auto">
+              <Border Classes="iconTile"><TextBlock Text="📝" FontSize="22" HorizontalAlignment="Center" VerticalAlignment="Center"/></Border>
+              <StackPanel Grid.Column="1" VerticalAlignment="Center" Spacing="3">
+                <TextBlock Text="Create Examination" Classes="tileTitle"/>
+                <TextBlock Text="Set the duration and allowed IDEs for a new exam." Classes="tileText"/>
+              </StackPanel>
+              <TextBlock Grid.Column="2" Text="→" Classes="arrow"/>
+            </Grid>
+          </Button>
 
-                    <TextBlock Text="QUICK ACTIONS"
-                               Foreground="#7F8BC4"
-                               FontSize="12"
-                               FontWeight="SemiBold"
-                               Margin="0,44,0,14"/>
+          <Button Grid.Row="0" Grid.Column="1" Classes="tile" Tag="manage" Click="Tile_Click">
+            <Grid ColumnDefinitions="Auto,*,Auto">
+              <Border Classes="iconTile"><TextBlock Text="📋" FontSize="22" HorizontalAlignment="Center" VerticalAlignment="Center"/></Border>
+              <StackPanel Grid.Column="1" VerticalAlignment="Center" Spacing="3">
+                <TextBlock Text="Manage Examinations" Classes="tileTitle"/>
+                <TextBlock Text="View, edit and remove your examinations." Classes="tileText"/>
+              </StackPanel>
+              <TextBlock Grid.Column="2" Text="→" Classes="arrow"/>
+            </Grid>
+          </Button>
 
-                    <Grid ColumnDefinitions="*,*" RowDefinitions="Auto,Auto" ColumnSpacing="18" RowSpacing="18">
+          <Button Grid.Row="1" Grid.Column="0" Classes="tile" Tag="requests" Click="Tile_Click">
+            <Grid ColumnDefinitions="Auto,*,Auto">
+              <Border Classes="iconTile"><TextBlock Text="🔔" FontSize="22" HorizontalAlignment="Center" VerticalAlignment="Center"/></Border>
+              <StackPanel Grid.Column="1" VerticalAlignment="Center" Spacing="3">
+                <TextBlock Text="Join Requests" Classes="tileTitle"/>
+                <TextBlock Text="Approve students waiting to join." Classes="tileText"/>
+              </StackPanel>
+              <TextBlock Grid.Column="2" Text="→" Classes="arrow"/>
+            </Grid>
+          </Button>
 
-                        <Button Grid.Row="0" Grid.Column="0" Classes="tile" Tag="create" Click="Tile_Click">
-                            <Grid ColumnDefinitions="Auto,*,Auto">
-                                <Border Classes="iconTile"><TextBlock Text="📝" FontSize="22" HorizontalAlignment="Center" VerticalAlignment="Center"/></Border>
-                                <StackPanel Grid.Column="1" VerticalAlignment="Center" Spacing="3">
-                                    <TextBlock Text="Create Examination" Classes="tileTitle"/>
-                                    <TextBlock Text="Set the duration and allowed IDEs for a new exam." Classes="tileText"/>
-                                </StackPanel>
-                                <TextBlock Grid.Column="2" Text="→" Classes="arrow"/>
-                            </Grid>
-                        </Button>
-
-                        <Button Grid.Row="0" Grid.Column="1" Classes="tile" Tag="manage" Click="Tile_Click">
-                            <Grid ColumnDefinitions="Auto,*,Auto">
-                                <Border Classes="iconTile"><TextBlock Text="📋" FontSize="22" HorizontalAlignment="Center" VerticalAlignment="Center"/></Border>
-                                <StackPanel Grid.Column="1" VerticalAlignment="Center" Spacing="3">
-                                    <TextBlock Text="Manage Examinations" Classes="tileTitle"/>
-                                    <TextBlock Text="View, edit and remove your examinations." Classes="tileText"/>
-                                </StackPanel>
-                                <TextBlock Grid.Column="2" Text="→" Classes="arrow"/>
-                            </Grid>
-                        </Button>
-
-                        <Button Grid.Row="1" Grid.Column="0" Classes="tile" Tag="requests" Click="Tile_Click">
-                            <Grid ColumnDefinitions="Auto,*,Auto">
-                                <Border Classes="iconTile"><TextBlock Text="🔔" FontSize="22" HorizontalAlignment="Center" VerticalAlignment="Center"/></Border>
-                                <StackPanel Grid.Column="1" VerticalAlignment="Center" Spacing="3">
-                                    <TextBlock Text="Join Requests" Classes="tileTitle"/>
-                                    <TextBlock Text="Approve students waiting to join." Classes="tileText"/>
-                                </StackPanel>
-                                <TextBlock Grid.Column="2" Text="→" Classes="arrow"/>
-                            </Grid>
-                        </Button>
-
-                        <Button Grid.Row="1" Grid.Column="1" Classes="tile" Tag="monitor" Click="Tile_Click">
-                            <Grid ColumnDefinitions="Auto,*,Auto">
-                                <Border Classes="iconTile"><TextBlock Text="🖥️" FontSize="22" HorizontalAlignment="Center" VerticalAlignment="Center"/></Border>
-                                <StackPanel Grid.Column="1" VerticalAlignment="Center" Spacing="3">
-                                    <TextBlock Text="Monitor Students" Classes="tileTitle"/>
-                                    <TextBlock Text="See unauthorized apps opened during exams." Classes="tileText"/>
-                                </StackPanel>
-                                <TextBlock Grid.Column="2" Text="→" Classes="arrow"/>
-                            </Grid>
-                        </Button>
-
-                    </Grid>
-
-                </StackPanel>
-
-            </ScrollViewer>
+          <Button Grid.Row="1" Grid.Column="1" Classes="tile" Tag="monitor" Click="Tile_Click">
+            <Grid ColumnDefinitions="Auto,*,Auto">
+              <Border Classes="iconTile"><TextBlock Text="🖥️" FontSize="22" HorizontalAlignment="Center" VerticalAlignment="Center"/></Border>
+              <StackPanel Grid.Column="1" VerticalAlignment="Center" Spacing="3">
+                <TextBlock Text="Monitor Students" Classes="tileTitle"/>
+                <TextBlock Text="See unauthorized apps opened during exams." Classes="tileText"/>
+              </StackPanel>
+              <TextBlock Grid.Column="2" Text="→" Classes="arrow"/>
+            </Grid>
+          </Button>
 
         </Grid>
 
-    </Border>
+      </StackPanel>
 
+    </ScrollViewer>
+
+  </Grid>
 </UserControl>

@@ -17,6 +17,7 @@ public partial class ManageExamsView : UserControl
     public ManageExamsView()
     {
         InitializeComponent();
+        Styles.Add(LightUi.Include());
         _ = LoadExamsAsync();
     }
 
@@ -61,8 +62,8 @@ public partial class ManageExamsView : UserControl
         {
             Text = "No examinations yet",
             FontSize = 18,
-            FontWeight = FontWeight.SemiBold,
-            Foreground = Heading(),
+            FontWeight = FontWeight.Bold,
+            Foreground = LightUi.Heading,
             HorizontalAlignment = HorizontalAlignment.Center,
             Margin = new Thickness(0, 8, 0, 0)
         });
@@ -70,8 +71,8 @@ public partial class ManageExamsView : UserControl
         stack.Children.Add(new TextBlock
         {
             Text = "Create one from the Create Examination page.",
-            FontSize = 13,
-            Foreground = Muted(),
+            FontSize = 14,
+            Foreground = LightUi.Muted,
             HorizontalAlignment = HorizontalAlignment.Center
         });
 
@@ -87,7 +88,8 @@ public partial class ManageExamsView : UserControl
     {
         var card = new Border
         {
-            Classes = { "listCard" }
+            Classes = { "listCard" },
+            Padding = new Thickness(24, 20)
         };
 
         var layout = new StackPanel { Spacing = 12 };
@@ -100,9 +102,9 @@ public partial class ManageExamsView : UserControl
         var nameText = new TextBlock
         {
             Text = exam.Name,
-            FontSize = 20,
+            FontSize = 22,
             FontWeight = FontWeight.Bold,
-            Foreground = Heading(),
+            Foreground = LightUi.Heading,
             VerticalAlignment = VerticalAlignment.Center
         };
         Grid.SetColumn(nameText, 0);
@@ -118,13 +120,15 @@ public partial class ManageExamsView : UserControl
         headerRow.Children.Add(nameText);
         headerRow.Children.Add(durationChip);
 
+        // Description: bold, dark, clearly visible
         var descriptionText = new TextBlock
         {
             Text = string.IsNullOrWhiteSpace(exam.Description)
                 ? "No description provided."
                 : exam.Description,
-            FontSize = 14,
-            Foreground = Muted(),
+            FontSize = 16,
+            FontWeight = FontWeight.Bold,
+            Foreground = Brush.Parse("#334155"),
             TextWrapping = TextWrapping.Wrap
         };
 
@@ -217,15 +221,15 @@ public partial class ManageExamsView : UserControl
             CanResize = false,
             WindowStartupLocation = WindowStartupLocation.CenterOwner
         };
-        DarkUi.StyleDialog(dialog);
+        LightUi.StyleDialog(dialog);
 
-        var nameBox = new TextBox { Text = exam.Name, Height = 42 };
+        var nameBox = new TextBox { Text = exam.Name, Height = 44 };
         var durationBox = new NumericUpDown
         {
             Value = exam.DurationMinutes,
             Minimum = 1,
             Maximum = 300,
-            Height = 42,
+            Height = 44,
             HorizontalAlignment = HorizontalAlignment.Left,
             Width = 220
         };
@@ -249,7 +253,8 @@ public partial class ManageExamsView : UserControl
             {
                 Content = ide.Name,
                 Tag = ide.Name,
-                IsChecked = allowedNames.Contains(ide.Name)
+                IsChecked = allowedNames.Contains(ide.Name),
+                Foreground = Brush.Parse("#0F172A")
             };
             checkboxes.Add(checkBox);
             ideCheckboxesPanel.Children.Add(checkBox);
@@ -257,8 +262,9 @@ public partial class ManageExamsView : UserControl
 
         var statusText = new TextBlock
         {
-            Foreground = DarkUi.Error,
-            FontSize = 13,
+            Foreground = LightUi.Error,
+            FontSize = 14,
+            FontWeight = FontWeight.SemiBold,
             TextWrapping = TextWrapping.Wrap
         };
 
@@ -327,7 +333,7 @@ public partial class ManageExamsView : UserControl
         buttonRow.Children.Add(saveButton);
 
         var header = new Grid { ColumnDefinitions = new ColumnDefinitions("*,Auto"), Margin = new Thickness(24, 20, 24, 0) };
-        var headerText = new TextBlock { Text = "Edit Examination", FontSize = 18, FontWeight = FontWeight.Bold, Foreground = Heading() };
+        var headerText = new TextBlock { Text = "Edit Examination", FontSize = 20, FontWeight = FontWeight.Bold, Foreground = LightUi.Heading };
         var closeButton = new Button { Content = "✕", Classes = { "ghost" } };
         closeButton.Click += (_, _) => dialog.Close();
         Grid.SetColumn(headerText, 0);
@@ -368,8 +374,4 @@ public partial class ManageExamsView : UserControl
         else
             dialog.Show();
     }
-
-    private static IBrush Muted() => DarkUi.Muted;
-
-    private static IBrush Heading() => DarkUi.Heading;
 }

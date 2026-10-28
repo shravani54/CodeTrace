@@ -1,0 +1,181 @@
+<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+  <Styles.Resources>
+    <SolidColorBrush x:Key="TextControlForeground" Color="#0F172A"/>
+    <SolidColorBrush x:Key="TextControlForegroundPointerOver" Color="#0F172A"/>
+    <SolidColorBrush x:Key="TextControlForegroundFocused" Color="#0F172A"/>
+    <SolidColorBrush x:Key="TextControlPlaceholderForeground" Color="#64748B"/>
+    <SolidColorBrush x:Key="TextControlPlaceholderForegroundPointerOver" Color="#64748B"/>
+    <SolidColorBrush x:Key="TextControlPlaceholderForegroundFocused" Color="#64748B"/>
+    <SolidColorBrush x:Key="TextControlBackground" Color="#FFFFFF"/>
+    <SolidColorBrush x:Key="TextControlBackgroundPointerOver" Color="#FFFFFF"/>
+    <SolidColorBrush x:Key="TextControlBackgroundFocused" Color="#FFFFFF"/>
+  </Styles.Resources>
+
+  <!-- Plain white card -->
+  <Style Selector="Border.card">
+    <Setter Property="Background" Value="#FFFFFF"/>
+    <Setter Property="BorderBrush" Value="#BAE6FD"/>
+    <Setter Property="BorderThickness" Value="1"/>
+    <Setter Property="CornerRadius" Value="20"/>
+  </Style>
+
+  <!-- List card (exam / IDE rows) -->
+  <Style Selector="Border.listCard">
+    <Setter Property="Background" Value="#F0F9FF"/>
+    <Setter Property="BorderBrush" Value="#BAE6FD"/>
+    <Setter Property="BorderThickness" Value="1"/>
+    <Setter Property="CornerRadius" Value="14"/>
+  </Style>
+
+  <!-- Chips (duration + allowed IDEs) -->
+  <Style Selector="Border.chip">
+    <Setter Property="Background" Value="#E0F2FE"/>
+    <Setter Property="BorderBrush" Value="#7DD3FC"/>
+    <Setter Property="BorderThickness" Value="1"/>
+    <Setter Property="CornerRadius" Value="12"/>
+    <Setter Property="Padding" Value="12,6"/>
+  </Style>
+  <Style Selector="Border.chip TextBlock">
+    <Setter Property="Foreground" Value="#0C4A6E"/>
+    <Setter Property="FontSize" Value="14"/>
+    <Setter Property="FontWeight" Value="SemiBold"/>
+  </Style>
+
+  <!-- Status chips -->
+  <Style Selector="Border.chipSuccess">
+    <Setter Property="Background" Value="#DCFCE7"/>
+    <Setter Property="BorderBrush" Value="#86EFAC"/>
+    <Setter Property="BorderThickness" Value="1"/>
+    <Setter Property="CornerRadius" Value="10"/>
+    <Setter Property="Padding" Value="12,5"/>
+  </Style>
+  <Style Selector="Border.chipSuccess TextBlock">
+    <Setter Property="Foreground" Value="#166534"/>
+    <Setter Property="FontSize" Value="13"/>
+    <Setter Property="FontWeight" Value="SemiBold"/>
+  </Style>
+
+  <Style Selector="Border.chipMuted">
+    <Setter Property="Background" Value="#F1F5F9"/>
+    <Setter Property="BorderBrush" Value="#CBD5E1"/>
+    <Setter Property="BorderThickness" Value="1"/>
+    <Setter Property="CornerRadius" Value="10"/>
+    <Setter Property="Padding" Value="12,5"/>
+  </Style>
+  <Style Selector="Border.chipMuted TextBlock">
+    <Setter Property="Foreground" Value="#475569"/>
+    <Setter Property="FontSize" Value="13"/>
+    <Setter Property="FontWeight" Value="SemiBold"/>
+  </Style>
+
+  <!-- Divider -->
+  <Style Selector="Border.divider">
+    <Setter Property="Height" Value="1"/>
+    <Setter Property="Background" Value="#BAE6FD"/>
+  </Style>
+
+  <!-- Dialog -->
+  <Style Selector="Border.dialogShell">
+    <Setter Property="Background" Value="#FFFFFF"/>
+    <Setter Property="BorderBrush" Value="#BAE6FD"/>
+    <Setter Property="BorderThickness" Value="1"/>
+  </Style>
+
+  <!-- Labels -->
+  <Style Selector="TextBlock.fieldLabel">
+    <Setter Property="FontSize" Value="13"/>
+    <Setter Property="FontWeight" Value="SemiBold"/>
+    <Setter Property="Foreground" Value="#0C4A6E"/>
+  </Style>
+
+  <Style Selector="TextBlock.sectionLabel">
+    <Setter Property="Foreground" Value="#475569"/>
+    <Setter Property="FontSize" Value="12"/>
+    <Setter Property="FontWeight" Value="Bold"/>
+  </Style>
+
+  <Style Selector="TextBox">
+    <Setter Property="CornerRadius" Value="10"/>
+    <Setter Property="BorderBrush" Value="#BAE6FD"/>
+    <Setter Property="Foreground" Value="#0F172A"/>
+    <Setter Property="Background" Value="#FFFFFF"/>
+    <Setter Property="FontSize" Value="14"/>
+  </Style>
+
+  <!-- Buttons -->
+  <Style Selector="Button.primary">
+    <Setter Property="Height" Value="46"/>
+    <Setter Property="CornerRadius" Value="10"/>
+    <Setter Property="HorizontalContentAlignment" Value="Center"/>
+    <Setter Property="VerticalContentAlignment" Value="Center"/>
+    <Setter Property="Foreground" Value="#082F49"/>
+    <Setter Property="FontSize" Value="15"/>
+    <Setter Property="FontWeight" Value="SemiBold"/>
+    <Setter Property="Cursor" Value="Hand"/>
+    <Setter Property="Background">
+      <LinearGradientBrush StartPoint="0%,50%" EndPoint="100%,50%">
+        <GradientStop Color="#7DD3FC" Offset="0"/>
+        <GradientStop Color="#38BDF8" Offset="1"/>
+      </LinearGradientBrush>
+    </Setter>
+  </Style>
+  <Style Selector="Button.primary:pointerover /template/ ContentPresenter#PART_ContentPresenter">
+    <Setter Property="Opacity" Value="0.9"/>
+    <Setter Property="Foreground" Value="#082F49"/>
+  </Style>
+  <Style Selector="Button.primary:disabled /template/ ContentPresenter#PART_ContentPresenter">
+    <Setter Property="Opacity" Value="0.55"/>
+  </Style>
+
+  <Style Selector="Button.secondary">
+    <Setter Property="Height" Value="46"/>
+    <Setter Property="CornerRadius" Value="10"/>
+    <Setter Property="Padding" Value="16,0"/>
+    <Setter Property="HorizontalContentAlignment" Value="Center"/>
+    <Setter Property="VerticalContentAlignment" Value="Center"/>
+    <Setter Property="Background" Value="#FFFFFF"/>
+    <Setter Property="Foreground" Value="#0369A1"/>
+    <Setter Property="BorderBrush" Value="#7DD3FC"/>
+    <Setter Property="BorderThickness" Value="1"/>
+    <Setter Property="FontSize" Value="14"/>
+    <Setter Property="FontWeight" Value="SemiBold"/>
+    <Setter Property="Cursor" Value="Hand"/>
+  </Style>
+  <Style Selector="Button.secondary:pointerover /template/ ContentPresenter#PART_ContentPresenter">
+    <Setter Property="Background" Value="#E0F2FE"/>
+    <Setter Property="BorderBrush" Value="#0EA5E9"/>
+    <Setter Property="Foreground" Value="#0C4A6E"/>
+  </Style>
+
+  <Style Selector="Button.danger">
+    <Setter Property="Padding" Value="16,8"/>
+    <Setter Property="CornerRadius" Value="10"/>
+    <Setter Property="Background" Value="#FFF1F2"/>
+    <Setter Property="Foreground" Value="#BE123C"/>
+    <Setter Property="BorderBrush" Value="#FECDD3"/>
+    <Setter Property="BorderThickness" Value="1"/>
+    <Setter Property="FontSize" Value="14"/>
+    <Setter Property="FontWeight" Value="SemiBold"/>
+    <Setter Property="Cursor" Value="Hand"/>
+  </Style>
+  <Style Selector="Button.danger:pointerover /template/ ContentPresenter#PART_ContentPresenter">
+    <Setter Property="Background" Value="#FFE4E6"/>
+    <Setter Property="BorderBrush" Value="#FDA4AF"/>
+    <Setter Property="Foreground" Value="#9F1239"/>
+  </Style>
+
+  <Style Selector="Button.ghost">
+    <Setter Property="Background" Value="Transparent"/>
+    <Setter Property="Foreground" Value="#475569"/>
+    <Setter Property="BorderThickness" Value="0"/>
+    <Setter Property="CornerRadius" Value="8"/>
+    <Setter Property="Cursor" Value="Hand"/>
+  </Style>
+  <Style Selector="Button.ghost:pointerover /template/ ContentPresenter#PART_ContentPresenter">
+    <Setter Property="Background" Value="#E0F2FE"/>
+    <Setter Property="Foreground" Value="#0C4A6E"/>
+  </Style>
+
+</Styles>

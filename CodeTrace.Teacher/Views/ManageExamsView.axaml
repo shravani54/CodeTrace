@@ -2,76 +2,80 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              x:Class="CodeTrace.Teacher.Views.ManageExamsView">
 
-    <UserControl.Styles>
+  <UserControl.Resources>
+    <SolidColorBrush x:Key="LoginMutedText" Color="#475569"/>
+    <SolidColorBrush x:Key="LoginErrorText" Color="#BE123C"/>
+  </UserControl.Resources>
 
-        <StyleInclude Source="/Styles/CodeTraceDark.axaml"/>
+  <UserControl.Styles>
 
-        <Style Selector="TextBlock.pageTitle">
-            <Setter Property="FontSize" Value="34"/>
-            <Setter Property="FontWeight" Value="Bold"/>
-            <Setter Property="Foreground" Value="White"/>
-        </Style>
+    <Style Selector="TextBlock.pageTitle">
+      <Setter Property="FontSize" Value="34"/>
+      <Setter Property="FontWeight" Value="Bold"/>
+      <Setter Property="Foreground" Value="#0C4A6E"/>
+    </Style>
 
-        <Style Selector="TextBlock.pageSubtitle">
-            <Setter Property="FontSize" Value="14"/>
-            <Setter Property="Foreground" Value="#98A4D6"/>
-        </Style>
+    <Style Selector="TextBlock.pageSubtitle">
+      <Setter Property="FontSize" Value="14"/>
+      <Setter Property="Foreground" Value="#475569"/>
+    </Style>
 
-        <Style Selector="ProgressBar">
-            <Setter Property="Foreground" Value="#4F7BFF"/>
-            <Setter Property="Background" Value="#131B4A"/>
-        </Style>
+    <Style Selector="ProgressBar">
+      <Setter Property="Foreground" Value="#0EA5E9"/>
+      <Setter Property="Background" Value="#E0F2FE"/>
+    </Style>
 
-    </UserControl.Styles>
+    <!-- Exam cards (built in code into ExamListPanel): readable dark text -->
+    <Style Selector="StackPanel#ExamListPanel TextBlock">
+      <Setter Property="Foreground" Value="#0F172A"/>
+      <Setter Property="FontSize" Value="14"/>
+    </Style>
 
-    <Border Background="#070B1F" ClipToBounds="True">
+  </UserControl.Styles>
 
-        <Grid>
+  <Grid ClipToBounds="True" Background="#F0F9FF">
 
-            <!-- Decorative circles, same as the home page -->
+    <!-- Background lighting -->
+    <Grid IsHitTestVisible="False">
+      <Ellipse Width="560" Height="560"
+               HorizontalAlignment="Right" VerticalAlignment="Top"
+               Margin="0,-320,-170,0" Fill="#BAE6FD" Opacity="0.55"/>
+      <Ellipse Width="500" Height="420"
+               HorizontalAlignment="Left" VerticalAlignment="Bottom"
+               Margin="-300,0,0,-260" Fill="#E0F2FE" Opacity="0.9"/>
+    </Grid>
 
-            <Ellipse Width="460" Height="460" Fill="#0B1233"
-                     HorizontalAlignment="Right" VerticalAlignment="Top"
-                     Margin="0,-200,-160,0" IsHitTestVisible="False"/>
+    <Grid RowDefinitions="Auto,Auto,*"
+          Margin="36,32,36,36"
+          MaxWidth="1000"
+          HorizontalAlignment="Stretch">
 
-            <Ellipse Width="420" Height="420" Fill="#091029"
-                     HorizontalAlignment="Left" VerticalAlignment="Bottom"
-                     Margin="120,0,0,-260" IsHitTestVisible="False"/>
+      <StackPanel Grid.Row="0" Spacing="6" Margin="0,0,0,24">
 
-            <Grid RowDefinitions="Auto,Auto,*"
-                  Margin="36,32,36,36"
-                  MaxWidth="1000"
-                  HorizontalAlignment="Stretch">
+        <StackPanel Orientation="Horizontal" Spacing="10">
+          <TextBlock Text="Manage" Classes="pageTitle"/>
+          <TextBlock Text="Examinations" Classes="pageTitle" Foreground="#0284C7"/>
+        </StackPanel>
 
-                <StackPanel Grid.Row="0"
-                            Spacing="6"
-                            Margin="0,0,0,24">
+        <TextBlock Text="View, edit, and remove examinations you've created."
+                   Classes="pageSubtitle"/>
 
-                    <StackPanel Orientation="Horizontal" Spacing="10">
-                        <TextBlock Text="Manage" Classes="pageTitle"/>
-                        <TextBlock Text="Examinations" Classes="pageTitle" Foreground="#4F7BFF"/>
-                    </StackPanel>
+        <Border Height="1" Background="#BAE6FD" Margin="0,14,0,0"/>
 
-                    <TextBlock Text="View, edit, and remove examinations you've created."
-                               Classes="pageSubtitle"/>
+      </StackPanel>
 
-                </StackPanel>
+      <ProgressBar Grid.Row="1"
+                   x:Name="LoadingBar"
+                   IsIndeterminate="True"
+                   IsVisible="False"
+                   Height="3"
+                   Margin="0,0,0,16"/>
 
-                <ProgressBar Grid.Row="1"
-                             x:Name="LoadingBar"
-                             IsIndeterminate="True"
-                             IsVisible="False"
-                             Height="4"
-                             Margin="0,0,0,16"/>
+      <ScrollViewer Grid.Row="2" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
+        <StackPanel x:Name="ExamListPanel" Spacing="14"/>
+      </ScrollViewer>
 
-                <ScrollViewer Grid.Row="2">
-                    <StackPanel x:Name="ExamListPanel" Spacing="14"/>
-                </ScrollViewer>
+    </Grid>
 
-            </Grid>
-
-        </Grid>
-
-    </Border>
-
+  </Grid>
 </UserControl>

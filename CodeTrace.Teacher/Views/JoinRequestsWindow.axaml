@@ -4,7 +4,7 @@
         x:Class="CodeTrace.Teacher.Views.JoinRequestsWindow"
         Title="Join Requests" Width="560" Height="520"
         MinWidth="440" MinHeight="360"
-        Background="#070B1F"
+        Background="#F0F9FF"
         WindowStartupLocation="CenterScreen">
 
     <views:JoinRequestsView/>

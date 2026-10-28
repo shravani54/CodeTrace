@@ -61,6 +61,19 @@
       <Setter Property="Margin" Value="0,14,0,7"/>
     </Style>
 
+    <!-- Small live hints under the fields -->
+    <Style Selector="TextBlock.hint">
+      <Setter Property="FontSize" Value="12"/>
+      <Setter Property="Foreground" Value="#64748B"/>
+      <Setter Property="TextWrapping" Value="Wrap"/>
+      <Setter Property="Margin" Value="2,6,0,0"/>
+    </Style>
+
+    <Style Selector="TextBlock.rule">
+      <Setter Property="FontSize" Value="12"/>
+      <Setter Property="Foreground" Value="#64748B"/>
+    </Style>
+
     <Style Selector="Button.signin">
       <Setter Property="Height" Value="50"/>
       <Setter Property="CornerRadius" Value="10"/>
@@ -132,28 +145,47 @@
           <TextBlock Text="Create Teacher Account" FontSize="16" FontWeight="SemiBold"
                      Foreground="#0C4A6E" Margin="0,12,0,0"/>
 
+          <!-- FULL NAME -->
           <TextBlock Text="Full Name" Classes="label"/>
           <TextBox x:Name="FullNameBox" Classes="field" MaxLength="60"
                    PlaceholderText="e.g. Prof. Sharma"/>
 
+          <!-- USERNAME -->
           <TextBlock Text="Username" Classes="label"/>
           <TextBox x:Name="UsernameBox" Classes="field" MaxLength="30"
-                   PlaceholderText="3 to 30 letters, numbers, . or _"/>
+                   PlaceholderText="Start with a letter; letters, numbers, . or _"/>
+          <TextBlock x:Name="UsernameHint" Classes="hint"
+                     Text="3 to 30 characters. Must start with a letter."/>
 
+          <!-- PASSWORD + live rules -->
           <TextBlock Text="Password" Classes="label"/>
           <TextBox x:Name="PasswordBox" Classes="field revealPasswordButton"
-                   PasswordChar="•" PlaceholderText="At least 6 characters"/>
+                   MaxLength="64"
+                   PasswordChar="•" PlaceholderText="Create a strong password"/>
 
+          <Border Background="#F0F9FF" BorderBrush="#BAE6FD" BorderThickness="1"
+                  CornerRadius="10" Padding="14,10" Margin="0,8,0,0">
+            <StackPanel Spacing="4">
+              <TextBlock Text="Your password must have:" FontSize="12" FontWeight="SemiBold"
+                         Foreground="#0C4A6E"/>
+              <TextBlock x:Name="RuleLength" Classes="rule"/>
+              <TextBlock x:Name="RuleUpper" Classes="rule"/>
+              <TextBlock x:Name="RuleLower" Classes="rule"/>
+              <TextBlock x:Name="RuleDigit" Classes="rule"/>
+              <TextBlock x:Name="RuleSpecial" Classes="rule"/>
+              <TextBlock x:Name="RuleSpace" Classes="rule"/>
+            </StackPanel>
+          </Border>
+
+          <!-- CONFIRM -->
           <TextBlock Text="Confirm Password" Classes="label"/>
           <TextBox x:Name="ConfirmBox" Classes="field revealPasswordButton"
+                   MaxLength="64"
                    PasswordChar="•" PlaceholderText="Type the password again"/>
-
-          <TextBlock Text="Teacher Access Code" Classes="label"/>
-          <TextBox x:Name="AccessCodeBox" Classes="field" MaxLength="60"
-                   PlaceholderText="Ask the administrator (leave empty if not required)"/>
+          <TextBlock x:Name="MatchHint" Classes="hint" IsVisible="False"/>
 
           <Grid MinHeight="22" Margin="0,12,0,12">
-            <TextBlock x:Name="StatusText" FontSize="11" TextWrapping="Wrap"
+            <TextBlock x:Name="StatusText" FontSize="12" TextWrapping="Wrap"
                        VerticalAlignment="Center" Foreground="#475569"/>
             <ProgressBar x:Name="SignUpProgress" IsIndeterminate="True" IsVisible="False"
                          Height="3" VerticalAlignment="Bottom"

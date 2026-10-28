@@ -7,17 +7,17 @@
 
     <UserControl.Resources>
 
-        <LinearGradientBrush x:Key="AccentGradient" StartPoint="0,0" EndPoint="1,0">
-            <GradientStop Color="#3B6CF5" Offset="0"/>
-            <GradientStop Color="#7C5CF0" Offset="1"/>
+        <LinearGradientBrush x:Key="AccentGradient" StartPoint="0%,50%" EndPoint="100%,50%">
+            <GradientStop Color="#7DD3FC" Offset="0"/>
+            <GradientStop Color="#38BDF8" Offset="1"/>
         </LinearGradientBrush>
 
-        <!-- Override the theme's text box colours so typed text stays white in every state,
-             including the text box inside the Duration number control -->
+        <!-- Text boxes sit inside a white input card: dark text, transparent box, in every state -->
 
-        <SolidColorBrush x:Key="TextControlForeground" Color="#FFFFFF"/>
-        <SolidColorBrush x:Key="TextControlForegroundPointerOver" Color="#FFFFFF"/>
-        <SolidColorBrush x:Key="TextControlForegroundFocused" Color="#FFFFFF"/>
+        <SolidColorBrush x:Key="TextControlForeground" Color="#0F172A"/>
+        <SolidColorBrush x:Key="TextControlForegroundPointerOver" Color="#0F172A"/>
+        <SolidColorBrush x:Key="TextControlForegroundFocused" Color="#0F172A"/>
+        <SolidColorBrush x:Key="TextControlForegroundDisabled" Color="#94A3B8"/>
 
         <SolidColorBrush x:Key="TextControlBackground" Color="Transparent"/>
         <SolidColorBrush x:Key="TextControlBackgroundPointerOver" Color="Transparent"/>
@@ -27,9 +27,9 @@
         <SolidColorBrush x:Key="TextControlBorderBrushPointerOver" Color="Transparent"/>
         <SolidColorBrush x:Key="TextControlBorderBrushFocused" Color="Transparent"/>
 
-        <SolidColorBrush x:Key="TextControlPlaceholderForeground" Color="#7F8BC4"/>
-        <SolidColorBrush x:Key="TextControlPlaceholderForegroundPointerOver" Color="#7F8BC4"/>
-        <SolidColorBrush x:Key="TextControlPlaceholderForegroundFocused" Color="#7F8BC4"/>
+        <SolidColorBrush x:Key="TextControlPlaceholderForeground" Color="#64748B"/>
+        <SolidColorBrush x:Key="TextControlPlaceholderForegroundPointerOver" Color="#64748B"/>
+        <SolidColorBrush x:Key="TextControlPlaceholderForegroundFocused" Color="#64748B"/>
 
     </UserControl.Resources>
 
@@ -40,80 +40,95 @@
         <Style Selector="TextBlock.pageTitle">
             <Setter Property="FontSize" Value="34"/>
             <Setter Property="FontWeight" Value="Bold"/>
-            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="Foreground" Value="#0C4A6E"/>
         </Style>
 
         <Style Selector="TextBlock.pageSubtitle">
             <Setter Property="FontSize" Value="14"/>
-            <Setter Property="Foreground" Value="#98A4D6"/>
+            <Setter Property="Foreground" Value="#475569"/>
         </Style>
 
         <Style Selector="TextBlock.fieldLabel">
-            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="Foreground" Value="#0C4A6E"/>
             <Setter Property="FontWeight" Value="SemiBold"/>
-            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="FontSize" Value="13"/>
             <Setter Property="Margin" Value="0,0,0,8"/>
         </Style>
 
         <Style Selector="TextBlock.hint">
-            <Setter Property="Foreground" Value="#7F8BC4"/>
+            <Setter Property="Foreground" Value="#475569"/>
             <Setter Property="FontSize" Value="12"/>
             <Setter Property="Margin" Value="2,8,0,0"/>
         </Style>
 
         <Style Selector="TextBlock.sectionTitle">
-            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="Foreground" Value="#0C4A6E"/>
             <Setter Property="FontWeight" Value="Bold"/>
-            <Setter Property="FontSize" Value="20"/>
+            <Setter Property="FontSize" Value="18"/>
         </Style>
 
         <!-- CARDS -->
 
         <Style Selector="Border.card">
-            <Setter Property="Background" Value="#0D1330"/>
-            <Setter Property="BorderBrush" Value="#1E2A63"/>
+            <Setter Property="Background" Value="#FFFFFF"/>
+            <Setter Property="BorderBrush" Value="#BAE6FD"/>
             <Setter Property="BorderThickness" Value="1"/>
-            <Setter Property="CornerRadius" Value="18"/>
-            <Setter Property="Padding" Value="28"/>
+            <Setter Property="CornerRadius" Value="20"/>
+            <Setter Property="Padding" Value="32"/>
+            <Setter Property="BoxShadow" Value="0 16 44 0 #260EA5E9"/>
         </Style>
 
         <Style Selector="Border.inputCard">
-            <Setter Property="Background" Value="#0A0F2B"/>
-            <Setter Property="BorderBrush" Value="#2A3A8C"/>
+            <Setter Property="Background" Value="#FFFFFF"/>
+            <Setter Property="BorderBrush" Value="#BAE6FD"/>
             <Setter Property="BorderThickness" Value="1"/>
-            <Setter Property="CornerRadius" Value="12"/>
+            <Setter Property="CornerRadius" Value="10"/>
             <Setter Property="Padding" Value="6,0"/>
         </Style>
 
+        <Style Selector="Border.inputCard:pointerover">
+            <Setter Property="BorderBrush" Value="#7DD3FC"/>
+        </Style>
+
         <Style Selector="Border.inputCard:focus-within">
-            <Setter Property="BorderBrush" Value="#4F7BFF"/>
+            <Setter Property="BorderBrush" Value="#0EA5E9"/>
+            <Setter Property="BorderThickness" Value="1.5"/>
         </Style>
 
         <!-- TEXTBOX -->
 
         <Style Selector="TextBox">
             <Setter Property="Background" Value="Transparent"/>
-            <Setter Property="Foreground" Value="White"/>
-            <Setter Property="CaretBrush" Value="White"/>
-            <Setter Property="SelectionBrush" Value="#3B6CF5"/>
-            <Setter Property="SelectionForegroundBrush" Value="White"/>
+            <Setter Property="Foreground" Value="#0F172A"/>
+            <Setter Property="CaretBrush" Value="#0C4A6E"/>
+            <Setter Property="SelectionBrush" Value="#7DD3FC"/>
+            <Setter Property="SelectionForegroundBrush" Value="#0F172A"/>
             <Setter Property="BorderThickness" Value="0"/>
             <Setter Property="FontSize" Value="14"/>
             <Setter Property="Padding" Value="10,0"/>
             <Setter Property="VerticalContentAlignment" Value="Center"/>
-            <Setter Property="PlaceholderForeground" Value="#7F8BC4"/>
+            <Setter Property="PlaceholderForeground" Value="#64748B"/>
         </Style>
 
         <Style Selector="TextBox:pointerover">
-            <Setter Property="Foreground" Value="White"/>
-            <Setter Property="CaretBrush" Value="White"/>
+            <Setter Property="Foreground" Value="#0F172A"/>
+            <Setter Property="CaretBrush" Value="#0C4A6E"/>
         </Style>
 
         <Style Selector="TextBox:focus">
-            <Setter Property="Foreground" Value="White"/>
-            <Setter Property="CaretBrush" Value="White"/>
-            <Setter Property="SelectionBrush" Value="#3B6CF5"/>
-            <Setter Property="SelectionForegroundBrush" Value="White"/>
+            <Setter Property="Foreground" Value="#0F172A"/>
+            <Setter Property="CaretBrush" Value="#0C4A6E"/>
+            <Setter Property="SelectionBrush" Value="#7DD3FC"/>
+            <Setter Property="SelectionForegroundBrush" Value="#0F172A"/>
+        </Style>
+
+        <!-- The typed text itself: dark in every state, even if the theme forces white -->
+        <Style Selector="TextBox /template/ TextPresenter#PART_TextPresenter">
+            <Setter Property="TextElement.Foreground" Value="#0F172A"/>
+        </Style>
+
+        <Style Selector="TextBox:focus /template/ TextPresenter#PART_TextPresenter">
+            <Setter Property="TextElement.Foreground" Value="#0F172A"/>
         </Style>
 
         <Style Selector="TextBox:pointerover /template/ Border#PART_BorderElement">
@@ -130,58 +145,209 @@
 
         <Style Selector="NumericUpDown">
             <Setter Property="Background" Value="Transparent"/>
-            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="Foreground" Value="#0F172A"/>
             <Setter Property="BorderThickness" Value="0"/>
             <Setter Property="FontSize" Value="14"/>
             <Setter Property="VerticalContentAlignment" Value="Center"/>
         </Style>
 
-        <!-- The text box inside the number control: keep it white in every state -->
-
         <Style Selector="NumericUpDown /template/ TextBox#PART_TextBox">
-            <Setter Property="Foreground" Value="White"/>
-            <Setter Property="CaretBrush" Value="White"/>
+            <Setter Property="Foreground" Value="#0F172A"/>
+            <Setter Property="CaretBrush" Value="#0C4A6E"/>
             <Setter Property="Background" Value="Transparent"/>
             <Setter Property="BorderThickness" Value="0"/>
-            <Setter Property="SelectionBrush" Value="#3B6CF5"/>
-            <Setter Property="SelectionForegroundBrush" Value="White"/>
+            <Setter Property="SelectionBrush" Value="#7DD3FC"/>
+            <Setter Property="SelectionForegroundBrush" Value="#0F172A"/>
         </Style>
 
         <Style Selector="NumericUpDown /template/ TextBox#PART_TextBox:pointerover">
-            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="Foreground" Value="#0F172A"/>
             <Setter Property="Background" Value="Transparent"/>
         </Style>
 
         <Style Selector="NumericUpDown /template/ TextBox#PART_TextBox:focus">
-            <Setter Property="Foreground" Value="White"/>
-            <Setter Property="CaretBrush" Value="White"/>
+            <Setter Property="Foreground" Value="#0F172A"/>
+            <Setter Property="CaretBrush" Value="#0C4A6E"/>
             <Setter Property="Background" Value="Transparent"/>
         </Style>
 
         <Style Selector="NumericUpDown:focus-within /template/ TextBox#PART_TextBox">
-            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="Foreground" Value="#0F172A"/>
             <Setter Property="Background" Value="Transparent"/>
+        </Style>
+
+        <!-- DATE / TIME FIELDS (buttons that open the popup cards) -->
+
+        <Style Selector="Button.fieldBtn">
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Padding" Value="10,0"/>
+            <Setter Property="HorizontalAlignment" Value="Stretch"/>
+            <Setter Property="VerticalAlignment" Value="Stretch"/>
+            <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="Cursor" Value="Hand"/>
+        </Style>
+
+        <Style Selector="Button.fieldBtn:pointerover /template/ ContentPresenter#PART_ContentPresenter">
+            <Setter Property="Background" Value="Transparent"/>
+        </Style>
+
+        <Style Selector="Button.fieldBtn:pressed /template/ ContentPresenter#PART_ContentPresenter">
+            <Setter Property="Background" Value="Transparent"/>
+        </Style>
+
+        <!-- CALENDAR: month arrows -->
+
+        <Style Selector="Button.navBtn">
+            <Setter Property="Width" Value="36"/>
+            <Setter Property="Height" Value="36"/>
+            <Setter Property="Padding" Value="0"/>
+            <Setter Property="CornerRadius" Value="18"/>
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+        </Style>
+
+        <Style Selector="Button.navBtn:pointerover /template/ ContentPresenter#PART_ContentPresenter">
+            <Setter Property="Background" Value="#E0F2FE"/>
+        </Style>
+
+        <Style Selector="Button.navBtn:pressed /template/ ContentPresenter#PART_ContentPresenter">
+            <Setter Property="Background" Value="#BAE6FD"/>
+        </Style>
+
+        <Style Selector="Button.navBtn:disabled">
+            <Setter Property="Opacity" Value="0.3"/>
+        </Style>
+
+        <!-- CALENDAR: day buttons -->
+
+        <Style Selector="Button.dayBtn">
+            <Setter Property="Width" Value="36"/>
+            <Setter Property="Height" Value="36"/>
+            <Setter Property="Padding" Value="0"/>
+            <Setter Property="CornerRadius" Value="18"/>
+            <Setter Property="FontSize" Value="13"/>
+            <Setter Property="Foreground" Value="#0F172A"/>
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="BorderBrush" Value="Transparent"/>
+            <Setter Property="BorderThickness" Value="1.5"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+        </Style>
+
+        <Style Selector="Button.dayBtn:pointerover /template/ ContentPresenter#PART_ContentPresenter">
+            <Setter Property="Background" Value="#E0F2FE"/>
+            <Setter Property="Foreground" Value="#0F172A"/>
+        </Style>
+
+        <Style Selector="Button.dayBtn:pressed /template/ ContentPresenter#PART_ContentPresenter">
+            <Setter Property="Background" Value="#BAE6FD"/>
+            <Setter Property="Foreground" Value="#0F172A"/>
+        </Style>
+
+        <!-- Today: blue ring -->
+        <Style Selector="Button.dayBtn.today">
+            <Setter Property="BorderBrush" Value="#0EA5E9"/>
+        </Style>
+
+        <Style Selector="Button.dayBtn.today /template/ ContentPresenter#PART_ContentPresenter">
+            <Setter Property="BorderBrush" Value="#0EA5E9"/>
+        </Style>
+
+        <!-- Selected: solid blue -->
+        <Style Selector="Button.dayBtn.selected /template/ ContentPresenter#PART_ContentPresenter">
+            <Setter Property="Background" Value="#0EA5E9"/>
+            <Setter Property="BorderBrush" Value="#0EA5E9"/>
+            <Setter Property="Foreground" Value="#FFFFFF"/>
+        </Style>
+
+        <Style Selector="Button.dayBtn.selected:pointerover /template/ ContentPresenter#PART_ContentPresenter">
+            <Setter Property="Background" Value="#0284C7"/>
+            <Setter Property="Foreground" Value="#FFFFFF"/>
+        </Style>
+
+        <!-- Past days: grey, not clickable -->
+        <Style Selector="Button.dayBtn:disabled /template/ ContentPresenter#PART_ContentPresenter">
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="BorderBrush" Value="Transparent"/>
+            <Setter Property="Foreground" Value="#CBD5E1"/>
+        </Style>
+
+        <!-- Small text button ("Today") -->
+        <Style Selector="Button.linkBtn">
+            <Setter Property="Padding" Value="10,6"/>
+            <Setter Property="CornerRadius" Value="8"/>
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="Foreground" Value="#0369A1"/>
+            <Setter Property="FontSize" Value="13"/>
+            <Setter Property="FontWeight" Value="SemiBold"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Cursor" Value="Hand"/>
+        </Style>
+
+        <Style Selector="Button.linkBtn:pointerover /template/ ContentPresenter#PART_ContentPresenter">
+            <Setter Property="Background" Value="#E0F2FE"/>
+            <Setter Property="Foreground" Value="#0369A1"/>
+        </Style>
+
+        <Style Selector="Button.linkBtn:disabled /template/ ContentPresenter#PART_ContentPresenter">
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="Foreground" Value="#CBD5E1"/>
+        </Style>
+
+        <!-- CLEAR BUTTON (next to the date and time) -->
+
+        <Style Selector="Button.clearBtn">
+            <Setter Property="Width" Value="50"/>
+            <Setter Property="Height" Value="50"/>
+            <Setter Property="Foreground" Value="#0369A1"/>
+            <Setter Property="Background" Value="#FFFFFF"/>
+            <Setter Property="BorderBrush" Value="#BAE6FD"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="CornerRadius" Value="10"/>
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+        </Style>
+
+        <Style Selector="Button.clearBtn:pointerover /template/ ContentPresenter#PART_ContentPresenter">
+            <Setter Property="Background" Value="#E0F2FE"/>
+            <Setter Property="BorderBrush" Value="#7DD3FC"/>
+            <Setter Property="Foreground" Value="#0369A1"/>
+        </Style>
+
+        <Style Selector="Button.clearBtn:pressed /template/ ContentPresenter#PART_ContentPresenter">
+            <Setter Property="Background" Value="#BAE6FD"/>
+            <Setter Property="Foreground" Value="#0369A1"/>
         </Style>
 
         <!-- IDE CHOICES (filled at runtime into AllowedIDEsPanel) -->
 
         <Style Selector="WrapPanel#AllowedIDEsPanel CheckBox">
-            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="Foreground" Value="#0C4A6E"/>
             <Setter Property="FontSize" Value="14"/>
         </Style>
 
         <!-- LOADING BAR -->
 
         <Style Selector="ProgressBar">
-            <Setter Property="Foreground" Value="#4F7BFF"/>
-            <Setter Property="Background" Value="#131B4A"/>
+            <Setter Property="Foreground" Value="#0EA5E9"/>
+            <Setter Property="Background" Value="#E0F2FE"/>
         </Style>
 
         <!-- STATUS -->
 
         <Style Selector="Border.status">
-            <Setter Property="Background" Value="#0E3B2F"/>
-            <Setter Property="BorderBrush" Value="#1FBF8F"/>
+            <Setter Property="Background" Value="#ECFDF5"/>
+            <Setter Property="BorderBrush" Value="#6EE7B7"/>
             <Setter Property="BorderThickness" Value="1"/>
             <Setter Property="CornerRadius" Value="10"/>
             <Setter Property="Padding" Value="14,12"/>
@@ -192,9 +358,10 @@
         <Style Selector="Button.primary">
             <Setter Property="Height" Value="50"/>
             <Setter Property="MinWidth" Value="230"/>
-            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="Foreground" Value="#082F49"/>
+            <Setter Property="FontSize" Value="15"/>
             <Setter Property="FontWeight" Value="SemiBold"/>
-            <Setter Property="CornerRadius" Value="12"/>
+            <Setter Property="CornerRadius" Value="10"/>
             <Setter Property="BorderThickness" Value="0"/>
             <Setter Property="Cursor" Value="Hand"/>
             <Setter Property="HorizontalContentAlignment" Value="Center"/>
@@ -204,38 +371,39 @@
 
         <Style Selector="Button.primary:pointerover /template/ ContentPresenter#PART_ContentPresenter">
             <Setter Property="Background" Value="{StaticResource AccentGradient}"/>
-            <Setter Property="Foreground" Value="White"/>
-            <Setter Property="Opacity" Value="0.92"/>
+            <Setter Property="Foreground" Value="#082F49"/>
+            <Setter Property="Opacity" Value="0.9"/>
         </Style>
 
         <Style Selector="Button.primary:pressed /template/ ContentPresenter#PART_ContentPresenter">
             <Setter Property="Background" Value="{StaticResource AccentGradient}"/>
-            <Setter Property="Foreground" Value="White"/>
-            <Setter Property="Opacity" Value="0.8"/>
+            <Setter Property="Foreground" Value="#082F49"/>
+            <Setter Property="Opacity" Value="0.75"/>
         </Style>
 
         <!-- Dimmed while disabled, but the label stays readable -->
         <Style Selector="Button.primary:disabled /template/ ContentPresenter#PART_ContentPresenter">
             <Setter Property="Background" Value="{StaticResource AccentGradient}"/>
-            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="Foreground" Value="#082F49"/>
             <Setter Property="Opacity" Value="0.55"/>
         </Style>
 
     </UserControl.Styles>
 
-    <Border Background="#070B1F" ClipToBounds="True">
+    <Border Background="#F0F9FF" ClipToBounds="True">
 
         <Grid>
 
-            <!-- Decorative circles, same as the home page -->
+            <!-- Decorative circles, same as SignUp -->
 
-            <Ellipse Width="460" Height="460" Fill="#0B1233"
-                     HorizontalAlignment="Right" VerticalAlignment="Top"
-                     Margin="0,-200,-160,0" IsHitTestVisible="False"/>
-
-            <Ellipse Width="420" Height="420" Fill="#091029"
-                     HorizontalAlignment="Left" VerticalAlignment="Bottom"
-                     Margin="120,0,0,-260" IsHitTestVisible="False"/>
+            <Grid IsHitTestVisible="False">
+                <Ellipse Width="560" Height="560"
+                         HorizontalAlignment="Right" VerticalAlignment="Top"
+                         Margin="0,-320,-170,0" Fill="#BAE6FD" Opacity="0.55"/>
+                <Ellipse Width="500" Height="420"
+                         HorizontalAlignment="Left" VerticalAlignment="Bottom"
+                         Margin="-300,0,0,-260" Fill="#E0F2FE" Opacity="0.9"/>
+            </Grid>
 
             <ScrollViewer>
 
@@ -247,7 +415,7 @@
 
                         <StackPanel Orientation="Horizontal" Spacing="10">
                             <TextBlock Text="Create" Classes="pageTitle"/>
-                            <TextBlock Text="Examination" Classes="pageTitle" Foreground="#4F7BFF"/>
+                            <TextBlock Text="Examination" Classes="pageTitle" Foreground="#0369A1"/>
                         </StackPanel>
 
                         <TextBlock Text="Fill in the details below to create a new examination."
@@ -286,17 +454,300 @@
                                 </StackPanel>
 
                                 <StackPanel Grid.Column="1">
-                                    <TextBlock Text="Start Time (optional)" Classes="fieldLabel"/>
-                                    <Border Classes="inputCard" Height="50">
-                                        <TextBox x:Name="StartTimeBox"
-                                                 PlaceholderText="e.g. 09:00 or 9:00 AM"/>
-                                    </Border>
+                                    <TextBlock Text="Start Time" Classes="fieldLabel"/>
+
+                                    <Grid ColumnDefinitions="*,*,Auto" ColumnSpacing="10">
+
+                                        <!-- DATE: button + calendar card -->
+                                        <Border Classes="inputCard" Height="50">
+                                            <Grid>
+
+                                                <Button x:Name="DateButton"
+                                                        Classes="fieldBtn"
+                                                        Click="DateButton_Click">
+                                                    <Grid ColumnDefinitions="*,Auto">
+                                                        <TextBlock x:Name="DateText"
+                                                                   Text="Select date"
+                                                                   FontSize="14"
+                                                                   Foreground="#64748B"
+                                                                   VerticalAlignment="Center"/>
+                                                        <Grid Grid.Column="1" Width="20" Height="20"
+                                                              VerticalAlignment="Center">
+                                                            <Path Data="M3,5 H17 V17 H3 Z M3,9 H17 M7,3 V6 M13,3 V6"
+                                                                  Stroke="#0369A1" StrokeThickness="1.8"
+                                                                  StrokeLineCap="Round" StrokeJoin="Round"/>
+                                                        </Grid>
+                                                    </Grid>
+                                                </Button>
+
+                                                <Popup x:Name="DatePopup"
+                                                       Placement="BottomEdgeAlignedLeft"
+                                                       VerticalOffset="8"
+                                                       IsLightDismissEnabled="True">
+
+                                                    <Border Background="#FFFFFF"
+                                                            BorderBrush="#BAE6FD"
+                                                            BorderThickness="1"
+                                                            CornerRadius="16"
+                                                            Padding="16"
+                                                            Width="316">
+
+                                                        <StackPanel Spacing="8">
+
+                                                            <!-- Month header -->
+                                                            <Grid ColumnDefinitions="Auto,*,Auto">
+
+                                                                <Button x:Name="PrevMonthButton"
+                                                                        Classes="navBtn"
+                                                                        Click="PrevMonth_Click">
+                                                                    <Path Data="M10,4 L5,9 L10,14"
+                                                                          Stroke="#0369A1" StrokeThickness="2"
+                                                                          StrokeLineCap="Round" StrokeJoin="Round"/>
+                                                                </Button>
+
+                                                                <TextBlock x:Name="MonthTitle"
+                                                                           Grid.Column="1"
+                                                                           FontSize="16"
+                                                                           FontWeight="Bold"
+                                                                           Foreground="#0C4A6E"
+                                                                           HorizontalAlignment="Center"
+                                                                           VerticalAlignment="Center"/>
+
+                                                                <Button x:Name="NextMonthButton"
+                                                                        Grid.Column="2"
+                                                                        Classes="navBtn"
+                                                                        Click="NextMonth_Click">
+                                                                    <Path Data="M6,4 L11,9 L6,14"
+                                                                          Stroke="#0369A1" StrokeThickness="2"
+                                                                          StrokeLineCap="Round" StrokeJoin="Round"/>
+                                                                </Button>
+
+                                                            </Grid>
+
+                                                            <!-- Weekday labels -->
+                                                            <UniformGrid Columns="7">
+                                                                <TextBlock Text="S" HorizontalAlignment="Center" FontSize="12" FontWeight="SemiBold" Foreground="#64748B"/>
+                                                                <TextBlock Text="M" HorizontalAlignment="Center" FontSize="12" FontWeight="SemiBold" Foreground="#64748B"/>
+                                                                <TextBlock Text="T" HorizontalAlignment="Center" FontSize="12" FontWeight="SemiBold" Foreground="#64748B"/>
+                                                                <TextBlock Text="W" HorizontalAlignment="Center" FontSize="12" FontWeight="SemiBold" Foreground="#64748B"/>
+                                                                <TextBlock Text="T" HorizontalAlignment="Center" FontSize="12" FontWeight="SemiBold" Foreground="#64748B"/>
+                                                                <TextBlock Text="F" HorizontalAlignment="Center" FontSize="12" FontWeight="SemiBold" Foreground="#64748B"/>
+                                                                <TextBlock Text="S" HorizontalAlignment="Center" FontSize="12" FontWeight="SemiBold" Foreground="#64748B"/>
+                                                            </UniformGrid>
+
+                                                            <Border Height="1" Background="#E0F2FE"/>
+
+                                                            <!-- Days (filled in code) -->
+                                                            <UniformGrid x:Name="DaysGrid" Rows="6" Columns="7"/>
+
+                                                            <Border Height="1" Background="#E0F2FE"/>
+
+                                                            <!-- Footer -->
+                                                            <Grid ColumnDefinitions="Auto,*">
+
+                                                                <Button x:Name="TodayButton"
+                                                                        Classes="linkBtn"
+                                                                        Content="Today"
+                                                                        Click="TodayButton_Click"/>
+
+                                                                <TextBlock Grid.Column="1"
+                                                                           Text="Past dates can't be selected"
+                                                                           FontSize="11"
+                                                                           Foreground="#64748B"
+                                                                           HorizontalAlignment="Right"
+                                                                           VerticalAlignment="Center"/>
+
+                                                            </Grid>
+
+                                                        </StackPanel>
+
+                                                    </Border>
+
+                                                </Popup>
+
+                                            </Grid>
+                                        </Border>
+
+                                        <!-- TIME: button + custom popup card -->
+                                        <Border Grid.Column="1" Classes="inputCard" Height="50">
+                                            <Grid>
+
+                                                <Button x:Name="TimeButton"
+                                                        Classes="fieldBtn"
+                                                        Click="TimeButton_Click">
+                                                    <Grid ColumnDefinitions="*,Auto">
+                                                        <TextBlock x:Name="TimeText"
+                                                                   Text="Select time"
+                                                                   FontSize="14"
+                                                                   Foreground="#64748B"
+                                                                   VerticalAlignment="Center"/>
+                                                        <Grid Grid.Column="1" Width="20" Height="20"
+                                                              VerticalAlignment="Center">
+                                                            <Ellipse Stroke="#0369A1" StrokeThickness="1.8"/>
+                                                            <Path Data="M10,5 L10,10 L13.5,12"
+                                                                  Stroke="#0369A1" StrokeThickness="1.8"
+                                                                  StrokeLineCap="Round" StrokeJoin="Round"/>
+                                                        </Grid>
+                                                    </Grid>
+                                                </Button>
+
+                                                <Popup x:Name="TimePopup"
+                                                       Placement="BottomEdgeAlignedLeft"
+                                                       VerticalOffset="8"
+                                                       IsLightDismissEnabled="True">
+
+                                                    <Border Background="#FFFFFF"
+                                                            BorderBrush="#BAE6FD"
+                                                            BorderThickness="1"
+                                                            CornerRadius="16"
+                                                            Padding="16"
+                                                            Width="290">
+
+                                                        <Border.Styles>
+
+                                                            <Style Selector="ListBox.timeList">
+                                                                <Setter Property="Background" Value="Transparent"/>
+                                                                <Setter Property="BorderThickness" Value="0"/>
+                                                                <Setter Property="Padding" Value="4"/>
+                                                                <Setter Property="Height" Value="200"/>
+                                                            </Style>
+
+                                                            <Style Selector="ListBoxItem">
+                                                                <Setter Property="Padding" Value="0,8"/>
+                                                                <Setter Property="Margin" Value="0,1"/>
+                                                                <Setter Property="CornerRadius" Value="8"/>
+                                                                <Setter Property="FontSize" Value="14"/>
+                                                                <Setter Property="Foreground" Value="#0F172A"/>
+                                                                <Setter Property="Cursor" Value="Hand"/>
+                                                            </Style>
+
+                                                            <Style Selector="ListBoxItem:pointerover /template/ ContentPresenter#PART_ContentPresenter">
+                                                                <Setter Property="Background" Value="#E0F2FE"/>
+                                                                <Setter Property="Foreground" Value="#0F172A"/>
+                                                            </Style>
+
+                                                            <Style Selector="ListBoxItem:selected /template/ ContentPresenter#PART_ContentPresenter">
+                                                                <Setter Property="Background" Value="#0EA5E9"/>
+                                                                <Setter Property="Foreground" Value="#FFFFFF"/>
+                                                            </Style>
+
+                                                            <Style Selector="ListBoxItem:selected:pointerover /template/ ContentPresenter#PART_ContentPresenter">
+                                                                <Setter Property="Background" Value="#0284C7"/>
+                                                                <Setter Property="Foreground" Value="#FFFFFF"/>
+                                                            </Style>
+
+                                                            <Style Selector="ListBoxItem:selected:focus /template/ ContentPresenter#PART_ContentPresenter">
+                                                                <Setter Property="Background" Value="#0EA5E9"/>
+                                                                <Setter Property="Foreground" Value="#FFFFFF"/>
+                                                            </Style>
+
+                                                            <!-- Past times: greyed out and not clickable -->
+                                                            <Style Selector="ListBoxItem:disabled /template/ ContentPresenter#PART_ContentPresenter">
+                                                                <Setter Property="Background" Value="Transparent"/>
+                                                                <Setter Property="Foreground" Value="#CBD5E1"/>
+                                                            </Style>
+
+                                                            <Style Selector="Button.doneBtn">
+                                                                <Setter Property="Height" Value="42"/>
+                                                                <Setter Property="Foreground" Value="#082F49"/>
+                                                                <Setter Property="FontSize" Value="14"/>
+                                                                <Setter Property="FontWeight" Value="SemiBold"/>
+                                                                <Setter Property="CornerRadius" Value="10"/>
+                                                                <Setter Property="BorderThickness" Value="0"/>
+                                                                <Setter Property="Cursor" Value="Hand"/>
+                                                                <Setter Property="HorizontalAlignment" Value="Stretch"/>
+                                                                <Setter Property="HorizontalContentAlignment" Value="Center"/>
+                                                                <Setter Property="VerticalContentAlignment" Value="Center"/>
+                                                                <Setter Property="Background" Value="{StaticResource AccentGradient}"/>
+                                                            </Style>
+
+                                                            <Style Selector="Button.doneBtn:pointerover /template/ ContentPresenter#PART_ContentPresenter">
+                                                                <Setter Property="Background" Value="{StaticResource AccentGradient}"/>
+                                                                <Setter Property="Foreground" Value="#082F49"/>
+                                                                <Setter Property="Opacity" Value="0.9"/>
+                                                            </Style>
+
+                                                            <Style Selector="Button.doneBtn:pressed /template/ ContentPresenter#PART_ContentPresenter">
+                                                                <Setter Property="Background" Value="{StaticResource AccentGradient}"/>
+                                                                <Setter Property="Foreground" Value="#082F49"/>
+                                                                <Setter Property="Opacity" Value="0.75"/>
+                                                            </Style>
+
+                                                        </Border.Styles>
+
+                                                        <StackPanel Spacing="10">
+
+                                                            <TextBlock Text="Select start time"
+                                                                       FontSize="16"
+                                                                       FontWeight="Bold"
+                                                                       Foreground="#0C4A6E"/>
+
+                                                            <Grid ColumnDefinitions="*,*,*" ColumnSpacing="8">
+
+                                                                <StackPanel Spacing="4">
+                                                                    <TextBlock Text="Hour" FontSize="12" FontWeight="SemiBold"
+                                                                               Foreground="#475569" HorizontalAlignment="Center"/>
+                                                                    <Border Background="#F0F9FF" CornerRadius="10">
+                                                                        <ListBox x:Name="HourList" Classes="timeList"/>
+                                                                    </Border>
+                                                                </StackPanel>
+
+                                                                <StackPanel Grid.Column="1" Spacing="4">
+                                                                    <TextBlock Text="Minute" FontSize="12" FontWeight="SemiBold"
+                                                                               Foreground="#475569" HorizontalAlignment="Center"/>
+                                                                    <Border Background="#F0F9FF" CornerRadius="10">
+                                                                        <ListBox x:Name="MinuteList" Classes="timeList"/>
+                                                                    </Border>
+                                                                </StackPanel>
+
+                                                                <StackPanel Grid.Column="2" Spacing="4">
+                                                                    <TextBlock Text="AM / PM" FontSize="12" FontWeight="SemiBold"
+                                                                               Foreground="#475569" HorizontalAlignment="Center"/>
+                                                                    <Border Background="#F0F9FF" CornerRadius="10">
+                                                                        <ListBox x:Name="AmPmList" Classes="timeList"/>
+                                                                    </Border>
+                                                                </StackPanel>
+
+                                                            </Grid>
+
+                                                            <TextBlock Text="Greyed-out times have already passed."
+                                                                       FontSize="11"
+                                                                       Foreground="#64748B"/>
+
+                                                            <TextBlock x:Name="TimePopupError"
+                                                                       FontSize="12"
+                                                                       Foreground="#B91C1C"
+                                                                       TextWrapping="Wrap"
+                                                                       IsVisible="False"/>
+
+                                                            <Button x:Name="TimeDoneButton"
+                                                                    Classes="doneBtn"
+                                                                    Content="Done"
+                                                                    Click="TimeDoneButton_Click"/>
+
+                                                        </StackPanel>
+
+                                                    </Border>
+
+                                                </Popup>
+
+                                            </Grid>
+                                        </Border>
+
+                                        <!-- Reset -->
+                                        <Button Grid.Column="2"
+                                                Classes="clearBtn"
+                                                Content="✕"
+                                                ToolTip.Tip="Reset date and time"
+                                                Click="ClearStartButton_Click"/>
+
+                                    </Grid>
                                 </StackPanel>
 
                             </Grid>
 
                             <TextBlock Classes="hint"
-                                       Text="Leave the start time blank to let students join any time."/>
+                                       Text="Pick the date and time the examination starts. Past dates and times cannot be selected."/>
 
                             <!-- DESCRIPTION -->
 
@@ -315,7 +766,7 @@
 
                             <!-- DIVIDER -->
 
-                            <Border Height="1" Background="#1E2A63" Margin="0,28,0,24"/>
+                            <Border Height="1" Background="#BAE6FD" Margin="0,28,0,24"/>
 
                             <!-- ALLOWED IDES -->
 
@@ -346,7 +797,7 @@
                                     IsVisible="False">
 
                                 <TextBlock x:Name="StatusText"
-                                           Foreground="#BFF5E0"
+                                           Foreground="#065F46"
                                            TextWrapping="Wrap"/>
 
                             </Border>

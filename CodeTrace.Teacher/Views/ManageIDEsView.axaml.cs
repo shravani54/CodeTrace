@@ -18,6 +18,7 @@ public partial class ManageIDEsView : UserControl
     public ManageIDEsView()
     {
         InitializeComponent();
+        Styles.Add(LightUi.Include());
         _ = LoadIDEsAsync();
     }
 
@@ -60,15 +61,15 @@ public partial class ManageIDEsView : UserControl
                             Text = "No IDEs added yet",
                             FontSize = 18,
                             FontWeight = FontWeight.SemiBold,
-                            Foreground = Heading(),
+                            Foreground = LightUi.Heading,
                             HorizontalAlignment = HorizontalAlignment.Center,
                             Margin = new Thickness(0, 8, 0, 0)
                         },
                         new TextBlock
                         {
                             Text = "Click \"+ Add IDE\" to register the first one.",
-                            FontSize = 13,
-                            Foreground = Muted(),
+                            FontSize = 14,
+                            Foreground = LightUi.Muted,
                             HorizontalAlignment = HorizontalAlignment.Center
                         }
                     }
@@ -88,14 +89,14 @@ public partial class ManageIDEsView : UserControl
                 Width = 46,
                 Height = 46,
                 CornerRadius = new CornerRadius(12),
-                Background = DarkUi.Chip,
-                BorderBrush = DarkUi.ChipBorder,
+                Background = LightUi.Chip,
+                BorderBrush = LightUi.ChipBorder,
                 BorderThickness = new Thickness(1),
                 Child = new TextBlock
                 {
                     Text = "⌨",
-                    FontSize = 18,
-                    Foreground = DarkUi.IconText,
+                    FontSize = 20,
+                    Foreground = LightUi.IconText,
                     HorizontalAlignment = HorizontalAlignment.Center,
                     VerticalAlignment = VerticalAlignment.Center
                 },
@@ -103,21 +104,21 @@ public partial class ManageIDEsView : UserControl
             };
             Grid.SetColumn(icon, 0);
 
-            var textStack = new StackPanel { Spacing = 6, VerticalAlignment = VerticalAlignment.Center };
+            var textStack = new StackPanel { Spacing = 4, VerticalAlignment = VerticalAlignment.Center };
 
             textStack.Children.Add(new TextBlock
             {
                 Text = ide.Name,
-                FontSize = 16,
-                FontWeight = FontWeight.SemiBold,
-                Foreground = Heading()
+                FontSize = 17,
+                FontWeight = FontWeight.Bold,
+                Foreground = LightUi.Heading
             });
 
             textStack.Children.Add(new TextBlock
             {
                 Text = ide.ExecutablePath,
-                FontSize = 12,
-                Foreground = Muted(),
+                FontSize = 13,
+                Foreground = LightUi.Muted,
                 TextWrapping = TextWrapping.Wrap
             });
 
@@ -156,10 +157,6 @@ public partial class ManageIDEsView : UserControl
         }
     }
 
-    private static IBrush Muted() => DarkUi.Muted;
-
-    private static IBrush Heading() => DarkUi.Heading;
-
     private async void AddIDEButton_Click(object? sender, RoutedEventArgs e)
     {
         var dialog = new Window
@@ -170,14 +167,20 @@ public partial class ManageIDEsView : UserControl
             CanResize = false,
             WindowStartupLocation = WindowStartupLocation.CenterOwner
         };
-        DarkUi.StyleDialog(dialog);
+        LightUi.StyleDialog(dialog);
 
-        var nameBox = new TextBox { PlaceholderText = "e.g. Visual Studio Code", Height = 42 };
-        var pathBox = new TextBox { PlaceholderText = "Path to executable", Height = 42 };
+        var nameBox = new TextBox { PlaceholderText = "e.g. Visual Studio Code", Height = 44 };
+        var pathBox = new TextBox { PlaceholderText = "Path to executable", Height = 44 };
         var browseButton = new Button { Content = "Browse", Classes = { "secondary" } };
         var saveButton = new Button { Content = "Save IDE", Classes = { "primary" }, HorizontalAlignment = HorizontalAlignment.Stretch };
         var cancelButton = new Button { Content = "Cancel", Classes = { "secondary" }, HorizontalAlignment = HorizontalAlignment.Stretch };
-        var statusText = new TextBlock { Foreground = DarkUi.Error, FontSize = 13, TextWrapping = TextWrapping.Wrap };
+        var statusText = new TextBlock
+        {
+            Foreground = LightUi.Error,
+            FontSize = 14,
+            FontWeight = FontWeight.SemiBold,
+            TextWrapping = TextWrapping.Wrap
+        };
 
         browseButton.Click += async (_, _) =>
         {
@@ -252,7 +255,7 @@ public partial class ManageIDEsView : UserControl
 
         // Header bar
         var header = new Grid { ColumnDefinitions = new ColumnDefinitions("*,Auto"), Margin = new Thickness(24, 20, 24, 0) };
-        var headerText = new TextBlock { Text = "Add IDE", FontSize = 18, FontWeight = FontWeight.Bold, Foreground = Heading() };
+        var headerText = new TextBlock { Text = "Add IDE", FontSize = 20, FontWeight = FontWeight.Bold, Foreground = LightUi.Heading };
         var closeButton = new Button { Content = "✕", Classes = { "ghost" } };
         closeButton.Click += (_, _) => dialog.Close();
         Grid.SetColumn(headerText, 0);

@@ -263,20 +263,30 @@ public partial class TeacherDashboard : UserControl
         var dialog = new Window
         {
             Title = "Sign out",
-            Width = 380,
+            Width = 420,
             SizeToContent = SizeToContent.Height,
             CanResize = false,
-            WindowStartupLocation = WindowStartupLocation.CenterOwner,
-            Background = new SolidColorBrush(Color.Parse("#101831"))
+            WindowStartupLocation = WindowStartupLocation.CenterOwner
         };
 
-        var stay = new Button { Content = "Stay signed in", Padding = new Thickness(16, 8) };
+        // Light background + light button styles (secondary / danger)
+        LightUi.StyleDialog(dialog);
+
+        var stay = new Button
+        {
+            Content = "Stay signed in",
+            Classes = { "secondary" },
+            MinWidth = 140
+        };
+
         var leave = new Button
         {
             Content = "Sign out",
-            Padding = new Thickness(16, 8),
-            Background = new SolidColorBrush(Color.Parse("#B91C1C")),
-            Foreground = Brushes.White
+            Classes = { "danger" },
+            Height = 46,
+            MinWidth = 120,
+            HorizontalContentAlignment = HorizontalAlignment.Center,
+            VerticalContentAlignment = VerticalAlignment.Center
         };
 
         stay.Click += (_, _) => dialog.Close();
@@ -286,39 +296,43 @@ public partial class TeacherDashboard : UserControl
             dialog.Close();
         };
 
-        dialog.Content = new StackPanel
+        dialog.Content = new Border
         {
-            Margin = new Thickness(24),
-            Spacing = 18,
-            Children =
+            Classes = { "dialogShell" },
+            Child = new StackPanel
             {
-                new StackPanel
+                Margin = new Thickness(28),
+                Spacing = 22,
+                Children =
                 {
-                    Spacing = 6,
-                    Children =
+                    new StackPanel
                     {
-                        new TextBlock
+                        Spacing = 8,
+                        Children =
                         {
-                            Text = "Sign out of CodeTrace?",
-                            FontSize = 18,
-                            FontWeight = FontWeight.Bold,
-                            Foreground = Brushes.White
-                        },
-                        new TextBlock
-                        {
-                            Text = "You will need to sign in again to manage examinations.",
-                            FontSize = 13,
-                            TextWrapping = TextWrapping.Wrap,
-                            Foreground = new SolidColorBrush(Color.Parse("#98A4D6"))
+                            new TextBlock
+                            {
+                                Text = "Sign out of CodeTrace?",
+                                FontSize = 20,
+                                FontWeight = FontWeight.Bold,
+                                Foreground = LightUi.Heading
+                            },
+                            new TextBlock
+                            {
+                                Text = "You will need to sign in again to manage examinations.",
+                                FontSize = 14,
+                                TextWrapping = TextWrapping.Wrap,
+                                Foreground = LightUi.Muted
+                            }
                         }
+                    },
+                    new StackPanel
+                    {
+                        Orientation = Orientation.Horizontal,
+                        Spacing = 10,
+                        HorizontalAlignment = HorizontalAlignment.Right,
+                        Children = { stay, leave }
                     }
-                },
-                new StackPanel
-                {
-                    Orientation = Orientation.Horizontal,
-                    Spacing = 10,
-                    HorizontalAlignment = HorizontalAlignment.Right,
-                    Children = { stay, leave }
                 }
             }
         };

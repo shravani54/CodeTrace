@@ -3,21 +3,106 @@
         x:Class="CodeTrace.Teacher.ManageExamsWindow"
         Title="Manage Examinations"
         Width="800"
-        Height="500">
+        Height="500"
+        Background="#070B1F">
 
-    <StackPanel Margin="30" Spacing="15">
+    <Window.Resources>
+        <LinearGradientBrush x:Key="NavGradient" StartPoint="0,0" EndPoint="1,0">
+            <GradientStop Color="#3B6CF5" Offset="0"/>
+            <GradientStop Color="#7C5CF0" Offset="1"/>
+        </LinearGradientBrush>
+    </Window.Resources>
 
-        <TextBlock Text="Manage Examinations"
-                   FontSize="28"
-                   FontWeight="Bold"/>
+    <Window.Styles>
 
-        <ListBox x:Name="ExamListBox"
-                 Height="300"/>
+        <!-- LIST ITEMS -->
+        <Style Selector="ListBoxItem">
+            <Setter Property="Foreground" Value="#E3E8FF"/>
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="Padding" Value="14,12"/>
+            <Setter Property="Margin" Value="0,0,0,6"/>
+            <Setter Property="CornerRadius" Value="10"/>
+            <Setter Property="Background" Value="#0F1638"/>
+            <Setter Property="Cursor" Value="Hand"/>
+        </Style>
 
-        <Button Content="Refresh"
-                Width="120"
-                Click="RefreshButton_Click"/>
+        <Style Selector="ListBoxItem:pointerover /template/ ContentPresenter#PART_ContentPresenter">
+            <Setter Property="Background" Value="#151C45"/>
+            <Setter Property="Foreground" Value="White"/>
+        </Style>
 
-    </StackPanel>
+        <Style Selector="ListBoxItem:selected /template/ ContentPresenter#PART_ContentPresenter">
+            <Setter Property="Background" Value="{StaticResource NavGradient}"/>
+            <Setter Property="Foreground" Value="White"/>
+        </Style>
+
+        <!-- PRIMARY BUTTON -->
+        <Style Selector="Button.primary">
+            <Setter Property="Background" Value="{StaticResource NavGradient}"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="CornerRadius" Value="10"/>
+            <Setter Property="Height" Value="42"/>
+            <Setter Property="Padding" Value="18,0"/>
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="FontWeight" Value="SemiBold"/>
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="Cursor" Value="Hand"/>
+        </Style>
+
+        <Style Selector="Button.primary:pointerover /template/ ContentPresenter#PART_ContentPresenter">
+            <Setter Property="Background" Value="{StaticResource NavGradient}"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="Opacity" Value="0.9"/>
+        </Style>
+
+        <Style Selector="Button.primary:pressed /template/ ContentPresenter#PART_ContentPresenter">
+            <Setter Property="Background" Value="{StaticResource NavGradient}"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="Opacity" Value="0.75"/>
+        </Style>
+
+    </Window.Styles>
+
+    <Border Background="#070B1F" Padding="30">
+
+        <Grid RowDefinitions="Auto,*,Auto">
+
+            <!-- HEADER -->
+            <StackPanel Grid.Row="0" Spacing="4" Margin="0,0,0,20">
+                <TextBlock Text="Manage Examinations"
+                           Foreground="White"
+                           FontSize="28"
+                           FontWeight="Bold"/>
+                <TextBlock Text="View and manage all your examinations"
+                           Foreground="#8F9BD0"
+                           FontSize="13"/>
+            </StackPanel>
+
+            <!-- LIST CARD -->
+            <Border Grid.Row="1"
+                    Background="#0A0F2B"
+                    BorderBrush="#1A2457"
+                    BorderThickness="1"
+                    CornerRadius="14"
+                    Padding="12">
+
+                <ListBox x:Name="ExamListBox"
+                         Background="Transparent"
+                         BorderThickness="0"/>
+            </Border>
+
+            <!-- ACTIONS -->
+            <Button Grid.Row="2"
+                    Content="🔄  Refresh"
+                    Classes="primary"
+                    Width="140"
+                    HorizontalAlignment="Left"
+                    Margin="0,20,0,0"
+                    Click="RefreshButton_Click"/>
+
+        </Grid>
+    </Border>
 
 </Window>

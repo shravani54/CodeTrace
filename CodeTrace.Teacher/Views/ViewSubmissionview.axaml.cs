@@ -97,17 +97,17 @@ public partial class ViewSubmissionsView : UserControl
         var title = new TextBlock
         {
             Text = name,
-            FontSize = 16,
-            FontWeight = FontWeight.SemiBold,
-            Foreground = Brushes.White,
+            FontSize = 18,
+            FontWeight = FontWeight.Bold,
+            Foreground = Brush.Parse("#0C4A6E"),
             TextTrimming = TextTrimming.CharacterEllipsis
         };
 
         var sub = new TextBlock
         {
             Text = info,
-            FontSize = 12,
-            Foreground = new SolidColorBrush(Color.Parse("#98A4D6"))
+            FontSize = 13,
+            Foreground = Brush.Parse("#475569")
         };
 
         var left = new StackPanel { Spacing = 3, VerticalAlignment = VerticalAlignment.Center };
@@ -118,7 +118,7 @@ public partial class ViewSubmissionsView : UserControl
         {
             Text = count == 1 ? "1 submission" : $"{count} submissions",
             FontWeight = FontWeight.SemiBold,
-            Foreground = new SolidColorBrush(Color.Parse("#6EA8FF")),
+            Foreground = Brush.Parse("#0369A1"),
             VerticalAlignment = VerticalAlignment.Center,
             Margin = new Thickness(16, 0)
         };
@@ -127,7 +127,7 @@ public partial class ViewSubmissionsView : UserControl
         {
             Text = "›",
             FontSize = 24,
-            Foreground = new SolidColorBrush(Color.Parse("#7F8BC4")),
+            Foreground = Brush.Parse("#0369A1"),
             VerticalAlignment = VerticalAlignment.Center
         };
 
@@ -197,7 +197,7 @@ public partial class ViewSubmissionsView : UserControl
                 codeCell = new TextBlock
                 {
                     Text = "No code ZIP",
-                    Foreground = new SolidColorBrush(Color.Parse("#7F8BC4")),
+                    Foreground = Brush.Parse("#64748B"),
                     VerticalAlignment = VerticalAlignment.Center
                 };
             }

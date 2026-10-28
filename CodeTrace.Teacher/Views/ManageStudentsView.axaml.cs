@@ -120,20 +120,19 @@ public partial class ManageStudentsView : UserControl
     private Button BuildExamCard(int id, string name, string info, int count)
     {
         var title = new TextBlock
-        {
-            Text = name,
-            FontSize = 16,
-            FontWeight = FontWeight.SemiBold,
-            Foreground = Brushes.White,
-            TextTrimming = TextTrimming.CharacterEllipsis
-        };
+    {
+        Text = name,
+        FontSize = 18,
+        FontWeight = FontWeight.Bold,
+        Foreground = Brush.Parse("#0C4A6E")
+    };
 
-        var sub = new TextBlock
-        {
-            Text = info,
-            FontSize = 12,
-            Foreground = new SolidColorBrush(Color.Parse("#98A4D6"))
-        };
+    var sub = new TextBlock
+    {
+        Text = info,
+        FontSize = 12,
+        Foreground = new SolidColorBrush(Color.Parse("#98A4D6"))
+    };
 
         var left = new StackPanel { Spacing = 3, VerticalAlignment = VerticalAlignment.Center };
         left.Children.Add(title);

@@ -5,127 +5,184 @@
              mc:Ignorable="d"
              x:Class="CodeTrace.Teacher.Views.ManageIDEsView">
 
-    <UserControl.Styles>
+  <UserControl.Resources>
+    <SolidColorBrush x:Key="LoginMutedText" Color="#475569"/>
+    <SolidColorBrush x:Key="LoginErrorText" Color="#BE123C"/>
 
-        <StyleInclude Source="/Styles/CodeTraceDark.axaml"/>
+    <!-- TextBox: dark text on white in every state -->
+    <SolidColorBrush x:Key="TextControlForeground" Color="#0F172A"/>
+    <SolidColorBrush x:Key="TextControlForegroundPointerOver" Color="#0F172A"/>
+    <SolidColorBrush x:Key="TextControlForegroundFocused" Color="#0F172A"/>
+    <SolidColorBrush x:Key="TextControlForegroundDisabled" Color="#94A3B8"/>
+    <SolidColorBrush x:Key="TextControlPlaceholderForeground" Color="#64748B"/>
+    <SolidColorBrush x:Key="TextControlPlaceholderForegroundPointerOver" Color="#64748B"/>
+    <SolidColorBrush x:Key="TextControlPlaceholderForegroundFocused" Color="#64748B"/>
 
-        <Style Selector="TextBlock.pageTitle">
-            <Setter Property="FontSize" Value="34"/>
-            <Setter Property="FontWeight" Value="Bold"/>
-            <Setter Property="Foreground" Value="White"/>
-        </Style>
+    <!-- TextBox: white background in every state -->
+    <SolidColorBrush x:Key="TextControlBackground" Color="#FFFFFF"/>
+    <SolidColorBrush x:Key="TextControlBackgroundPointerOver" Color="#FFFFFF"/>
+    <SolidColorBrush x:Key="TextControlBackgroundFocused" Color="#FFFFFF"/>
+    <SolidColorBrush x:Key="TextControlBackgroundDisabled" Color="#F1F5F9"/>
+  </UserControl.Resources>
 
-        <Style Selector="TextBlock.pageSubtitle">
-            <Setter Property="FontSize" Value="14"/>
-            <Setter Property="Foreground" Value="#98A4D6"/>
-        </Style>
+  <UserControl.Styles>
 
-        <Style Selector="TextBlock.sectionTitle">
-            <Setter Property="Foreground" Value="White"/>
-            <Setter Property="FontWeight" Value="Bold"/>
-            <Setter Property="FontSize" Value="20"/>
-        </Style>
+    <Style Selector="TextBlock.pageTitle">
+      <Setter Property="FontSize" Value="34"/>
+      <Setter Property="FontWeight" Value="Bold"/>
+      <Setter Property="Foreground" Value="#0C4A6E"/>
+    </Style>
 
-        <Style Selector="ProgressBar">
-            <Setter Property="Foreground" Value="#4F7BFF"/>
-            <Setter Property="Background" Value="#131B4A"/>
-        </Style>
+    <Style Selector="TextBlock.pageSubtitle">
+      <Setter Property="FontSize" Value="14"/>
+      <Setter Property="Foreground" Value="#475569"/>
+    </Style>
 
-        <!-- The page's Add IDE button is wider than the one in the dialogs -->
+    <Style Selector="TextBlock.sectionTitle">
+      <Setter Property="Foreground" Value="#0C4A6E"/>
+      <Setter Property="FontWeight" Value="Bold"/>
+      <Setter Property="FontSize" Value="20"/>
+    </Style>
 
-        <Style Selector="Button#AddIDEButton">
-            <Setter Property="Height" Value="50"/>
-            <Setter Property="MinWidth" Value="230"/>
-        </Style>
+    <Style Selector="ProgressBar">
+      <Setter Property="Foreground" Value="#0EA5E9"/>
+      <Setter Property="Background" Value="#E0F2FE"/>
+    </Style>
 
-    </UserControl.Styles>
+    <!-- IDE rows (built in code into IDEListPanel): readable dark text on white -->
+    <Style Selector="StackPanel#IDEListPanel TextBlock">
+      <Setter Property="Foreground" Value="#0F172A"/>
+      <Setter Property="FontSize" Value="14"/>
+      <Setter Property="VerticalAlignment" Value="Center"/>
+    </Style>
 
-    <Border Background="#070B1F" ClipToBounds="True">
+    <!-- White card -->
+    <Style Selector="Border.card">
+      <Setter Property="Background" Value="#FFFFFF"/>
+      <Setter Property="BorderBrush" Value="#BAE6FD"/>
+      <Setter Property="BorderThickness" Value="1"/>
+      <Setter Property="CornerRadius" Value="20"/>
+      <Setter Property="Padding" Value="32"/>
+      <Setter Property="BoxShadow" Value="0 16 44 0 #260EA5E9"/>
+    </Style>
 
-        <Grid>
+    <!-- Primary button: sky-blue gradient -->
+    <Style Selector="Button.primary">
+      <Setter Property="Height" Value="50"/>
+      <Setter Property="CornerRadius" Value="10"/>
+      <Setter Property="Padding" Value="20,0"/>
+      <Setter Property="HorizontalContentAlignment" Value="Center"/>
+      <Setter Property="VerticalContentAlignment" Value="Center"/>
+      <Setter Property="Foreground" Value="#082F49"/>
+      <Setter Property="FontSize" Value="15"/>
+      <Setter Property="FontWeight" Value="SemiBold"/>
+      <Setter Property="Cursor" Value="Hand"/>
+      <Setter Property="Background">
+        <LinearGradientBrush StartPoint="0%,50%" EndPoint="100%,50%">
+          <GradientStop Color="#7DD3FC" Offset="0"/>
+          <GradientStop Color="#38BDF8" Offset="1"/>
+        </LinearGradientBrush>
+      </Setter>
+    </Style>
 
-            <!-- Decorative circles, same as the home page -->
+    <Style Selector="Button.primary:pointerover /template/ ContentPresenter">
+      <Setter Property="Opacity" Value="0.9"/>
+    </Style>
 
-            <Ellipse Width="460" Height="460" Fill="#0B1233"
-                     HorizontalAlignment="Right" VerticalAlignment="Top"
-                     Margin="0,-200,-160,0" IsHitTestVisible="False"/>
+    <Style Selector="Button.primary:pressed /template/ ContentPresenter">
+      <Setter Property="Opacity" Value="0.8"/>
+    </Style>
 
-            <Ellipse Width="420" Height="420" Fill="#091029"
-                     HorizontalAlignment="Left" VerticalAlignment="Bottom"
-                     Margin="120,0,0,-260" IsHitTestVisible="False"/>
+    <Style Selector="Button.primary:disabled /template/ ContentPresenter">
+      <Setter Property="Opacity" Value="0.55"/>
+    </Style>
 
-            <ScrollViewer>
+    <!-- The page's Add IDE button is wider than the one in the dialogs -->
+    <Style Selector="Button#AddIDEButton">
+      <Setter Property="Height" Value="50"/>
+      <Setter Property="MinWidth" Value="230"/>
+    </Style>
 
-                <StackPanel Margin="36,32,36,36" MaxWidth="1000" HorizontalAlignment="Stretch">
+  </UserControl.Styles>
 
-                    <!-- HEADER -->
+  <Grid ClipToBounds="True" Background="#F0F9FF">
 
-                    <StackPanel Margin="0,0,0,24">
+    <!-- Background lighting -->
+    <Grid IsHitTestVisible="False">
+      <Ellipse Width="560" Height="560"
+               HorizontalAlignment="Right" VerticalAlignment="Top"
+               Margin="0,-320,-170,0" Fill="#BAE6FD" Opacity="0.55"/>
+      <Ellipse Width="500" Height="420"
+               HorizontalAlignment="Left" VerticalAlignment="Bottom"
+               Margin="-300,0,0,-260" Fill="#E0F2FE" Opacity="0.9"/>
+    </Grid>
 
-                        <StackPanel Orientation="Horizontal" Spacing="10">
-                            <TextBlock Text="Manage" Classes="pageTitle"/>
-                            <TextBlock Text="IDEs" Classes="pageTitle" Foreground="#4F7BFF"/>
-                        </StackPanel>
+    <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
 
-                        <TextBlock Text="Add and manage IDEs that can be assigned to examinations."
-                                   Classes="pageSubtitle"
-                                   Margin="0,6,0,0"
-                                   TextWrapping="Wrap"/>
+      <StackPanel Margin="36,32,36,36" MaxWidth="1000" HorizontalAlignment="Stretch">
 
-                    </StackPanel>
+        <!-- HEADER -->
+        <StackPanel Margin="0,0,0,24">
 
-                    <!-- MAIN CARD -->
+          <StackPanel Orientation="Horizontal" Spacing="10">
+            <TextBlock Text="Manage" Classes="pageTitle"/>
+            <TextBlock Text="IDEs" Classes="pageTitle" Foreground="#0284C7"/>
+          </StackPanel>
 
-                    <Border Classes="card">
+          <TextBlock Text="Add and manage IDEs that can be assigned to examinations."
+                     Classes="pageSubtitle"
+                     Margin="0,6,0,0"
+                     TextWrapping="Wrap"/>
 
-                        <StackPanel>
+          <Border Height="1" Background="#BAE6FD" Margin="0,14,0,0"/>
 
-                            <TextBlock Text="Available IDEs" Classes="sectionTitle"/>
+        </StackPanel>
 
-                            <TextBlock Text="These IDEs can be allowed when you create an examination."
-                                       Classes="pageSubtitle"
-                                       Margin="0,4,0,0"/>
+        <!-- MAIN CARD -->
+        <Border Classes="card">
 
-                            <ProgressBar x:Name="LoadingBar"
-                                         IsIndeterminate="True"
-                                         IsVisible="False"
-                                         Height="4"
-                                         Margin="0,14,0,0"/>
+          <StackPanel>
 
-                            <!-- Dynamic IDE list -->
+            <TextBlock Text="Available IDEs" Classes="sectionTitle"/>
 
-                            <StackPanel x:Name="IDEListPanel"
-                                        Spacing="12"
-                                        Margin="0,18,0,0"/>
+            <TextBlock Text="These IDEs can be allowed when you create an examination."
+                       Classes="pageSubtitle"
+                       Margin="0,4,0,0"/>
 
-                            <!-- Divider -->
+            <ProgressBar x:Name="LoadingBar"
+                         IsIndeterminate="True"
+                         IsVisible="False"
+                         Height="3"
+                         Margin="0,14,0,0"/>
 
-                            <Border Height="1" Background="#1E2A63" Margin="0,26,0,22"/>
+            <!-- Dynamic IDE list -->
+            <StackPanel x:Name="IDEListPanel"
+                        Spacing="12"
+                        Margin="0,18,0,0"/>
 
-                            <!-- Button -->
+            <!-- Divider -->
+            <Border Height="1" Background="#BAE6FD" Margin="0,26,0,22"/>
 
-                            <Button x:Name="AddIDEButton"
-                                    Classes="primary"
-                                    Click="AddIDEButton_Click"
-                                    HorizontalAlignment="Left">
+            <!-- Button -->
+            <Button x:Name="AddIDEButton"
+                    Classes="primary"
+                    Click="AddIDEButton_Click"
+                    HorizontalAlignment="Left">
 
-                                <StackPanel Orientation="Horizontal" Spacing="10">
-                                    <TextBlock Text="+"/>
-                                    <TextBlock Text="Add IDE"/>
-                                </StackPanel>
+              <StackPanel Orientation="Horizontal" Spacing="10">
+                <TextBlock Text="+"/>
+                <TextBlock Text="Add IDE"/>
+              </StackPanel>
 
-                            </Button>
+            </Button>
 
-                        </StackPanel>
+          </StackPanel>
 
-                    </Border>
+        </Border>
 
-                </StackPanel>
+      </StackPanel>
 
-            </ScrollViewer>
+    </ScrollViewer>
 
-        </Grid>
-
-    </Border>
-
+  </Grid>
 </UserControl>
