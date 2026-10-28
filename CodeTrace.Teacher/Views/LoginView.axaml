@@ -1,0 +1,505 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             x:Class="CodeTrace.Teacher.Views.LoginView">
+
+  <UserControl.Resources>
+    <SolidColorBrush x:Key="LoginMutedText" Color="#475569"/>
+    <SolidColorBrush x:Key="LoginErrorText" Color="#BE123C"/>
+
+    <!-- TextBox: dark text on white in every state -->
+    <SolidColorBrush x:Key="TextControlForeground" Color="#0F172A"/>
+    <SolidColorBrush x:Key="TextControlForegroundPointerOver" Color="#0F172A"/>
+    <SolidColorBrush x:Key="TextControlForegroundFocused" Color="#0F172A"/>
+    <SolidColorBrush x:Key="TextControlForegroundDisabled" Color="#94A3B8"/>
+    <SolidColorBrush x:Key="TextControlPlaceholderForeground" Color="#64748B"/>
+    <SolidColorBrush x:Key="TextControlPlaceholderForegroundPointerOver" Color="#64748B"/>
+    <SolidColorBrush x:Key="TextControlPlaceholderForegroundFocused" Color="#64748B"/>
+
+    <!-- TextBox: white background in every state -->
+    <SolidColorBrush x:Key="TextControlBackground" Color="#FFFFFF"/>
+    <SolidColorBrush x:Key="TextControlBackgroundPointerOver" Color="#FFFFFF"/>
+    <SolidColorBrush x:Key="TextControlBackgroundFocused" Color="#FFFFFF"/>
+    <SolidColorBrush x:Key="TextControlBackgroundDisabled" Color="#F1F5F9"/>
+
+    <StreamGeometry x:Key="UserIcon">M12,4A4,4 0 0,1 16,8A4,4 0 0,1 12,12A4,4 0 0,1 8,8A4,4 0 0,1 12,4M12,14C16.42,14 20,15.79 20,18V20H4V18C4,15.79 7.58,14 12,14Z</StreamGeometry>
+    <StreamGeometry x:Key="LockIcon">M12,17A2,2 0 0,0 14,15C14,13.89 13.1,13 12,13A2,2 0 0,0 10,15A2,2 0 0,0 12,17M18,8A2,2 0 0,1 20,10V20A2,2 0 0,1 18,22H6A2,2 0 0,1 4,20V10C4,8.89 4.9,8 6,8H7V6A5,5 0 0,1 12,1A5,5 0 0,1 17,6V8H18M12,3A3,3 0 0,0 9,6V8H15V6A3,3 0 0,0 12,3Z</StreamGeometry>
+    <StreamGeometry x:Key="ShieldIcon">M12,1L3,5V11C3,16.55 6.84,21.74 12,23C17.16,21.74 21,16.55 21,11V5L12,1Z</StreamGeometry>
+    <StreamGeometry x:Key="ArrowIcon">M4,11V13H16L10.5,18.5L11.92,19.92L19.84,12L11.92,4.08L10.5,5.5L16,11H4Z</StreamGeometry>
+  </UserControl.Resources>
+
+  <UserControl.Styles>
+
+    <Style Selector="TextBox.field">
+      <Setter Property="Height" Value="52"/>
+      <Setter Property="CornerRadius" Value="10"/>
+      <Setter Property="VerticalContentAlignment" Value="Center"/>
+      <Setter Property="FontSize" Value="14"/>
+      <Setter Property="Padding" Value="5,0"/>
+      <Setter Property="Background" Value="#FFFFFF"/>
+      <Setter Property="Foreground" Value="#0F172A"/>
+      <Setter Property="CaretBrush" Value="#0C4A6E"/>
+      <Setter Property="SelectionBrush" Value="#7DD3FC"/>
+      <Setter Property="BorderBrush" Value="#BAE6FD"/>
+      <Setter Property="BorderThickness" Value="1"/>
+    </Style>
+
+    <!-- The typed text itself: dark in every state, even if the theme forces white -->
+    <Style Selector="TextBox.field /template/ TextPresenter#PART_TextPresenter">
+      <Setter Property="TextElement.Foreground" Value="#0F172A"/>
+    </Style>
+
+    <Style Selector="TextBox.field:focus /template/ TextPresenter#PART_TextPresenter">
+      <Setter Property="TextElement.Foreground" Value="#0F172A"/>
+    </Style>
+
+    <Style Selector="TextBox.field:pointerover /template/ Border#PART_BorderElement">
+      <Setter Property="BorderBrush" Value="#7DD3FC"/>
+    </Style>
+
+    <Style Selector="TextBox.field:focus /template/ Border#PART_BorderElement">
+      <Setter Property="Background" Value="#FFFFFF"/>
+      <Setter Property="BorderBrush" Value="#0EA5E9"/>
+      <Setter Property="BorderThickness" Value="1.5"/>
+    </Style>
+
+    <Style Selector="TextBox.field.error /template/ Border#PART_BorderElement">
+      <Setter Property="BorderBrush" Value="#E11D48"/>
+      <Setter Property="BorderThickness" Value="1.5"/>
+    </Style>
+
+    <Style Selector="Button.signin">
+      <Setter Property="Height" Value="52"/>
+      <Setter Property="CornerRadius" Value="10"/>
+      <Setter Property="HorizontalAlignment" Value="Stretch"/>
+      <Setter Property="HorizontalContentAlignment" Value="Center"/>
+      <Setter Property="VerticalContentAlignment" Value="Center"/>
+      <Setter Property="Foreground" Value="#082F49"/>
+      <Setter Property="FontSize" Value="15"/>
+      <Setter Property="FontWeight" Value="SemiBold"/>
+      <Setter Property="Cursor" Value="Hand"/>
+      <Setter Property="Background">
+        <LinearGradientBrush StartPoint="0%,50%" EndPoint="100%,50%">
+          <GradientStop Color="#7DD3FC" Offset="0"/>
+          <GradientStop Color="#38BDF8" Offset="1"/>
+        </LinearGradientBrush>
+      </Setter>
+    </Style>
+
+    <Style Selector="Button.signin:pointerover /template/ ContentPresenter">
+      <Setter Property="Opacity" Value="0.9"/>
+    </Style>
+
+    <Style Selector="Button.signin:pressed /template/ ContentPresenter">
+      <Setter Property="Opacity" Value="0.8"/>
+    </Style>
+
+    <Style Selector="Button.signin:disabled /template/ ContentPresenter">
+      <Setter Property="Opacity" Value="0.55"/>
+    </Style>
+
+  </UserControl.Styles>
+
+  <Grid ClipToBounds="True" Background="#F0F9FF">
+
+    <!-- Background lighting -->
+    <Grid IsHitTestVisible="False">
+      <Ellipse Width="560" Height="560"
+               HorizontalAlignment="Right"
+               VerticalAlignment="Top"
+               Margin="0,-320,-170,0"
+               Fill="#BAE6FD"
+               Opacity="0.55"/>
+
+      <Ellipse Width="500" Height="420"
+               HorizontalAlignment="Left"
+               VerticalAlignment="Bottom"
+               Margin="-300,0,0,-260"
+               Fill="#E0F2FE"
+               Opacity="0.9"/>
+
+      <Border Height="1"
+              VerticalAlignment="Bottom"
+              Background="#BAE6FD"
+              Opacity="0.7"/>
+    </Grid>
+
+    <!-- Main page: one centered block, brand + hero share the same left edge -->
+    <Grid MaxWidth="1120"
+          Margin="48,34"
+          HorizontalAlignment="Stretch">
+
+      <Grid.RowDefinitions>
+        <RowDefinition Height="60"/>
+        <RowDefinition Height="*"/>
+      </Grid.RowDefinitions>
+
+      <!-- Brand header -->
+      <StackPanel Grid.Row="0"
+                  Orientation="Horizontal"
+                  Spacing="13"
+                  HorizontalAlignment="Left"
+                  VerticalAlignment="Top">
+
+        <Border Width="46"
+                Height="46"
+                CornerRadius="12"
+                Background="#0369A1">
+          <TextBlock Text="CT"
+                     FontSize="17"
+                     FontWeight="Bold"
+                     Foreground="White"
+                     HorizontalAlignment="Center"
+                     VerticalAlignment="Center"/>
+        </Border>
+
+        <StackPanel VerticalAlignment="Center" Spacing="3">
+          <TextBlock Text="CodeTrace"
+                     FontSize="22"
+                     FontWeight="Bold"
+                     Foreground="#0C4A6E"/>
+
+          <TextBlock Text="Secure Programming Examination System"
+                     FontSize="12"
+                     Foreground="#475569"/>
+        </StackPanel>
+      </StackPanel>
+
+      <!-- Hero and login card -->
+      <Grid Grid.Row="1"
+            ColumnDefinitions="*,56,440"
+            VerticalAlignment="Center"
+            Margin="0,0,0,0">
+
+        <!-- LEFT: Hero section -->
+        <StackPanel Grid.Column="0"
+                    VerticalAlignment="Center"
+                    HorizontalAlignment="Left"
+                    Spacing="0">
+
+          <TextBlock Text="Better Coding"
+                     FontSize="46"
+                     FontWeight="Bold"
+                     LineHeight="60"
+                     Foreground="#0C4A6E"/>
+
+          <StackPanel Orientation="Horizontal" Spacing="12">
+            <TextBlock Text="Better"
+                       FontSize="46"
+                       FontWeight="Bold"
+                       LineHeight="60"
+                       Foreground="#0C4A6E"/>
+
+            <TextBlock Text="Future"
+                       FontSize="46"
+                       FontWeight="Bold"
+                       LineHeight="60"
+                       Foreground="#0284C7"/>
+          </StackPanel>
+
+          <TextBlock Text="Secure. Reliable. Smart."
+                     FontSize="17"
+                     Foreground="#475569"
+                     Margin="0,8,0,0"/>
+
+          <TextBlock Text="A secure and controlled environment for programming examinations."
+                     MaxWidth="430"
+                     TextWrapping="Wrap"
+                     FontSize="13"
+                     LineHeight="21"
+                     Foreground="#475569"
+                     Margin="0,10,0,0"/>
+
+          <!-- Feature labels -->
+          <StackPanel Orientation="Horizontal"
+                      Spacing="10"
+                      Margin="0,20,0,0">
+
+            <Border CornerRadius="8"
+                    Padding="10,7"
+                    Background="#FFFFFF"
+                    BorderBrush="#BAE6FD"
+                    BorderThickness="1">
+              <StackPanel Orientation="Horizontal" Spacing="7">
+                <Ellipse Width="6" Height="6"
+                         Fill="#0EA5E9"
+                         VerticalAlignment="Center"/>
+                <TextBlock Text="Secure Exams"
+                           FontSize="11"
+                           Foreground="#334155"/>
+              </StackPanel>
+            </Border>
+
+            <Border CornerRadius="8"
+                    Padding="10,7"
+                    Background="#FFFFFF"
+                    BorderBrush="#BAE6FD"
+                    BorderThickness="1">
+              <StackPanel Orientation="Horizontal" Spacing="7">
+                <Ellipse Width="6" Height="6"
+                         Fill="#0369A1"
+                         VerticalAlignment="Center"/>
+                <TextBlock Text="Live Monitoring"
+                           FontSize="11"
+                           Foreground="#334155"/>
+              </StackPanel>
+            </Border>
+          </StackPanel>
+
+          <!-- Coding illustration: laptop 320 wide, shield overlaps its bottom-right corner -->
+          <Grid Width="370"
+                Height="196"
+                HorizontalAlignment="Left"
+                Margin="0,26,0,0">
+
+            <!-- Soft glow centered under the laptop screen -->
+            <Ellipse Width="280"
+                     Height="70"
+                     Fill="#38BDF8"
+                     Opacity="0.20"
+                     HorizontalAlignment="Left"
+                     VerticalAlignment="Top"
+                     Margin="20,150,0,0"/>
+
+            <!-- Laptop screen -->
+            <Border Width="320"
+                    Height="176"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Top"
+                    CornerRadius="11"
+                    Background="#FFFFFF"
+                    BorderBrush="#38BDF8"
+                    BorderThickness="1.5"
+                    BoxShadow="0 10 28 0 #3338BDF8">
+
+              <StackPanel Margin="16" Spacing="10">
+
+                <Grid ColumnDefinitions="Auto,Auto,Auto,*">
+                  <Ellipse Grid.Column="0" Width="8" Height="8" Fill="#F16C72"/>
+                  <Ellipse Grid.Column="1" Width="8" Height="8" Fill="#E8B650" Margin="6,0,0,0"/>
+                  <Ellipse Grid.Column="2" Width="8" Height="8" Fill="#4FC98B" Margin="6,0,0,0"/>
+                  <TextBlock Grid.Column="3"
+                             Text="solution.java"
+                             FontSize="10"
+                             Foreground="#64748B"
+                             HorizontalAlignment="Right"/>
+                </Grid>
+
+                <Border Height="1" Background="#E0F2FE"/>
+
+                <StackPanel Spacing="10">
+
+                  <StackPanel Orientation="Horizontal" Spacing="9">
+                    <TextBlock Text="01" FontSize="9" Foreground="#64748B"/>
+                    <Rectangle Width="135" Height="6" RadiusX="3" RadiusY="3" Fill="#0EA5E9" HorizontalAlignment="Left"/>
+                  </StackPanel>
+
+                  <StackPanel Orientation="Horizontal" Spacing="9">
+                    <TextBlock Text="02" FontSize="9" Foreground="#64748B"/>
+                    <Rectangle Width="205" Height="6" RadiusX="3" RadiusY="3" Fill="#BAE6FD" HorizontalAlignment="Left"/>
+                  </StackPanel>
+
+                  <StackPanel Orientation="Horizontal" Spacing="9">
+                    <TextBlock Text="03" FontSize="9" Foreground="#64748B"/>
+                    <Rectangle Width="105" Height="6" RadiusX="3" RadiusY="3" Fill="#0369A1" HorizontalAlignment="Left"/>
+                  </StackPanel>
+
+                  <StackPanel Orientation="Horizontal" Spacing="9">
+                    <TextBlock Text="04" FontSize="9" Foreground="#64748B"/>
+                    <Rectangle Width="170" Height="6" RadiusX="3" RadiusY="3" Fill="#BAE6FD" HorizontalAlignment="Left"/>
+                  </StackPanel>
+
+                  <StackPanel Orientation="Horizontal" Spacing="9">
+                    <TextBlock Text="05" FontSize="9" Foreground="#64748B"/>
+                    <Rectangle Width="92" Height="6" RadiusX="3" RadiusY="3" Fill="#38BDF8" HorizontalAlignment="Left"/>
+                  </StackPanel>
+
+                </StackPanel>
+              </StackPanel>
+            </Border>
+
+            <!-- Laptop base: same width as the screen -->
+            <Border Width="320"
+                    Height="8"
+                    CornerRadius="0,0,6,6"
+                    Background="#BAE6FD"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Top"
+                    Margin="0,176,0,0"/>
+
+            <!-- Shield badge: bottom lines up with the base, overlaps the right corner -->
+            <Border Width="76"
+                    Height="88"
+                    CornerRadius="15"
+                    Background="#0284C7"
+                    BorderBrush="#FFFFFF"
+                    BorderThickness="2"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Top"
+                    Margin="286,104,0,0"
+                    BoxShadow="0 6 18 0 #4D0284C7">
+
+              <StackPanel VerticalAlignment="Center"
+                          HorizontalAlignment="Center"
+                          Spacing="5">
+                <PathIcon Data="{StaticResource ShieldIcon}"
+                          Width="28"
+                          Height="28"
+                          Foreground="White"/>
+
+                <PathIcon Data="{StaticResource LockIcon}"
+                          Width="17"
+                          Height="17"
+                          Foreground="White"/>
+              </StackPanel>
+            </Border>
+          </Grid>
+
+          <TextBlock Text="Built for reliable programming assessments."
+                     FontSize="11"
+                     Foreground="#475569"
+                     Margin="0,10,0,0"/>
+        </StackPanel>
+
+        <!-- RIGHT: Login card -->
+        <Border Grid.Column="2"
+                VerticalAlignment="Center"
+                CornerRadius="20"
+                Padding="32"
+                Background="#FFFFFF"
+                BorderBrush="#BAE6FD"
+                BorderThickness="1"
+                BoxShadow="0 16 44 0 #260EA5E9">
+
+          <StackPanel Spacing="0">
+
+            <StackPanel Orientation="Horizontal" Spacing="12">
+              <Border Width="44" Height="44" CornerRadius="10" Background="#0369A1">
+                <TextBlock Text="CT"
+                           FontSize="16"
+                           FontWeight="Bold"
+                           Foreground="White"
+                           HorizontalAlignment="Center"
+                           VerticalAlignment="Center"/>
+              </Border>
+
+              <StackPanel VerticalAlignment="Center" Spacing="3">
+                <TextBlock Text="CodeTrace"
+                           FontSize="19"
+                           FontWeight="Bold"
+                           Foreground="#0C4A6E"/>
+                <TextBlock Text="Secure Programming Examination System"
+                           FontSize="10"
+                           Foreground="#475569"/>
+              </StackPanel>
+            </StackPanel>
+
+            <Border Height="1" Background="#BAE6FD" Margin="0,22,0,22"/>
+
+            <StackPanel Orientation="Horizontal" Spacing="9" Margin="0,0,0,20">
+              <PathIcon Data="{StaticResource UserIcon}" Width="17" Height="17" Foreground="#0284C7"/>
+              <TextBlock Text="Teacher Login" FontSize="16" FontWeight="SemiBold" Foreground="#0C4A6E"/>
+            </StackPanel>
+
+            <!-- Username -->
+            <TextBlock Text="Username"
+                       FontSize="12"
+                       FontWeight="SemiBold"
+                       Foreground="#0C4A6E"
+                       Margin="0,0,0,8"/>
+
+            <TextBox x:Name="UsernameBox"
+                     Classes="field"
+                     MaxLength="30"
+                     PlaceholderText="Enter your username"
+                     Margin="0,0,0,18">
+              <TextBox.InnerLeftContent>
+                <PathIcon Data="{StaticResource UserIcon}"
+                          Width="16"
+                          Height="16"
+                          Foreground="#64748B"
+                          Margin="12,0,5,0"/>
+              </TextBox.InnerLeftContent>
+            </TextBox>
+
+            <!-- Password -->
+            <TextBlock Text="Password"
+                       FontSize="12"
+                       FontWeight="SemiBold"
+                       Foreground="#0C4A6E"
+                       Margin="0,0,0,8"/>
+
+            <TextBox x:Name="PasswordBox"
+                     Classes="field revealPasswordButton"
+                     PasswordChar="•"
+                     PlaceholderText="Enter your password">
+              <TextBox.InnerLeftContent>
+                <PathIcon Data="{StaticResource LockIcon}"
+                          Width="16"
+                          Height="16"
+                          Foreground="#64748B"
+                          Margin="12,0,5,0"/>
+              </TextBox.InnerLeftContent>
+            </TextBox>
+
+            <!-- Status and progress share one slot (keeps layout stable, no big gap) -->
+            <Grid MinHeight="20" Margin="0,8,0,12">
+              <TextBlock x:Name="StatusText"
+                         FontSize="11"
+                         TextWrapping="Wrap"
+                         VerticalAlignment="Center"
+                         Foreground="{DynamicResource LoginMutedText}"/>
+
+              <ProgressBar x:Name="LoginProgress"
+                           IsIndeterminate="True"
+                           IsVisible="False"
+                           Height="3"
+                           VerticalAlignment="Bottom"
+                           Foreground="#0EA5E9"
+                           Background="#E0F2FE"/>
+            </Grid>
+
+            <!-- Sign in button -->
+            <Button x:Name="LoginButton"
+                    Classes="signin"
+                    IsDefault="True"
+                    Click="LoginButton_Click">
+              <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Spacing="9">
+                <TextBlock Text="Sign In" Foreground="#082F49" VerticalAlignment="Center"/>
+                <PathIcon Data="{StaticResource ArrowIcon}" Width="17" Height="17" Foreground="#082F49"/>
+              </StackPanel>
+            </Button>
+
+            <!-- Create account link -->
+            <StackPanel Orientation="Horizontal"
+                        HorizontalAlignment="Center"
+                        Spacing="6"
+                        Margin="0,16,0,0">
+              <TextBlock Text="New teacher?" FontSize="12" Foreground="#475569"
+                         VerticalAlignment="Center"/>
+              <Button x:Name="SignUpLinkButton"
+                      Content="Create an account"
+                      Click="SignUpLink_Click"
+                      Background="Transparent"
+                      BorderThickness="0"
+                      Padding="2,0"
+                      Foreground="#0369A1"
+                      FontSize="12"
+                      FontWeight="SemiBold"
+                      Cursor="Hand"/>
+            </StackPanel>
+
+            <!-- Security note -->
+            <StackPanel Orientation="Horizontal"
+                        HorizontalAlignment="Center"
+                        Spacing="8"
+                        Margin="0,20,0,0">
+              <PathIcon Data="{StaticResource ShieldIcon}" Width="13" Height="13" Foreground="#0284C7"/>
+              <TextBlock Text="Authorized Teachers Only" FontSize="11" Foreground="#475569"/>
+            </StackPanel>
+
+          </StackPanel>
+        </Border>
+      </Grid>
+    </Grid>
+  </Grid>
+</UserControl>

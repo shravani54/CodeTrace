@@ -1,0 +1,201 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             x:Class="CodeTrace.Teacher.Views.ViewSubmissionsView"
+             Background="#070B1F"
+             ClipToBounds="True">
+
+    <UserControl.Styles>
+
+        <Style Selector="TextBlock.pageTitle">
+            <Setter Property="FontSize" Value="34"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="Foreground" Value="White"/>
+        </Style>
+
+        <Style Selector="TextBlock.pageSubtitle">
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="Foreground" Value="#98A4D6"/>
+        </Style>
+
+        <Style Selector="TextBlock.fieldLabel">
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="FontWeight" Value="SemiBold"/>
+            <Setter Property="FontSize" Value="14"/>
+        </Style>
+
+        <Style Selector="Border.card">
+            <Setter Property="Background" Value="#0D1330"/>
+            <Setter Property="BorderBrush" Value="#1E2A63"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="CornerRadius" Value="18"/>
+            <Setter Property="Padding" Value="28"/>
+        </Style>
+
+        <Style Selector="Border.divider">
+            <Setter Property="Height" Value="1"/>
+            <Setter Property="Background" Value="#1E2A63"/>
+            <Setter Property="Margin" Value="0,4"/>
+        </Style>
+
+        <!-- Exam cards (built in code into ExamsPanel) -->
+        <Style Selector="Button.examCard">
+            <Setter Property="Background" Value="#101846"/>
+            <Setter Property="BorderBrush" Value="#1E2A63"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="CornerRadius" Value="14"/>
+            <Setter Property="Padding" Value="20,16"/>
+            <Setter Property="HorizontalAlignment" Value="Stretch"/>
+            <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+            <Setter Property="Cursor" Value="Hand"/>
+        </Style>
+
+        <Style Selector="Button.examCard:pointerover /template/ ContentPresenter#PART_ContentPresenter">
+            <Setter Property="Background" Value="#16205A"/>
+            <Setter Property="BorderBrush" Value="#3B6BFF"/>
+        </Style>
+
+        <!-- Back button -->
+        <Style Selector="Button#BackButton">
+            <Setter Property="Background" Value="#101846"/>
+            <Setter Property="Foreground" Value="#C9D2F0"/>
+            <Setter Property="BorderBrush" Value="#2F4C94"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="CornerRadius" Value="10"/>
+            <Setter Property="Padding" Value="16,8"/>
+            <Setter Property="FontWeight" Value="SemiBold"/>
+            <Setter Property="Cursor" Value="Hand"/>
+        </Style>
+
+        <Style Selector="Button#BackButton:pointerover /template/ ContentPresenter#PART_ContentPresenter">
+            <Setter Property="Background" Value="#16205A"/>
+            <Setter Property="BorderBrush" Value="#3B6BFF"/>
+            <Setter Property="Foreground" Value="White"/>
+        </Style>
+
+        <!-- Submission rows (built in code into RowsPanel) -->
+        <Style Selector="StackPanel#RowsPanel TextBlock">
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="Foreground" Value="#E8EDFF"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+        </Style>
+
+        <Style Selector="StackPanel#RowsPanel > Grid">
+            <Setter Property="Background" Value="Transparent"/>
+        </Style>
+
+        <Style Selector="StackPanel#RowsPanel > Grid:pointerover">
+            <Setter Property="Background" Value="#101846"/>
+        </Style>
+
+        <!-- Download ZIP button inside the rows -->
+        <Style Selector="StackPanel#RowsPanel Button">
+            <Setter Property="Background" Value="#14234A"/>
+            <Setter Property="Foreground" Value="#6EA8FF"/>
+            <Setter Property="BorderBrush" Value="#2F4C94"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="CornerRadius" Value="10"/>
+            <Setter Property="Padding" Value="14,6"/>
+            <Setter Property="FontWeight" Value="SemiBold"/>
+            <Setter Property="Cursor" Value="Hand"/>
+        </Style>
+
+        <Style Selector="StackPanel#RowsPanel Button:pointerover /template/ ContentPresenter#PART_ContentPresenter">
+            <Setter Property="Background" Value="#1B2F66"/>
+            <Setter Property="BorderBrush" Value="#3B6BFF"/>
+            <Setter Property="Foreground" Value="White"/>
+        </Style>
+
+    </UserControl.Styles>
+
+    <Grid>
+
+        <Ellipse Width="460" Height="460" Fill="#0B1233"
+                 HorizontalAlignment="Right" VerticalAlignment="Top"
+                 Margin="0,-200,-160,0" IsHitTestVisible="False"/>
+
+        <Ellipse Width="420" Height="420" Fill="#091029"
+                 HorizontalAlignment="Left" VerticalAlignment="Bottom"
+                 Margin="120,0,0,-260" IsHitTestVisible="False"/>
+
+        <ScrollViewer>
+
+            <StackPanel Margin="36,32,36,36" MaxWidth="1000" HorizontalAlignment="Stretch">
+
+                <StackPanel Orientation="Horizontal" Spacing="10">
+                    <TextBlock Text="View" Classes="pageTitle"/>
+                    <TextBlock Text="Submissions" Classes="pageTitle" Foreground="#4F7BFF"/>
+                </StackPanel>
+
+                <TextBlock x:Name="SubtitleText"
+                           Text="Pick an exam to see what students submitted."
+                           Classes="pageSubtitle"
+                           Margin="0,6,0,24"/>
+
+                <Border Classes="card">
+
+                    <Grid>
+
+                        <!-- STEP 1: exams -->
+                        <StackPanel x:Name="ExamsSection" Spacing="12">
+
+                            <TextBlock x:Name="ExamsCountText" Classes="fieldLabel"/>
+
+                            <Border Classes="divider"/>
+
+                            <StackPanel x:Name="ExamsPanel" Spacing="10"/>
+
+                            <TextBlock x:Name="NoExamsText"
+                                       Text="No exams yet."
+                                       Classes="pageSubtitle"
+                                       IsVisible="False"/>
+
+                        </StackPanel>
+
+                        <!-- STEP 2: submissions of one exam -->
+                        <StackPanel x:Name="SubmissionsSection" Spacing="10" IsVisible="False">
+
+                            <Grid ColumnDefinitions="Auto,*">
+                                <Button x:Name="BackButton" Content="←  Back to exams"
+                                        Click="BackButton_Click"/>
+
+                                <StackPanel Grid.Column="1" Margin="20,0" VerticalAlignment="Center" Spacing="2">
+                                    <TextBlock x:Name="ExamTitleText" Classes="fieldLabel" FontSize="16"/>
+                                    <TextBlock x:Name="CountText" Classes="pageSubtitle"/>
+                                </StackPanel>
+                            </Grid>
+
+                            <Grid ColumnDefinitions="50,*,150,170" Margin="8,8,8,0">
+                                <TextBlock Grid.Column="0" Text="No." Classes="fieldLabel" Foreground="#7F8BC4"/>
+                                <TextBlock Grid.Column="1" Text="Student" Classes="fieldLabel" Foreground="#7F8BC4"/>
+                                <TextBlock Grid.Column="2" Text="Submitted" Classes="fieldLabel" Foreground="#7F8BC4"/>
+                                <TextBlock Grid.Column="3" Text="Code" Classes="fieldLabel" Foreground="#7F8BC4"/>
+                            </Grid>
+
+                            <Border Classes="divider"/>
+
+                            <StackPanel x:Name="RowsPanel" Spacing="2"/>
+
+                            <TextBlock x:Name="EmptyText"
+                                       Text="No submissions for this exam yet."
+                                       Classes="pageSubtitle"
+                                       IsVisible="False"/>
+
+                        </StackPanel>
+
+                    </Grid>
+
+                </Border>
+
+                <TextBlock x:Name="ErrorText"
+                           Text="Cannot reach the server."
+                           Foreground="#FF9FB0"
+                           Margin="0,12,0,0"
+                           IsVisible="False"/>
+
+            </StackPanel>
+
+        </ScrollViewer>
+
+    </Grid>
+
+</UserControl>

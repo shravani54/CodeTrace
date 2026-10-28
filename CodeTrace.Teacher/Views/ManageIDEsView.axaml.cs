@@ -1,155 +1,211 @@
 using System.Collections.Generic;
+using System.Threading.Tasks;
+using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Interactivity;
+using Avalonia.Layout;
 using Avalonia.Media;
 using CodeTrace.Teacher.Models;
+using CodeTrace.Teacher.Services;
 
 namespace CodeTrace.Teacher.Views;
 
 public partial class ManageIDEsView : UserControl
 {
     private readonly List<IDEConfiguration> _ides = new();
+    private readonly IDEApiService _api = new();
 
     public ManageIDEsView()
     {
         InitializeComponent();
-
-        LoadSampleIDEs();
-        RefreshIDEList();
+        _ = LoadIDEsAsync();
     }
 
-    private void LoadSampleIDEs()
+    private async Task LoadIDEsAsync()
     {
-        _ides.Add(new IDEConfiguration
-        {
-            Id = 1,
-            Name = "Visual Studio Code",
-            ExecutablePath = @"C:\Program Files\Microsoft VS Code\Code.exe",
-            IsActive = true
-        });
+        LoadingBar.IsVisible = true;
+        IDEListPanel.Children.Clear();
 
-        _ides.Add(new IDEConfiguration
-        {
-            Id = 2,
-            Name = "Android Studio",
-            ExecutablePath = @"C:\Program Files\Android\Android Studio\bin\studio64.exe",
-            IsActive = true
-        });
+        _ides.Clear();
+        _ides.AddRange(await _api.GetAllAsync());
+
+        LoadingBar.IsVisible = false;
+        RefreshIDEList();
     }
 
     private void RefreshIDEList()
     {
         IDEListPanel.Children.Clear();
 
+        if (_ides.Count == 0)
+        {
+            IDEListPanel.Children.Add(new Border
+            {
+                Classes = { "listCard" },
+                Padding = new Thickness(40),
+                Child = new StackPanel
+                {
+                    HorizontalAlignment = HorizontalAlignment.Center,
+                    Spacing = 6,
+                    Children =
+                    {
+                        new TextBlock
+                        {
+                            Text = "🖥️",
+                            FontSize = 32,
+                            HorizontalAlignment = HorizontalAlignment.Center
+                        },
+                        new TextBlock
+                        {
+                            Text = "No IDEs added yet",
+                            FontSize = 18,
+                            FontWeight = FontWeight.SemiBold,
+                            Foreground = Heading(),
+                            HorizontalAlignment = HorizontalAlignment.Center,
+                            Margin = new Thickness(0, 8, 0, 0)
+                        },
+                        new TextBlock
+                        {
+                            Text = "Click \"+ Add IDE\" to register the first one.",
+                            FontSize = 13,
+                            Foreground = Muted(),
+                            HorizontalAlignment = HorizontalAlignment.Center
+                        }
+                    }
+                }
+            });
+            return;
+        }
+
         foreach (var ide in _ides)
         {
-            var nameText = new TextBlock
+            var card = new Border { Classes = { "listCard" }, Padding = new Thickness(20, 16) };
+
+            var row = new Grid { ColumnDefinitions = new ColumnDefinitions("Auto,*,Auto,Auto") };
+
+            var icon = new Border
+            {
+                Width = 46,
+                Height = 46,
+                CornerRadius = new CornerRadius(12),
+                Background = DarkUi.Chip,
+                BorderBrush = DarkUi.ChipBorder,
+                BorderThickness = new Thickness(1),
+                Child = new TextBlock
+                {
+                    Text = "⌨",
+                    FontSize = 18,
+                    Foreground = DarkUi.IconText,
+                    HorizontalAlignment = HorizontalAlignment.Center,
+                    VerticalAlignment = VerticalAlignment.Center
+                },
+                Margin = new Thickness(0, 0, 16, 0)
+            };
+            Grid.SetColumn(icon, 0);
+
+            var textStack = new StackPanel { Spacing = 6, VerticalAlignment = VerticalAlignment.Center };
+
+            textStack.Children.Add(new TextBlock
             {
                 Text = ide.Name,
-                FontSize = 20,
-                FontWeight = FontWeight.Bold
-            };
+                FontSize = 16,
+                FontWeight = FontWeight.SemiBold,
+                Foreground = Heading()
+            });
 
-            var pathText = new TextBlock
+            textStack.Children.Add(new TextBlock
             {
                 Text = ide.ExecutablePath,
+                FontSize = 12,
+                Foreground = Muted(),
                 TextWrapping = TextWrapping.Wrap
-            };
+            });
 
-            var statusText = new TextBlock
+            Grid.SetColumn(textStack, 1);
+
+            var statusChip = new Border
             {
-                Text = ide.IsActive ? "Active" : "Disabled"
+                Classes = { ide.IsActive ? "chipSuccess" : "chipMuted" },
+                VerticalAlignment = VerticalAlignment.Center,
+                Margin = new Thickness(10, 0, 10, 0)
             };
+            statusChip.Child = new TextBlock { Text = ide.IsActive ? "Active" : "Disabled" };
+            Grid.SetColumn(statusChip, 2);
 
-            var panel = new StackPanel
+            var deleteButton = new Button
             {
-                Spacing = 5
+                Content = "Remove",
+                Classes = { "danger" },
+                VerticalAlignment = VerticalAlignment.Center
             };
-
-            panel.Children.Add(nameText);
-            panel.Children.Add(pathText);
-            panel.Children.Add(statusText);
-
-            var border = new Border
+            deleteButton.Click += async (_, _) =>
             {
-                Padding = new Avalonia.Thickness(15),
-                Child = panel
+                deleteButton.IsEnabled = false;
+                await _api.DeleteAsync(ide.Id);
+                await LoadIDEsAsync();
             };
+            Grid.SetColumn(deleteButton, 3);
 
-            IDEListPanel.Children.Add(border);
+            row.Children.Add(icon);
+            row.Children.Add(textStack);
+            row.Children.Add(statusChip);
+            row.Children.Add(deleteButton);
+
+            card.Child = row;
+            IDEListPanel.Children.Add(card);
         }
     }
 
-    private async void AddIDEButton_Click(
-        object? sender,
-        RoutedEventArgs e)
+    private static IBrush Muted() => DarkUi.Muted;
+
+    private static IBrush Heading() => DarkUi.Heading;
+
+    private async void AddIDEButton_Click(object? sender, RoutedEventArgs e)
     {
         var dialog = new Window
         {
             Title = "Add IDE",
-            Width = 500,
-            Height = 350,
+            Width = 480,
+            SizeToContent = SizeToContent.Height,
+            CanResize = false,
             WindowStartupLocation = WindowStartupLocation.CenterOwner
         };
+        DarkUi.StyleDialog(dialog);
 
-        var nameBox = new TextBox
-        {
-            PlaceholderText = "IDE name"
-        };
-
-        var pathBox = new TextBox
-        {
-            PlaceholderText = "Executable path"
-        };
-
-        var browseButton = new Button
-        {
-            Content = "Browse..."
-        };
-
-        var saveButton = new Button
-        {
-            Content = "Save IDE"
-        };
-
-        var cancelButton = new Button
-        {
-            Content = "Cancel"
-        };
-
-        var statusText = new TextBlock();
+        var nameBox = new TextBox { PlaceholderText = "e.g. Visual Studio Code", Height = 42 };
+        var pathBox = new TextBox { PlaceholderText = "Path to executable", Height = 42 };
+        var browseButton = new Button { Content = "Browse", Classes = { "secondary" } };
+        var saveButton = new Button { Content = "Save IDE", Classes = { "primary" }, HorizontalAlignment = HorizontalAlignment.Stretch };
+        var cancelButton = new Button { Content = "Cancel", Classes = { "secondary" }, HorizontalAlignment = HorizontalAlignment.Stretch };
+        var statusText = new TextBlock { Foreground = DarkUi.Error, FontSize = 13, TextWrapping = TextWrapping.Wrap };
 
         browseButton.Click += async (_, _) =>
         {
             var topLevel = TopLevel.GetTopLevel(this);
+            if (topLevel == null) return;
 
-            if (topLevel == null)
-                return;
-
-            var files = await topLevel.StorageProvider
-                .OpenFilePickerAsync(
-                    new Avalonia.Platform.Storage.FilePickerOpenOptions
-                    {
-                        Title = "Select IDE executable",
-                        AllowMultiple = false,
-                        FileTypeFilter =
-                        [
-                            new Avalonia.Platform.Storage.FilePickerFileType(
-                                "Windows executable")
-                            {
-                                Patterns = ["*.exe"]
-                            }
-                        ]
-                    });
+            var files = await topLevel.StorageProvider.OpenFilePickerAsync(
+                new Avalonia.Platform.Storage.FilePickerOpenOptions
+                {
+                    Title = "Select IDE executable",
+                    AllowMultiple = false,
+                    FileTypeFilter =
+                    [
+                        new Avalonia.Platform.Storage.FilePickerFileType("Windows executable")
+                        {
+                            Patterns = ["*.exe"]
+                        }
+                    ]
+                });
 
             if (files.Count > 0)
-            {
                 pathBox.Text = files[0].Path.LocalPath;
-            }
         };
 
-        saveButton.Click += (_, _) =>
+        saveButton.Click += async (_, _) =>
         {
+            statusText.Text = "";
+
             if (string.IsNullOrWhiteSpace(nameBox.Text))
             {
                 statusText.Text = "Please enter the IDE name.";
@@ -162,69 +218,75 @@ public partial class ManageIDEsView : UserControl
                 return;
             }
 
-            _ides.Add(new IDEConfiguration
+            saveButton.IsEnabled = false;
+            saveButton.Content = "Saving...";
+
+            var created = await _api.CreateAsync(new IDEConfiguration
             {
-                Id = _ides.Count + 1,
                 Name = nameBox.Text.Trim(),
                 ExecutablePath = pathBox.Text.Trim(),
                 IsActive = true
             });
 
+            if (created != null)
+                _ides.Add(created);
+
             RefreshIDEList();
-
             dialog.Close();
         };
 
-        cancelButton.Click += (_, _) =>
+        cancelButton.Click += (_, _) => dialog.Close();
+
+        var pathRow = new Grid { ColumnDefinitions = new ColumnDefinitions("*,Auto") };
+        Grid.SetColumn(pathBox, 0);
+        Grid.SetColumn(browseButton, 1);
+        pathBox.Margin = new Thickness(0, 0, 8, 0);
+        pathRow.Children.Add(pathBox);
+        pathRow.Children.Add(browseButton);
+
+        var buttonRow = new Grid { ColumnDefinitions = new ColumnDefinitions("*,*"), ColumnSpacing = 10, Margin = new Thickness(0, 20, 0, 0) };
+        Grid.SetColumn(cancelButton, 0);
+        Grid.SetColumn(saveButton, 1);
+        buttonRow.Children.Add(cancelButton);
+        buttonRow.Children.Add(saveButton);
+
+        // Header bar
+        var header = new Grid { ColumnDefinitions = new ColumnDefinitions("*,Auto"), Margin = new Thickness(24, 20, 24, 0) };
+        var headerText = new TextBlock { Text = "Add IDE", FontSize = 18, FontWeight = FontWeight.Bold, Foreground = Heading() };
+        var closeButton = new Button { Content = "✕", Classes = { "ghost" } };
+        closeButton.Click += (_, _) => dialog.Close();
+        Grid.SetColumn(headerText, 0);
+        Grid.SetColumn(closeButton, 1);
+        header.Children.Add(headerText);
+        header.Children.Add(closeButton);
+
+        var body = new StackPanel
         {
-            dialog.Close();
+            Margin = new Thickness(24, 16, 24, 24),
+            Spacing = 8,
+            Children =
+            {
+                new TextBlock { Text = "IDE Name", Classes = { "fieldLabel" } },
+                nameBox,
+                new TextBlock { Text = "Executable", Classes = { "fieldLabel" }, Margin = new Thickness(0,8,0,0) },
+                pathRow,
+                statusText,
+                buttonRow
+            }
         };
 
-        var content = new StackPanel
+        var shell = new Border
         {
-            Margin = new Avalonia.Thickness(30),
-            Spacing = 12
+            Classes = { "dialogShell" },
+            Child = new StackPanel { Children = { header, body } }
         };
 
-        content.Children.Add(new TextBlock
-        {
-            Text = "IDE Name",
-            FontWeight = FontWeight.Bold
-        });
-
-        content.Children.Add(nameBox);
-
-        content.Children.Add(new TextBlock
-        {
-            Text = "Executable",
-            FontWeight = FontWeight.Bold
-        });
-
-        var pathPanel = new StackPanel
-        {
-            Orientation = Avalonia.Layout.Orientation.Horizontal,
-            Spacing = 10
-        };
-
-        pathPanel.Children.Add(pathBox);
-        pathPanel.Children.Add(browseButton);
-
-        content.Children.Add(pathPanel);
-        content.Children.Add(saveButton);
-        content.Children.Add(cancelButton);
-        content.Children.Add(statusText);
-
-        dialog.Content = content;
+        dialog.Content = shell;
 
         var owner = TopLevel.GetTopLevel(this) as Window;
-
         if (owner != null)
-        {
             await dialog.ShowDialog(owner);
-        }
         else
-        {
             dialog.Show();
-        }
     }
 }

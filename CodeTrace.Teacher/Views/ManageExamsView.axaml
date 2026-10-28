@@ -2,22 +2,76 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              x:Class="CodeTrace.Teacher.Views.ManageExamsView">
 
-    <Grid RowDefinitions="Auto,*"
-          Margin="30">
+    <UserControl.Styles>
 
-        <TextBlock Grid.Row="0"
-                   Text="Manage Examinations"
-                   FontSize="32"
-                   FontWeight="Bold"
-                   Margin="0,0,0,25"/>
+        <StyleInclude Source="/Styles/CodeTraceDark.axaml"/>
 
-        <ScrollViewer Grid.Row="1">
+        <Style Selector="TextBlock.pageTitle">
+            <Setter Property="FontSize" Value="34"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="Foreground" Value="White"/>
+        </Style>
 
-            <StackPanel x:Name="ExamListPanel"
-                        Spacing="15"/>
+        <Style Selector="TextBlock.pageSubtitle">
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="Foreground" Value="#98A4D6"/>
+        </Style>
 
-        </ScrollViewer>
+        <Style Selector="ProgressBar">
+            <Setter Property="Foreground" Value="#4F7BFF"/>
+            <Setter Property="Background" Value="#131B4A"/>
+        </Style>
 
-    </Grid>
+    </UserControl.Styles>
+
+    <Border Background="#070B1F" ClipToBounds="True">
+
+        <Grid>
+
+            <!-- Decorative circles, same as the home page -->
+
+            <Ellipse Width="460" Height="460" Fill="#0B1233"
+                     HorizontalAlignment="Right" VerticalAlignment="Top"
+                     Margin="0,-200,-160,0" IsHitTestVisible="False"/>
+
+            <Ellipse Width="420" Height="420" Fill="#091029"
+                     HorizontalAlignment="Left" VerticalAlignment="Bottom"
+                     Margin="120,0,0,-260" IsHitTestVisible="False"/>
+
+            <Grid RowDefinitions="Auto,Auto,*"
+                  Margin="36,32,36,36"
+                  MaxWidth="1000"
+                  HorizontalAlignment="Stretch">
+
+                <StackPanel Grid.Row="0"
+                            Spacing="6"
+                            Margin="0,0,0,24">
+
+                    <StackPanel Orientation="Horizontal" Spacing="10">
+                        <TextBlock Text="Manage" Classes="pageTitle"/>
+                        <TextBlock Text="Examinations" Classes="pageTitle" Foreground="#4F7BFF"/>
+                    </StackPanel>
+
+                    <TextBlock Text="View, edit, and remove examinations you've created."
+                               Classes="pageSubtitle"/>
+
+                </StackPanel>
+
+                <ProgressBar Grid.Row="1"
+                             x:Name="LoadingBar"
+                             IsIndeterminate="True"
+                             IsVisible="False"
+                             Height="4"
+                             Margin="0,0,0,16"/>
+
+                <ScrollViewer Grid.Row="2">
+                    <StackPanel x:Name="ExamListPanel" Spacing="14"/>
+                </ScrollViewer>
+
+            </Grid>
+
+        </Grid>
+
+    </Border>
 
 </UserControl>

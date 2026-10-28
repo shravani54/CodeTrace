@@ -6,64 +6,10 @@
         Height="700"
         MinWidth="900"
         MinHeight="600"
-        WindowStartupLocation="CenterScreen">
+        Background="#070B1F"
+        WindowStartupLocation="CenterScreen"
+        WindowState="Maximized">
 
-    <ContentControl x:Name="MainContent">
-
-        <Border Padding="50">
-
-            <StackPanel Width="400"
-                        VerticalAlignment="Center"
-                        HorizontalAlignment="Center"
-                        Spacing="15">
-
-                <TextBlock Text="CodeTrace"
-                           FontSize="36"
-                           FontWeight="Bold"
-                           HorizontalAlignment="Center"/>
-
-                <TextBlock Text="Secure Programming Examination System"
-                           FontSize="14"
-                           TextWrapping="Wrap"
-                           TextAlignment="Center"
-                           HorizontalAlignment="Center"
-                           Margin="0,0,0,25"/>
-
-                <TextBlock Text="Teacher Login"
-                           FontSize="24"
-                           FontWeight="SemiBold"
-                           HorizontalAlignment="Center"/>
-
-                <TextBlock Text="Teacher Username"/>
-
-                <TextBox x:Name="UsernameBox"
-                         Watermark="Enter your username"
-                         Height="42"/>
-
-                <TextBlock Text="Password"
-                           Margin="0,10,0,0"/>
-
-                <TextBox x:Name="PasswordBox"
-                         PasswordChar="●"
-                         Watermark="Enter your password"
-                         Height="42"/>
-
-                <Button Content="LOGIN"
-                        Height="45"
-                        Width="180"
-                        HorizontalAlignment="Center"
-                        Margin="0,20,0,0"
-                        Click="LoginButton_Click"/>
-
-                <TextBlock x:Name="StatusText"
-                           TextWrapping="Wrap"
-                           HorizontalAlignment="Center"
-                           TextAlignment="Center"/>
-
-            </StackPanel>
-
-        </Border>
-
-    </ContentControl>
+    <ContentControl x:Name="MainContent"/>
 
 </Window>

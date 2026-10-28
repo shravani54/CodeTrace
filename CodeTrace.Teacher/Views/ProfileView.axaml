@@ -1,0 +1,126 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             x:Class="CodeTrace.Teacher.Views.ProfileView"
+             Background="#070B1F"
+             ClipToBounds="True">
+
+    <UserControl.Styles>
+
+        <Style Selector="TextBlock.pageTitle">
+            <Setter Property="FontSize" Value="34"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="Foreground" Value="White"/>
+        </Style>
+
+        <Style Selector="TextBlock.pageSubtitle">
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="Foreground" Value="#98A4D6"/>
+        </Style>
+
+        <Style Selector="TextBlock.fieldLabel">
+            <Setter Property="Foreground" Value="#7F8BC4"/>
+            <Setter Property="FontWeight" Value="SemiBold"/>
+            <Setter Property="FontSize" Value="13"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+        </Style>
+
+        <Style Selector="TextBlock.fieldValue">
+            <Setter Property="Foreground" Value="#E8EDFF"/>
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+        </Style>
+
+        <Style Selector="Border.card">
+            <Setter Property="Background" Value="#0D1330"/>
+            <Setter Property="BorderBrush" Value="#1E2A63"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="CornerRadius" Value="18"/>
+            <Setter Property="Padding" Value="28"/>
+        </Style>
+
+        <Style Selector="Border.divider">
+            <Setter Property="Height" Value="1"/>
+            <Setter Property="Background" Value="#1E2A63"/>
+            <Setter Property="Margin" Value="0,20"/>
+        </Style>
+
+    </UserControl.Styles>
+
+    <Grid>
+
+        <!-- Decorative circles, same as the home page -->
+
+        <Ellipse Width="460" Height="460" Fill="#0B1233"
+                 HorizontalAlignment="Right" VerticalAlignment="Top"
+                 Margin="0,-200,-160,0" IsHitTestVisible="False"/>
+
+        <Ellipse Width="420" Height="420" Fill="#091029"
+                 HorizontalAlignment="Left" VerticalAlignment="Bottom"
+                 Margin="120,0,0,-260" IsHitTestVisible="False"/>
+
+        <ScrollViewer>
+
+            <StackPanel Margin="36,32,36,36" MaxWidth="1000" HorizontalAlignment="Stretch">
+
+                <StackPanel Orientation="Horizontal" Spacing="10">
+                    <TextBlock Text="Your" Classes="pageTitle"/>
+                    <TextBlock Text="Profile" Classes="pageTitle" Foreground="#4F7BFF"/>
+                </StackPanel>
+
+                <TextBlock Text="Your account details."
+                           Classes="pageSubtitle"
+                           Margin="0,6,0,24"/>
+
+                <Border Classes="card">
+
+                    <StackPanel>
+
+                        <StackPanel Orientation="Horizontal" Spacing="18">
+
+                            <Border Width="64" Height="64" CornerRadius="32" Background="#3B6CF5">
+                                <TextBlock x:Name="InitialText"
+                                           Text="T"
+                                           FontSize="26"
+                                           FontWeight="Bold"
+                                           Foreground="White"
+                                           HorizontalAlignment="Center"
+                                           VerticalAlignment="Center"/>
+                            </Border>
+
+                            <StackPanel VerticalAlignment="Center" Spacing="2">
+                                <TextBlock x:Name="UsernameText"
+                                           Text="teacher"
+                                           FontSize="22"
+                                           FontWeight="Bold"
+                                           Foreground="White"/>
+                                <TextBlock Text="Signed in" Classes="pageSubtitle"/>
+                            </StackPanel>
+
+                        </StackPanel>
+
+                        <Border Classes="divider"/>
+
+                        <Grid ColumnDefinitions="160,*" RowDefinitions="Auto,Auto" RowSpacing="16">
+
+                            <TextBlock Text="Username" Classes="fieldLabel"/>
+                            <TextBlock x:Name="UsernameDetailText"
+                                       Grid.Column="1"
+                                       Text="teacher"
+                                       Classes="fieldValue"/>
+
+                            <TextBlock Grid.Row="1" Text="Role" Classes="fieldLabel"/>
+                            <TextBlock Grid.Row="1" Grid.Column="1" Text="Teacher" Classes="fieldValue"/>
+
+                        </Grid>
+
+                    </StackPanel>
+
+                </Border>
+
+            </StackPanel>
+
+        </ScrollViewer>
+
+    </Grid>
+
+</UserControl>

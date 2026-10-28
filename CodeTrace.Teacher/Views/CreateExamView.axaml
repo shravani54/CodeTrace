@@ -1,57 +1,381 @@
 <UserControl xmlns="https://github.com/avaloniaui"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
              x:Class="CodeTrace.Teacher.Views.CreateExamView">
 
-    <ScrollViewer>
+    <UserControl.Resources>
 
-        <StackPanel Spacing="15"
-                    Width="600">
+        <LinearGradientBrush x:Key="AccentGradient" StartPoint="0,0" EndPoint="1,0">
+            <GradientStop Color="#3B6CF5" Offset="0"/>
+            <GradientStop Color="#7C5CF0" Offset="1"/>
+        </LinearGradientBrush>
 
-            <TextBlock Text="Create Examination"
-                       FontSize="32"
-                       FontWeight="Bold"/>
+        <!-- Override the theme's text box colours so typed text stays white in every state,
+             including the text box inside the Duration number control -->
 
-            <TextBlock Text="Examination Name"
-                       FontSize="16"
-                       Margin="0,20,0,0"/>
+        <SolidColorBrush x:Key="TextControlForeground" Color="#FFFFFF"/>
+        <SolidColorBrush x:Key="TextControlForegroundPointerOver" Color="#FFFFFF"/>
+        <SolidColorBrush x:Key="TextControlForegroundFocused" Color="#FFFFFF"/>
 
-            <TextBox x:Name="ExamNameBox"
-                     Height="42"
-                     Watermark="Enter examination name"/>
+        <SolidColorBrush x:Key="TextControlBackground" Color="Transparent"/>
+        <SolidColorBrush x:Key="TextControlBackgroundPointerOver" Color="Transparent"/>
+        <SolidColorBrush x:Key="TextControlBackgroundFocused" Color="Transparent"/>
 
-            <TextBlock Text="Duration (minutes)"
-                       FontSize="16"
-                       Margin="0,10,0,0"/>
+        <SolidColorBrush x:Key="TextControlBorderBrush" Color="Transparent"/>
+        <SolidColorBrush x:Key="TextControlBorderBrushPointerOver" Color="Transparent"/>
+        <SolidColorBrush x:Key="TextControlBorderBrushFocused" Color="Transparent"/>
 
-            <NumericUpDown x:Name="DurationBox"
-                           Height="42"
-                           Minimum="1"
-                           Maximum="300"
-                           Value="60"/>
+        <SolidColorBrush x:Key="TextControlPlaceholderForeground" Color="#7F8BC4"/>
+        <SolidColorBrush x:Key="TextControlPlaceholderForegroundPointerOver" Color="#7F8BC4"/>
+        <SolidColorBrush x:Key="TextControlPlaceholderForegroundFocused" Color="#7F8BC4"/>
 
-            <TextBlock Text="Description"
-                       FontSize="16"
-                       Margin="0,10,0,0"/>
+    </UserControl.Resources>
 
-            <TextBox x:Name="DescriptionBox"
-                     Height="120"
-                     Watermark="Enter examination description"
-                     AcceptsReturn="True"
-                     TextWrapping="Wrap"/>
+    <UserControl.Styles>
 
-            <Button Content="Create Examination"
-                    Width="220"
-                    Height="45"
-                    HorizontalAlignment="Left"
-                    Margin="0,20,0,0"
-                    Click="CreateExamButton_Click"/>
+        <!-- TEXT -->
 
-            <TextBlock x:Name="StatusText"
-                       FontSize="15"
-                       TextWrapping="Wrap"/>
+        <Style Selector="TextBlock.pageTitle">
+            <Setter Property="FontSize" Value="34"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="Foreground" Value="White"/>
+        </Style>
 
-        </StackPanel>
+        <Style Selector="TextBlock.pageSubtitle">
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="Foreground" Value="#98A4D6"/>
+        </Style>
 
-    </ScrollViewer>
+        <Style Selector="TextBlock.fieldLabel">
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="FontWeight" Value="SemiBold"/>
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="Margin" Value="0,0,0,8"/>
+        </Style>
+
+        <Style Selector="TextBlock.hint">
+            <Setter Property="Foreground" Value="#7F8BC4"/>
+            <Setter Property="FontSize" Value="12"/>
+            <Setter Property="Margin" Value="2,8,0,0"/>
+        </Style>
+
+        <Style Selector="TextBlock.sectionTitle">
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="FontSize" Value="20"/>
+        </Style>
+
+        <!-- CARDS -->
+
+        <Style Selector="Border.card">
+            <Setter Property="Background" Value="#0D1330"/>
+            <Setter Property="BorderBrush" Value="#1E2A63"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="CornerRadius" Value="18"/>
+            <Setter Property="Padding" Value="28"/>
+        </Style>
+
+        <Style Selector="Border.inputCard">
+            <Setter Property="Background" Value="#0A0F2B"/>
+            <Setter Property="BorderBrush" Value="#2A3A8C"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="CornerRadius" Value="12"/>
+            <Setter Property="Padding" Value="6,0"/>
+        </Style>
+
+        <Style Selector="Border.inputCard:focus-within">
+            <Setter Property="BorderBrush" Value="#4F7BFF"/>
+        </Style>
+
+        <!-- TEXTBOX -->
+
+        <Style Selector="TextBox">
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="CaretBrush" Value="White"/>
+            <Setter Property="SelectionBrush" Value="#3B6CF5"/>
+            <Setter Property="SelectionForegroundBrush" Value="White"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="Padding" Value="10,0"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="PlaceholderForeground" Value="#7F8BC4"/>
+        </Style>
+
+        <Style Selector="TextBox:pointerover">
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="CaretBrush" Value="White"/>
+        </Style>
+
+        <Style Selector="TextBox:focus">
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="CaretBrush" Value="White"/>
+            <Setter Property="SelectionBrush" Value="#3B6CF5"/>
+            <Setter Property="SelectionForegroundBrush" Value="White"/>
+        </Style>
+
+        <Style Selector="TextBox:pointerover /template/ Border#PART_BorderElement">
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="BorderThickness" Value="0"/>
+        </Style>
+
+        <Style Selector="TextBox:focus /template/ Border#PART_BorderElement">
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="BorderThickness" Value="0"/>
+        </Style>
+
+        <!-- NUMERIC (Duration) -->
+
+        <Style Selector="NumericUpDown">
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+        </Style>
+
+        <!-- The text box inside the number control: keep it white in every state -->
+
+        <Style Selector="NumericUpDown /template/ TextBox#PART_TextBox">
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="CaretBrush" Value="White"/>
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="SelectionBrush" Value="#3B6CF5"/>
+            <Setter Property="SelectionForegroundBrush" Value="White"/>
+        </Style>
+
+        <Style Selector="NumericUpDown /template/ TextBox#PART_TextBox:pointerover">
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="Background" Value="Transparent"/>
+        </Style>
+
+        <Style Selector="NumericUpDown /template/ TextBox#PART_TextBox:focus">
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="CaretBrush" Value="White"/>
+            <Setter Property="Background" Value="Transparent"/>
+        </Style>
+
+        <Style Selector="NumericUpDown:focus-within /template/ TextBox#PART_TextBox">
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="Background" Value="Transparent"/>
+        </Style>
+
+        <!-- IDE CHOICES (filled at runtime into AllowedIDEsPanel) -->
+
+        <Style Selector="WrapPanel#AllowedIDEsPanel CheckBox">
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="FontSize" Value="14"/>
+        </Style>
+
+        <!-- LOADING BAR -->
+
+        <Style Selector="ProgressBar">
+            <Setter Property="Foreground" Value="#4F7BFF"/>
+            <Setter Property="Background" Value="#131B4A"/>
+        </Style>
+
+        <!-- STATUS -->
+
+        <Style Selector="Border.status">
+            <Setter Property="Background" Value="#0E3B2F"/>
+            <Setter Property="BorderBrush" Value="#1FBF8F"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="CornerRadius" Value="10"/>
+            <Setter Property="Padding" Value="14,12"/>
+        </Style>
+
+        <!-- BUTTON -->
+
+        <Style Selector="Button.primary">
+            <Setter Property="Height" Value="50"/>
+            <Setter Property="MinWidth" Value="230"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="FontWeight" Value="SemiBold"/>
+            <Setter Property="CornerRadius" Value="12"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="Background" Value="{StaticResource AccentGradient}"/>
+        </Style>
+
+        <Style Selector="Button.primary:pointerover /template/ ContentPresenter#PART_ContentPresenter">
+            <Setter Property="Background" Value="{StaticResource AccentGradient}"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="Opacity" Value="0.92"/>
+        </Style>
+
+        <Style Selector="Button.primary:pressed /template/ ContentPresenter#PART_ContentPresenter">
+            <Setter Property="Background" Value="{StaticResource AccentGradient}"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="Opacity" Value="0.8"/>
+        </Style>
+
+        <!-- Dimmed while disabled, but the label stays readable -->
+        <Style Selector="Button.primary:disabled /template/ ContentPresenter#PART_ContentPresenter">
+            <Setter Property="Background" Value="{StaticResource AccentGradient}"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="Opacity" Value="0.55"/>
+        </Style>
+
+    </UserControl.Styles>
+
+    <Border Background="#070B1F" ClipToBounds="True">
+
+        <Grid>
+
+            <!-- Decorative circles, same as the home page -->
+
+            <Ellipse Width="460" Height="460" Fill="#0B1233"
+                     HorizontalAlignment="Right" VerticalAlignment="Top"
+                     Margin="0,-200,-160,0" IsHitTestVisible="False"/>
+
+            <Ellipse Width="420" Height="420" Fill="#091029"
+                     HorizontalAlignment="Left" VerticalAlignment="Bottom"
+                     Margin="120,0,0,-260" IsHitTestVisible="False"/>
+
+            <ScrollViewer>
+
+                <StackPanel Margin="36,32,36,36" MaxWidth="1000" HorizontalAlignment="Stretch">
+
+                    <!-- HEADER -->
+
+                    <StackPanel Margin="0,0,0,24">
+
+                        <StackPanel Orientation="Horizontal" Spacing="10">
+                            <TextBlock Text="Create" Classes="pageTitle"/>
+                            <TextBlock Text="Examination" Classes="pageTitle" Foreground="#4F7BFF"/>
+                        </StackPanel>
+
+                        <TextBlock Text="Fill in the details below to create a new examination."
+                                   Classes="pageSubtitle"
+                                   Margin="0,6,0,0"/>
+
+                    </StackPanel>
+
+                    <!-- MAIN CARD -->
+
+                    <Border Classes="card">
+
+                        <StackPanel>
+
+                            <!-- EXAM NAME -->
+
+                            <TextBlock Classes="fieldLabel" Text="Examination Name"/>
+
+                            <Border Classes="inputCard" Height="50">
+                                <TextBox x:Name="ExamNameBox"
+                                         PlaceholderText="e.g. C# Programming Practical"/>
+                            </Border>
+
+                            <!-- DURATION + START -->
+
+                            <Grid Margin="0,22,0,0" ColumnDefinitions="*,*" ColumnSpacing="18">
+
+                                <StackPanel>
+                                    <TextBlock Text="Duration (minutes)" Classes="fieldLabel"/>
+                                    <Border Classes="inputCard" Height="50">
+                                        <NumericUpDown x:Name="DurationBox"
+                                                       Minimum="1"
+                                                       Maximum="300"
+                                                       Value="60"/>
+                                    </Border>
+                                </StackPanel>
+
+                                <StackPanel Grid.Column="1">
+                                    <TextBlock Text="Start Time (optional)" Classes="fieldLabel"/>
+                                    <Border Classes="inputCard" Height="50">
+                                        <TextBox x:Name="StartTimeBox"
+                                                 PlaceholderText="e.g. 09:00 or 9:00 AM"/>
+                                    </Border>
+                                </StackPanel>
+
+                            </Grid>
+
+                            <TextBlock Classes="hint"
+                                       Text="Leave the start time blank to let students join any time."/>
+
+                            <!-- DESCRIPTION -->
+
+                            <TextBlock Text="Description"
+                                       Classes="fieldLabel"
+                                       Margin="0,22,0,8"/>
+
+                            <Border Classes="inputCard" Height="110">
+                                <TextBox x:Name="DescriptionBox"
+                                         AcceptsReturn="True"
+                                         TextWrapping="Wrap"
+                                         VerticalContentAlignment="Top"
+                                         Padding="10,12"
+                                         PlaceholderText="Briefly describe this examination"/>
+                            </Border>
+
+                            <!-- DIVIDER -->
+
+                            <Border Height="1" Background="#1E2A63" Margin="0,28,0,24"/>
+
+                            <!-- ALLOWED IDES -->
+
+                            <TextBlock Text="Allowed IDEs" Classes="sectionTitle"/>
+
+                            <TextBlock Text="Students will only be able to launch the IDEs selected below."
+                                       Classes="pageSubtitle"
+                                       Margin="0,4,0,0"/>
+
+                            <ProgressBar x:Name="IDELoadingBar"
+                                         Margin="0,12,0,10"
+                                         Height="4"
+                                         IsVisible="False"
+                                         IsIndeterminate="True"/>
+
+                            <!-- Dynamic IDE list -->
+
+                            <WrapPanel x:Name="AllowedIDEsPanel"
+                                       ItemSpacing="14"
+                                       LineSpacing="10"
+                                       Margin="0,14,0,0"/>
+
+                            <!-- Status -->
+
+                            <Border x:Name="StatusBanner"
+                                    Classes="status"
+                                    Margin="0,20,0,0"
+                                    IsVisible="False">
+
+                                <TextBlock x:Name="StatusText"
+                                           Foreground="#BFF5E0"
+                                           TextWrapping="Wrap"/>
+
+                            </Border>
+
+                            <!-- Button -->
+
+                            <Button x:Name="SubmitButton"
+                                    Classes="primary"
+                                    Click="CreateExamButton_Click"
+                                    HorizontalAlignment="Left"
+                                    Margin="0,22,0,0">
+
+                                <StackPanel Orientation="Horizontal" Spacing="10">
+                                    <TextBlock Text="Create Examination"/>
+                                    <TextBlock Text="→"/>
+                                </StackPanel>
+
+                            </Button>
+
+                        </StackPanel>
+
+                    </Border>
+
+                </StackPanel>
+
+            </ScrollViewer>
+
+        </Grid>
+
+    </Border>
 
 </UserControl>

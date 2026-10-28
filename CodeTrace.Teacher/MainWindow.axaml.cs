@@ -1,5 +1,5 @@
 using Avalonia.Controls;
-using Avalonia.Interactivity;
+using CodeTrace.Teacher.Views;
 
 namespace CodeTrace.Teacher;
 
@@ -8,27 +8,29 @@ public partial class MainWindow : Window
     public MainWindow()
     {
         InitializeComponent();
+        ShowLogin();
     }
 
-    private void LoginButton_Click(object? sender, RoutedEventArgs e)
+    private void ShowLogin()
     {
-        string username = UsernameBox.Text ?? "";
-        string password = PasswordBox.Text ?? "";
+        var login = new LoginView();
+        login.LoginSucceeded += (_, username) => ShowDashboard(username);
+        login.SignUpRequested += (_, _) => ShowSignUp();
+        MainContent.Content = login;
+    }
 
-        if (string.IsNullOrWhiteSpace(username) ||
-            string.IsNullOrWhiteSpace(password))
-        {
-            StatusText.Text = "Please enter username and password.";
-            return;
-        }
+    private void ShowSignUp()
+    {
+        var signUp = new SignUpView();
+        signUp.AccountCreated += (_, username) => ShowDashboard(username);
+        signUp.BackToLoginRequested += (_, _) => ShowLogin();
+        MainContent.Content = signUp;
+    }
 
-        if (username == "teacher" && password == "1234")
-        {
-            MainContent.Content = new TeacherDashboard();
-        }
-        else
-        {
-            StatusText.Text = "Invalid username or password.";
-        }
+    private void ShowDashboard(string username)
+    {
+        var dashboard = new TeacherDashboard(username);
+        dashboard.LogoutRequested += (_, _) => ShowLogin();
+        MainContent.Content = dashboard;
     }
 }

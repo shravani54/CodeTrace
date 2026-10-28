@@ -1,0 +1,228 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             x:Class="CodeTrace.Teacher.Views.MonitorStudentsView">
+
+    <UserControl.Styles>
+
+        <!-- TEXT -->
+
+        <Style Selector="TextBlock.pageTitle">
+            <Setter Property="FontSize" Value="34"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="Foreground" Value="White"/>
+        </Style>
+
+        <Style Selector="TextBlock.pageSubtitle">
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="Foreground" Value="#98A4D6"/>
+        </Style>
+
+        <Style Selector="TextBlock.sectionTitle">
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="FontSize" Value="20"/>
+        </Style>
+
+        <Style Selector="TextBlock.colHeader">
+            <Setter Property="Foreground" Value="#7F8BC4"/>
+            <Setter Property="FontWeight" Value="SemiBold"/>
+            <Setter Property="FontSize" Value="13"/>
+        </Style>
+
+        <!-- CARDS -->
+
+        <Style Selector="Border.card">
+            <Setter Property="Background" Value="#0D1330"/>
+            <Setter Property="BorderBrush" Value="#1E2A63"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="CornerRadius" Value="18"/>
+            <Setter Property="Padding" Value="28"/>
+        </Style>
+
+        <!-- Same look as the input fields on Create Examination -->
+        <Style Selector="Border.inputCard">
+            <Setter Property="Background" Value="#0A0F2B"/>
+            <Setter Property="BorderBrush" Value="#2A3A8C"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="CornerRadius" Value="12"/>
+            <Setter Property="Padding" Value="8,6"/>
+        </Style>
+
+        <Style Selector="Border.divider">
+            <Setter Property="Height" Value="1"/>
+            <Setter Property="Background" Value="#1E2A63"/>
+            <Setter Property="Margin" Value="0,4"/>
+        </Style>
+
+        <!-- CLEAR BUTTON -->
+
+        <Style Selector="Button#ClearButton">
+            <Setter Property="Background" Value="#22101F"/>
+            <Setter Property="Foreground" Value="#FF9FB0"/>
+            <Setter Property="BorderBrush" Value="#5A2038"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="CornerRadius" Value="12"/>
+            <Setter Property="Height" Value="44"/>
+            <Setter Property="Padding" Value="22,0"/>
+            <Setter Property="FontWeight" Value="SemiBold"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="VerticalAlignment" Value="Top"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+        </Style>
+
+        <Style Selector="Button#ClearButton:pointerover /template/ ContentPresenter#PART_ContentPresenter">
+            <Setter Property="Background" Value="#34162B"/>
+            <Setter Property="BorderBrush" Value="#5A2038"/>
+            <Setter Property="Foreground" Value="White"/>
+        </Style>
+
+        <!-- LOG ROWS (built in code into RowsPanel) -->
+
+        <Style Selector="StackPanel#RowsPanel TextBlock">
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="Foreground" Value="#E8EDFF"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+        </Style>
+
+        <Style Selector="StackPanel#RowsPanel > Grid">
+            <Setter Property="Background" Value="Transparent"/>
+        </Style>
+
+        <Style Selector="StackPanel#RowsPanel > Grid:pointerover">
+            <Setter Property="Background" Value="#101846"/>
+        </Style>
+
+        <Style Selector="StackPanel#RowsPanel > Border">
+            <Setter Property="CornerRadius" Value="10"/>
+            <Setter Property="Padding" Value="0,8"/>
+        </Style>
+
+        <Style Selector="StackPanel#RowsPanel > Border:pointerover">
+            <Setter Property="Background" Value="#101846"/>
+        </Style>
+
+        <!-- EMPTY + ERROR MESSAGES -->
+
+        <Style Selector="TextBlock#EmptyText">
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="Foreground" Value="#98A4D6"/>
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+            <Setter Property="Margin" Value="0,28,0,28"/>
+        </Style>
+
+        <Style Selector="TextBlock#ErrorText">
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="Foreground" Value="#FF9FB0"/>
+            <Setter Property="Background" Value="#22101F"/>
+            <Setter Property="Padding" Value="14,12"/>
+            <Setter Property="Margin" Value="0,10,0,0"/>
+            <Setter Property="TextWrapping" Value="Wrap"/>
+        </Style>
+
+    </UserControl.Styles>
+
+    <Border Background="#070B1F" ClipToBounds="True">
+
+        <Grid>
+
+            <!-- Decorative circles, same as the home page -->
+
+            <Ellipse Width="460" Height="460" Fill="#0B1233"
+                     HorizontalAlignment="Right" VerticalAlignment="Top"
+                     Margin="0,-200,-160,0" IsHitTestVisible="False"/>
+
+            <Ellipse Width="420" Height="420" Fill="#091029"
+                     HorizontalAlignment="Left" VerticalAlignment="Bottom"
+                     Margin="120,0,0,-260" IsHitTestVisible="False"/>
+
+            <ScrollViewer>
+
+                <StackPanel Margin="36,32,36,36" MaxWidth="1000" HorizontalAlignment="Stretch">
+
+                    <!-- HEADER -->
+
+                    <StackPanel Margin="0,0,0,24">
+
+                        <StackPanel Orientation="Horizontal" Spacing="10">
+                            <TextBlock Text="Monitor" Classes="pageTitle"/>
+                            <TextBlock Text="Students" Classes="pageTitle" Foreground="#4F7BFF"/>
+                        </StackPanel>
+
+                        <TextBlock Text="Every time a student opens an app that is not allowed, it is listed here."
+                                   Classes="pageSubtitle"
+                                   Margin="0,6,0,0"
+                                   TextWrapping="Wrap"/>
+
+                    </StackPanel>
+
+                    <!-- MAIN CARD -->
+
+                    <Border Classes="card">
+
+                        <StackPanel>
+
+                            <Grid ColumnDefinitions="*,Auto">
+
+                                <StackPanel>
+                                    <TextBlock Text="Unauthorized app activity" Classes="sectionTitle"/>
+                                    <TextBlock x:Name="CountText"
+                                               Classes="pageSubtitle"
+                                               Margin="0,4,0,0"/>
+                                </StackPanel>
+
+                                <Button Grid.Column="1"
+                                        x:Name="ClearButton"
+                                        Content="Clear list"
+                                        Click="ClearButton_Click"/>
+
+                            </Grid>
+
+                            <Border Height="1" Background="#1E2A63" Margin="0,22,0,22"/>
+
+                            <!-- TABLE -->
+
+                            <Border Classes="inputCard">
+
+                                <StackPanel>
+
+                                    <!-- Table header -->
+                                    <Grid ColumnDefinitions="50,110,*,120,180" Margin="8,8,8,0">
+                                        <TextBlock Grid.Column="0" Text="No." Classes="colHeader"/>
+                                        <TextBlock Grid.Column="1" Text="Time" Classes="colHeader"/>
+                                        <TextBlock Grid.Column="2" Text="Student" Classes="colHeader"/>
+                                        <TextBlock Grid.Column="3" Text="Roll Number" Classes="colHeader"/>
+                                        <TextBlock Grid.Column="4" Text="App opened" Classes="colHeader"/>
+                                    </Grid>
+
+                                    <Border Classes="divider" Margin="0,10,0,4"/>
+
+                                    <StackPanel x:Name="RowsPanel" Spacing="2"/>
+
+                                    <TextBlock x:Name="EmptyText"
+                                               Text="No unauthorized apps have been opened."
+                                               IsVisible="False"/>
+
+                                    <TextBlock x:Name="ErrorText"
+                                               Text="Cannot reach the server."
+                                               IsVisible="False"/>
+
+                                </StackPanel>
+
+                            </Border>
+
+                        </StackPanel>
+
+                    </Border>
+
+                </StackPanel>
+
+            </ScrollViewer>
+
+        </Grid>
+
+    </Border>
+
+</UserControl>

@@ -1,10 +1,332 @@
 <Application xmlns="https://github.com/avaloniaui"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              x:Class="CodeTrace.Teacher.App"
-             RequestedThemeVariant="Default">
-             <!-- "Default" ThemeVariant follows system theme variant. "Dark" or "Light" are other available options. -->
+             RequestedThemeVariant="Light">
+
+    <Application.Resources>
+
+        <!-- ===== Brand — Indigo ===== -->
+        <SolidColorBrush x:Key="AccentBrush">#4F46E5</SolidColorBrush>
+        <SolidColorBrush x:Key="AccentBrushHover">#4338CA</SolidColorBrush>
+        <SolidColorBrush x:Key="AccentBrushPressed">#3730A3</SolidColorBrush>
+        <SolidColorBrush x:Key="AccentSoft">#EEF2FF</SolidColorBrush>
+
+        <!-- ===== Status ===== -->
+        <SolidColorBrush x:Key="DangerBrush">#DC2626</SolidColorBrush>
+        <SolidColorBrush x:Key="DangerBrushHover">#B91C1C</SolidColorBrush>
+        <SolidColorBrush x:Key="DangerSoft">#FEF2F2</SolidColorBrush>
+        <SolidColorBrush x:Key="SuccessBrush">#16A34A</SolidColorBrush>
+        <SolidColorBrush x:Key="SuccessSoft">#F0FDF4</SolidColorBrush>
+        <SolidColorBrush x:Key="WarningBrush">#D97706</SolidColorBrush>
+        <SolidColorBrush x:Key="WarningSoft">#FFFBEB</SolidColorBrush>
+        <SolidColorBrush x:Key="ErrorBrush">#DC2626</SolidColorBrush>
+
+        <!-- ===== Surfaces ===== -->
+        <SolidColorBrush x:Key="PageBackground">#F8FAFC</SolidColorBrush>
+        <SolidColorBrush x:Key="CardBackground">#FFFFFF</SolidColorBrush>
+        <SolidColorBrush x:Key="CardBorder">#E2E8F0</SolidColorBrush>
+        <SolidColorBrush x:Key="CardBorderHover">#C7D2FE</SolidColorBrush>
+        <SolidColorBrush x:Key="InputBackground">#FFFFFF</SolidColorBrush>
+        <SolidColorBrush x:Key="InputBorder">#CBD5E1</SolidColorBrush>
+        <SolidColorBrush x:Key="DividerBrush">#E2E8F0</SolidColorBrush>
+
+        <!-- ===== Sidebar — deep indigo-slate ===== -->
+        <SolidColorBrush x:Key="SidebarBackground">#1E1B34</SolidColorBrush>
+        <SolidColorBrush x:Key="SidebarHover">#2E2A4D</SolidColorBrush>
+        <SolidColorBrush x:Key="SidebarActive">#4F46E5</SolidColorBrush>
+        <SolidColorBrush x:Key="SidebarText">#C7C4E0</SolidColorBrush>
+        <SolidColorBrush x:Key="SidebarTextMuted">#7C7A9C</SolidColorBrush>
+
+        <!-- ===== Text ===== -->
+        <SolidColorBrush x:Key="HeadingText">#0F172A</SolidColorBrush>
+        <SolidColorBrush x:Key="BodyText">#334155</SolidColorBrush>
+        <SolidColorBrush x:Key="MutedText">#64748B</SolidColorBrush>
+        <SolidColorBrush x:Key="PlaceholderText">#94A3B8</SolidColorBrush>
+
+        <!-- ===== Chips ===== -->
+        <SolidColorBrush x:Key="ChipBackground">#EEF2FF</SolidColorBrush>
+        <SolidColorBrush x:Key="ChipText">#4338CA</SolidColorBrush>
+
+    </Application.Resources>
 
     <Application.Styles>
+
         <FluentTheme />
+
+        <!-- ============================================================
+             GLOBAL DEFAULTS
+             ============================================================ -->
+
+        <Style Selector="Window">
+            <Setter Property="Background" Value="{StaticResource PageBackground}"/>
+            <Setter Property="FontFamily" Value="Segoe UI, Inter, sans-serif"/>
+        </Style>
+
+        <Style Selector="UserControl">
+            <Setter Property="Background" Value="{StaticResource PageBackground}"/>
+        </Style>
+
+        <Style Selector="TextBlock">
+            <Setter Property="Foreground" Value="{StaticResource BodyText}"/>
+        </Style>
+
+        <!-- ============================================================
+             BUTTONS
+             ============================================================ -->
+
+        <Style Selector="Button.primary">
+            <Setter Property="Background" Value="{StaticResource AccentBrush}"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="CornerRadius" Value="8"/>
+            <Setter Property="Padding" Value="20,11"/>
+            <Setter Property="FontWeight" Value="SemiBold"/>
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+            <Setter Property="Transitions">
+                <Transitions>
+                    <BrushTransition Property="Background" Duration="0:0:0.12"/>
+                </Transitions>
+            </Setter>
+        </Style>
+        <Style Selector="Button.primary:pointerover /template/ ContentPresenter">
+            <Setter Property="Background" Value="{StaticResource AccentBrushHover}"/>
+        </Style>
+        <Style Selector="Button.primary:pressed /template/ ContentPresenter">
+            <Setter Property="Background" Value="{StaticResource AccentBrushPressed}"/>
+        </Style>
+        <Style Selector="Button.primary:disabled /template/ ContentPresenter">
+            <Setter Property="Background" Value="#94A3B8"/>
+            <Setter Property="Opacity" Value="0.8"/>
+        </Style>
+
+        <Style Selector="Button.danger">
+            <Setter Property="Background" Value="{StaticResource DangerSoft}"/>
+            <Setter Property="Foreground" Value="{StaticResource DangerBrush}"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="CornerRadius" Value="8"/>
+            <Setter Property="Padding" Value="14,8"/>
+            <Setter Property="FontWeight" Value="Medium"/>
+            <Setter Property="FontSize" Value="13"/>
+            <Setter Property="Cursor" Value="Hand"/>
+        </Style>
+        <Style Selector="Button.danger:pointerover /template/ ContentPresenter">
+            <Setter Property="Background" Value="{StaticResource DangerBrush}"/>
+            <Setter Property="TextBlock.Foreground" Value="White"/>
+        </Style>
+
+        <Style Selector="Button.secondary">
+            <Setter Property="Background" Value="{StaticResource AccentSoft}"/>
+            <Setter Property="Foreground" Value="{StaticResource AccentBrush}"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="CornerRadius" Value="8"/>
+            <Setter Property="Padding" Value="14,8"/>
+            <Setter Property="FontWeight" Value="Medium"/>
+            <Setter Property="FontSize" Value="13"/>
+            <Setter Property="Cursor" Value="Hand"/>
+        </Style>
+        <Style Selector="Button.secondary:pointerover /template/ ContentPresenter">
+            <Setter Property="Background" Value="{StaticResource AccentBrush}"/>
+            <Setter Property="TextBlock.Foreground" Value="White"/>
+        </Style>
+
+        <!-- Minimal icon-style button, used for close/edit affordances -->
+        <Style Selector="Button.ghost">
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="Foreground" Value="{StaticResource MutedText}"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="CornerRadius" Value="6"/>
+            <Setter Property="Padding" Value="8"/>
+            <Setter Property="Cursor" Value="Hand"/>
+        </Style>
+        <Style Selector="Button.ghost:pointerover /template/ ContentPresenter">
+            <Setter Property="Background" Value="{StaticResource PageBackground}"/>
+        </Style>
+
+        <Style Selector="Button.navItem">
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="Foreground" Value="{StaticResource SidebarText}"/>
+            <Setter Property="HorizontalAlignment" Value="Stretch"/>
+            <Setter Property="HorizontalContentAlignment" Value="Left"/>
+            <Setter Property="Padding" Value="16,12"/>
+            <Setter Property="CornerRadius" Value="8"/>
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="FontWeight" Value="Medium"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Cursor" Value="Hand"/>
+        </Style>
+        <Style Selector="Button.navItem:pointerover /template/ ContentPresenter">
+            <Setter Property="Background" Value="{StaticResource SidebarHover}"/>
+        </Style>
+        <!-- Active/selected page in the sidebar -->
+        <Style Selector="Button.navItem.active /template/ ContentPresenter">
+            <Setter Property="Background" Value="{StaticResource SidebarActive}"/>
+        </Style>
+        <Style Selector="Button.navItem.active">
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="FontWeight" Value="SemiBold"/>
+        </Style>
+
+        <!-- ============================================================
+             INPUTS
+             ============================================================ -->
+
+        <Style Selector="TextBox">
+            <Setter Property="Background" Value="{StaticResource InputBackground}"/>
+            <Setter Property="Foreground" Value="{StaticResource HeadingText}"/>
+            <Setter Property="CornerRadius" Value="8"/>
+            <Setter Property="Padding" Value="12,10"/>
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="BorderBrush" Value="{StaticResource InputBorder}"/>
+        </Style>
+        <Style Selector="TextBox:focus /template/ Border#PART_BorderElement">
+            <Setter Property="BorderBrush" Value="{StaticResource AccentBrush}"/>
+            <Setter Property="BorderThickness" Value="2"/>
+        </Style>
+        <!-- Apply Classes="error" to a TextBox to flag invalid input -->
+        <Style Selector="TextBox.error /template/ Border#PART_BorderElement">
+            <Setter Property="BorderBrush" Value="{StaticResource DangerBrush}"/>
+            <Setter Property="BorderThickness" Value="2"/>
+        </Style>
+
+        <Style Selector="NumericUpDown">
+            <Setter Property="Background" Value="{StaticResource InputBackground}"/>
+            <Setter Property="CornerRadius" Value="8"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="BorderBrush" Value="{StaticResource InputBorder}"/>
+        </Style>
+
+        <Style Selector="CheckBox">
+            <Setter Property="Foreground" Value="{StaticResource BodyText}"/>
+            <Setter Property="FontSize" Value="14"/>
+        </Style>
+
+        <Style Selector="ProgressBar">
+            <Setter Property="Foreground" Value="{StaticResource AccentBrush}"/>
+            <Setter Property="Background" Value="{StaticResource CardBorder}"/>
+            <Setter Property="Height" Value="4"/>
+            <Setter Property="CornerRadius" Value="2"/>
+        </Style>
+
+        <!-- ============================================================
+             TYPOGRAPHY
+             ============================================================ -->
+
+        <Style Selector="TextBlock.pageTitle">
+            <Setter Property="FontSize" Value="28"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="Foreground" Value="{StaticResource HeadingText}"/>
+        </Style>
+
+        <Style Selector="TextBlock.pageSubtitle">
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="Foreground" Value="{StaticResource MutedText}"/>
+        </Style>
+
+        <Style Selector="TextBlock.fieldLabel">
+            <Setter Property="FontSize" Value="13"/>
+            <Setter Property="FontWeight" Value="SemiBold"/>
+            <Setter Property="Foreground" Value="{StaticResource HeadingText}"/>
+        </Style>
+
+        <Style Selector="TextBlock.sectionLabel">
+            <Setter Property="FontSize" Value="11"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="Foreground" Value="{StaticResource MutedText}"/>
+            <Setter Property="LetterSpacing" Value="1"/>
+        </Style>
+
+        <!-- ============================================================
+             CARDS / CHIPS / DIALOG
+             ============================================================ -->
+
+        <Style Selector="Border.card">
+            <Setter Property="Background" Value="{StaticResource CardBackground}"/>
+            <Setter Property="BorderBrush" Value="{StaticResource CardBorder}"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="CornerRadius" Value="14"/>
+            <Setter Property="Padding" Value="24"/>
+            <Setter Property="BoxShadow" Value="0 1 3 0 #14000000"/>
+        </Style>
+
+        <Style Selector="Border.listCard">
+            <Setter Property="Background" Value="{StaticResource CardBackground}"/>
+            <Setter Property="BorderBrush" Value="{StaticResource CardBorder}"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="CornerRadius" Value="12"/>
+            <Setter Property="Padding" Value="20"/>
+            <Setter Property="BoxShadow" Value="0 1 2 0 #0F000000"/>
+        </Style>
+
+        <Style Selector="Border.dialogShell">
+            <Setter Property="Background" Value="{StaticResource CardBackground}"/>
+            <Setter Property="CornerRadius" Value="16"/>
+            <Setter Property="BoxShadow" Value="0 8 24 0 #33000000"/>
+        </Style>
+
+        <Style Selector="Border.chip">
+            <Setter Property="Background" Value="{StaticResource ChipBackground}"/>
+            <Setter Property="CornerRadius" Value="999"/>
+            <Setter Property="Padding" Value="12,5"/>
+        </Style>
+        <Style Selector="Border.chip TextBlock">
+            <Setter Property="Foreground" Value="{StaticResource ChipText}"/>
+            <Setter Property="FontSize" Value="12"/>
+            <Setter Property="FontWeight" Value="SemiBold"/>
+        </Style>
+
+        <Style Selector="Border.chipSuccess">
+            <Setter Property="Background" Value="{StaticResource SuccessSoft}"/>
+            <Setter Property="CornerRadius" Value="999"/>
+            <Setter Property="Padding" Value="12,5"/>
+        </Style>
+        <Style Selector="Border.chipSuccess TextBlock">
+            <Setter Property="Foreground" Value="{StaticResource SuccessBrush}"/>
+            <Setter Property="FontSize" Value="12"/>
+            <Setter Property="FontWeight" Value="SemiBold"/>
+        </Style>
+
+        <Style Selector="Border.chipMuted">
+            <Setter Property="Background" Value="{StaticResource PageBackground}"/>
+            <Setter Property="CornerRadius" Value="999"/>
+            <Setter Property="Padding" Value="12,5"/>
+        </Style>
+        <Style Selector="Border.chipMuted TextBlock">
+            <Setter Property="Foreground" Value="{StaticResource MutedText}"/>
+            <Setter Property="FontSize" Value="12"/>
+            <Setter Property="FontWeight" Value="SemiBold"/>
+        </Style>
+
+        <!-- Status banners: pair Border.bannerSuccess / bannerError with a TextBlock child -->
+        <Style Selector="Border.bannerSuccess">
+            <Setter Property="Background" Value="{StaticResource SuccessSoft}"/>
+            <Setter Property="CornerRadius" Value="8"/>
+            <Setter Property="Padding" Value="14,10"/>
+        </Style>
+        <Style Selector="Border.bannerSuccess TextBlock">
+            <Setter Property="Foreground" Value="{StaticResource SuccessBrush}"/>
+            <Setter Property="FontSize" Value="13"/>
+            <Setter Property="FontWeight" Value="Medium"/>
+        </Style>
+
+        <Style Selector="Border.bannerError">
+            <Setter Property="Background" Value="{StaticResource DangerSoft}"/>
+            <Setter Property="CornerRadius" Value="8"/>
+            <Setter Property="Padding" Value="14,10"/>
+        </Style>
+        <Style Selector="Border.bannerError TextBlock">
+            <Setter Property="Foreground" Value="{StaticResource DangerBrush}"/>
+            <Setter Property="FontSize" Value="13"/>
+            <Setter Property="FontWeight" Value="Medium"/>
+        </Style>
+
+        <Style Selector="Border.divider">
+            <Setter Property="Background" Value="{StaticResource DividerBrush}"/>
+            <Setter Property="Height" Value="1"/>
+        </Style>
+
     </Application.Styles>
+
 </Application>
