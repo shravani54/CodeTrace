@@ -90,16 +90,10 @@
                             Spacing="10"
                             Margin="8,10,8,30">
 
-                    <Border Background="#0369A1"
-                            Width="38" Height="38"
-                            CornerRadius="11">
-                        <TextBlock Text="CT"
-                                   Foreground="White"
-                                   FontWeight="Bold"
-                                   FontSize="14"
-                                   HorizontalAlignment="Center"
-                                   VerticalAlignment="Center"/>
-                    </Border>
+                    <!-- Logo -->
+                    <Image Source="/Assets/logo.png"
+                           Width="40" Height="40"
+                           RenderOptions.BitmapInterpolationMode="HighQuality"/>
 
                     <TextBlock Text="CodeTrace"
                                Foreground="#0C4A6E"
@@ -136,6 +130,11 @@
                             Content="👥  Manage Students"
                             Classes="navItem"
                             Click="ManageStudentsButton_Click"/>
+
+                    <Button x:Name="StudentListNavButton"
+                            Content="📑  Approved Students"
+                            Classes="navItem"
+                            Click="StudentListButton_Click"/>
 
                     <Button x:Name="MonitorStudentsNavButton"
                             Content="🖥️  Monitor Students"

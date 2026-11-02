@@ -1,4 +1,5 @@
 using CodeTrace.Api.Data;
+using CodeTrace.Api.Services;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -19,16 +20,21 @@ builder.Services.AddDbContext<CodeTraceDbContext>(options =>
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-builder.Services.AddSingleton<CodeTrace.Api.Services.JoinRequestStore>();
-builder.Services.AddHostedService<CodeTrace.Api.Services.DiscoveryService>();
 
-// NEW: deletes every examination 24 hours after it was created
-builder.Services.AddHostedService<CodeTrace.Api.Services.ExpiredExamCleaner>();
+// The teacher's Excel list of students who are approved automatically.
+// Must be registered BEFORE JoinRequestStore, because the join store uses it.
+builder.Services.AddSingleton<AllowedStudentStore>();
+builder.Services.AddSingleton<JoinRequestStore>();
+
+builder.Services.AddHostedService<DiscoveryService>();
+
+// Deletes every examination 24 hours after it was created
+builder.Services.AddHostedService<ExpiredExamCleaner>();
 
 
 var app = builder.Build();
 
-// ===== NEW: adds missing Exams columns on startup (safe to run many times) =====
+// ===== Adds missing Exams columns on startup (safe to run many times) =====
 try
 {
     using var scope = app.Services.CreateScope();
@@ -45,7 +51,7 @@ catch (Exception ex)
 {
     Console.WriteLine("Database check failed: " + ex.Message);
 }
-// ===== END NEW =====
+// ===== END =====
 
 if (app.Environment.IsDevelopment())
 {
@@ -57,7 +63,7 @@ if (app.Environment.IsDevelopment())
 
 app.MapControllers();
 
-// ===== NEW: camera frames (latest photo per student, kept in memory only) =====
+// ===== Camera frames (latest photo per student, kept in memory only) =====
 var frames = new System.Collections.Concurrent.ConcurrentDictionary<string, byte[]>();
 
 // Student app sends a photo here
@@ -73,6 +79,6 @@ app.MapPost("/api/proctor/{id}/frame", async (string id, HttpRequest req) =>
 // Teacher app reads the latest photo from here
 app.MapGet("/api/proctor/{id}/frame", (string id) =>
     frames.TryGetValue(id, out var b) ? Results.File(b, "image/jpeg") : Results.NotFound());
-// ===== END NEW =====
+// ===== END =====
 
 app.Run();

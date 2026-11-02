@@ -39,6 +39,7 @@ public partial class TeacherDashboard : UserControl
             ManageExamsNavButton,
             JoinRequestsNavButton,
             ManageStudentsNavButton,
+            StudentListNavButton,
             MonitorStudentsNavButton,
             ViewSubmissionsNavButton,
             ManageIDEsNavButton,
@@ -212,6 +213,13 @@ public partial class TeacherDashboard : UserControl
     {
         SetActiveNav(ManageStudentsNavButton);
         MainContent.Content = new ManageStudentsView();
+    }
+
+    // Excel list of students who are approved automatically
+    private void StudentListButton_Click(object? sender, RoutedEventArgs e)
+    {
+        SetActiveNav(StudentListNavButton);
+        MainContent.Content = new AllowedStudentsView();
     }
 
     // Every time a student opened an app that is not allowed
