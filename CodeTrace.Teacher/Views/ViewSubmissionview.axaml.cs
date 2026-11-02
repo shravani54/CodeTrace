@@ -196,7 +196,7 @@ public partial class ViewSubmissionsView : UserControl
             {
                 codeCell = new TextBlock
                 {
-                    Text = "No code ZIP",
+                    Text = "No Submission",
                     Foreground = Brush.Parse("#64748B"),
                     VerticalAlignment = VerticalAlignment.Center
                 };

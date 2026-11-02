@@ -18,11 +18,12 @@ public partial class ManageStudentsView : UserControl
     private readonly ExamApiService _examService = new();
     private readonly DispatcherTimer _timer;
 
-    // null = showing the exam list; 0 = "no exam chosen yet" group; otherwise the selected exam id
+    // null = showing the exam list; 0 = "not in a listed exam" group; otherwise the selected exam id
     private int? _selectedExamId;
     private string _selectedExamName = "";
 
     private List<ConnectedStudent> _lastStudents = new();
+    private HashSet<int> _knownExamIds = new();   // ids of the exams shown in the list
     private bool _refreshing;
 
     public ManageStudentsView()
@@ -78,61 +79,72 @@ public partial class ManageStudentsView : UserControl
         }
     }
 
-    // ---------- Step 1: ongoing exams ----------
+    // ---------- Step 1: all examinations ----------
+
+    private static DateTime ToUtc(DateTime d) =>
+        d.Kind == DateTimeKind.Unspecified ? DateTime.SpecifyKind(d, DateTimeKind.Utc) : d.ToUniversalTime();
 
     private async Task ShowExamListAsync(List<ConnectedStudent> students)
     {
         var exams = await _examService.GetAllAsync();
         var now = DateTime.UtcNow;
 
-        // Ongoing = active, and its time has not run out yet
-        var ongoing = exams
-            .Where(e => e.IsActive &&
-                        (e.StartTime == null || e.StartTime.Value.AddMinutes(e.DurationMinutes) > now))
-            .OrderBy(e => e.StartTime ?? DateTime.MinValue)
-            .ToList();
+        // Every exam is listed (the server already hides exams older than 24 hours), newest first
+        var ordered = exams.OrderByDescending(e => e.Id).ToList();
+        _knownExamIds = ordered.Select(e => e.Id).ToHashSet();
 
         ExamsPanel.Children.Clear();
 
-        foreach (var e in ongoing)
+        foreach (var e in ordered)
         {
-            string info;
-            if (e.StartTime == null)
-                info = $"Ongoing  •  {e.DurationMinutes} min";
-            else if (e.StartTime.Value > now)
-                info = $"Starts {e.StartTime.Value.ToLocalTime():hh:mm tt}  •  {e.DurationMinutes} min";
+            string status;
+            if (!e.IsActive)
+            {
+                status = "Not active";
+            }
+            else if (e.StartTime is not DateTime start)
+            {
+                status = "Open (no start time)";
+            }
             else
-                info = $"Started {e.StartTime.Value.ToLocalTime():hh:mm tt}  •  {e.DurationMinutes} min";
+            {
+                var startUtc = ToUtc(start);
+                var startLocal = startUtc.ToLocalTime();
 
+                if (startUtc > now)
+                    status = $"Starts {startLocal:hh:mm tt}";
+                else if (startUtc.AddMinutes(e.DurationMinutes) > now)
+                    status = $"Ongoing, started {startLocal:hh:mm tt}";
+                else
+                    status = "Ended";
+            }
+
+            var info = $"{status}  •  {e.DurationMinutes} min";
             var count = students.Count(s => s.ExamId == e.Id);
             ExamsPanel.Children.Add(BuildExamCard(e.Id, e.Name, info, count));
         }
 
-        // Students who are approved but have not picked an exam yet
-        var waiting = students.Count(s => s.ExamId == null);
-        if (waiting > 0)
-            ExamsPanel.Children.Add(BuildExamCard(0, "Not in an exam yet", "Approved, still choosing an exam", waiting));
+        // Students who are not in any listed exam: not joined yet, or their exam no longer exists
+        var other = students.Count(s => s.ExamId == null || !_knownExamIds.Contains(s.ExamId.Value));
+        if (other > 0)
+            ExamsPanel.Children.Add(BuildExamCard(0, "Not in a listed exam", "Logged in, but not in an exam above", other));
 
-        ExamsCountText.Text = $"Ongoing exams: {ongoing.Count}";
+        ExamsCountText.Text = $"Examinations: {ordered.Count}";
+        NoExamsText.Text = "No examinations yet. Create one first.";
         NoExamsText.IsVisible = ExamsPanel.Children.Count == 0;
     }
 
     private Button BuildExamCard(int id, string name, string info, int count)
     {
-        var title = new TextBlock
-    {
-        Text = name,
-        FontSize = 18,
-        FontWeight = FontWeight.Bold,
-        Foreground = Brush.Parse("#0C4A6E")
-    };
+        var title = new TextBlock { Text = name };
+        title.Classes.Add("examName");   // dark, bold (style in the XAML)
 
-    var sub = new TextBlock
-    {
-        Text = info,
-        FontSize = 12,
-        Foreground = new SolidColorBrush(Color.Parse("#98A4D6"))
-    };
+        var sub = new TextBlock
+        {
+            Text = info,
+            FontSize = 12,
+            Foreground = new SolidColorBrush(Color.Parse("#475569"))
+        };
 
         var left = new StackPanel { Spacing = 3, VerticalAlignment = VerticalAlignment.Center };
         left.Children.Add(title);
@@ -142,7 +154,7 @@ public partial class ManageStudentsView : UserControl
         {
             Text = count == 1 ? "1 student" : $"{count} students",
             FontWeight = FontWeight.SemiBold,
-            Foreground = new SolidColorBrush(Color.Parse("#6EA8FF")),
+            Foreground = new SolidColorBrush(Color.Parse("#0369A1")),
             VerticalAlignment = VerticalAlignment.Center,
             Margin = new Thickness(16, 0)
         };
@@ -151,7 +163,7 @@ public partial class ManageStudentsView : UserControl
         {
             Text = "›",
             FontSize = 24,
-            Foreground = new SolidColorBrush(Color.Parse("#7F8BC4")),
+            Foreground = new SolidColorBrush(Color.Parse("#0369A1")),
             VerticalAlignment = VerticalAlignment.Center
         };
 
@@ -181,7 +193,9 @@ public partial class ManageStudentsView : UserControl
     private void ShowStudents(List<ConnectedStudent> students)
     {
         var selected = students
-            .Where(s => _selectedExamId == 0 ? s.ExamId == null : s.ExamId == _selectedExamId)
+            .Where(s => _selectedExamId == 0
+                ? (s.ExamId == null || !_knownExamIds.Contains(s.ExamId.Value))
+                : s.ExamId == _selectedExamId)
             .ToList();
 
         RowsPanel.Children.Clear();

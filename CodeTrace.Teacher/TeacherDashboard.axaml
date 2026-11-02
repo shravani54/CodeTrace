@@ -4,8 +4,8 @@
 
     <UserControl.Resources>
         <LinearGradientBrush x:Key="NavGradient" StartPoint="0,0" EndPoint="1,0">
-            <GradientStop Color="#3B6CF5" Offset="0"/>
-            <GradientStop Color="#7C5CF0" Offset="1"/>
+            <GradientStop Color="#7DD3FC" Offset="0"/>
+            <GradientStop Color="#38BDF8" Offset="1"/>
         </LinearGradientBrush>
     </UserControl.Resources>
 
@@ -15,7 +15,7 @@
 
         <Style Selector="Button.navItem">
             <Setter Property="Background" Value="Transparent"/>
-            <Setter Property="Foreground" Value="#A9B4E3"/>
+            <Setter Property="Foreground" Value="#0C4A6E"/>
             <Setter Property="BorderThickness" Value="0"/>
             <Setter Property="CornerRadius" Value="10"/>
             <Setter Property="Height" Value="44"/>
@@ -28,33 +28,33 @@
         </Style>
 
         <Style Selector="Button.navItem:pointerover /template/ ContentPresenter#PART_ContentPresenter">
-            <Setter Property="Background" Value="#151C45"/>
-            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="Background" Value="#BAE6FD"/>
+            <Setter Property="Foreground" Value="#082F49"/>
         </Style>
 
         <Style Selector="Button.navItem:pressed /template/ ContentPresenter#PART_ContentPresenter">
-            <Setter Property="Background" Value="#1B2556"/>
-            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="Background" Value="#7DD3FC"/>
+            <Setter Property="Foreground" Value="#082F49"/>
         </Style>
 
         <!-- Selected page (covers the class names usually used for this) -->
 
         <Style Selector="Button.navItem.active, Button.navItem.selected, Button.navItem.current">
-            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="Foreground" Value="#082F49"/>
             <Setter Property="FontWeight" Value="SemiBold"/>
             <Setter Property="Background" Value="{StaticResource NavGradient}"/>
         </Style>
 
         <Style Selector="Button.navItem.active /template/ ContentPresenter#PART_ContentPresenter, Button.navItem.selected /template/ ContentPresenter#PART_ContentPresenter, Button.navItem.current /template/ ContentPresenter#PART_ContentPresenter">
             <Setter Property="Background" Value="{StaticResource NavGradient}"/>
-            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="Foreground" Value="#082F49"/>
         </Style>
 
         <!-- SIGN OUT BUTTON -->
 
         <Style Selector="Button.ghost">
             <Setter Property="Background" Value="Transparent"/>
-            <Setter Property="Foreground" Value="#A9B4E3"/>
+            <Setter Property="Foreground" Value="#0369A1"/>
             <Setter Property="BorderThickness" Value="0"/>
             <Setter Property="CornerRadius" Value="10"/>
             <Setter Property="Width" Value="40"/>
@@ -67,8 +67,8 @@
         </Style>
 
         <Style Selector="Button.ghost:pointerover /template/ ContentPresenter#PART_ContentPresenter">
-            <Setter Property="Background" Value="#1E2A63"/>
-            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="Background" Value="#BAE6FD"/>
+            <Setter Property="Foreground" Value="#082F49"/>
         </Style>
 
     </UserControl.Styles>
@@ -78,8 +78,8 @@
         <!-- SIDEBAR -->
 
         <Border Grid.Column="0"
-                Background="#0A0F2B"
-                BorderBrush="#1A2457"
+                Background="#E0F2FE"
+                BorderBrush="#BAE6FD"
                 BorderThickness="0,0,1,0"
                 Padding="16">
 
@@ -90,7 +90,7 @@
                             Spacing="10"
                             Margin="8,10,8,30">
 
-                    <Border Background="#3B6CF5"
+                    <Border Background="#0369A1"
                             Width="38" Height="38"
                             CornerRadius="11">
                         <TextBlock Text="CT"
@@ -102,7 +102,7 @@
                     </Border>
 
                     <TextBlock Text="CodeTrace"
-                               Foreground="White"
+                               Foreground="#0C4A6E"
                                FontSize="20"
                                FontWeight="Bold"
                                VerticalAlignment="Center"/>
@@ -112,7 +112,7 @@
                 <StackPanel Grid.Row="1" Spacing="4">
 
                     <TextBlock Text="MAIN"
-                               Foreground="#7F8BC4"
+                               Foreground="#475569"
                                FontSize="11"
                                FontWeight="Bold"
                                Margin="14,0,0,6"/>
@@ -148,7 +148,7 @@
                             Click="ViewSubmissionsButton_Click"/>
 
                     <TextBlock Text="SETTINGS"
-                               Foreground="#7F8BC4"
+                               Foreground="#475569"
                                FontSize="11"
                                FontWeight="Bold"
                                Margin="14,22,0,6"/>
@@ -171,8 +171,8 @@
                 </StackPanel>
 
                 <Border Grid.Row="2"
-                        Background="#121A45"
-                        BorderBrush="#1E2A63"
+                        Background="#FFFFFF"
+                        BorderBrush="#BAE6FD"
                         BorderThickness="1"
                         CornerRadius="12"
                         Padding="12"
@@ -181,7 +181,7 @@
 
                         <Border Grid.Column="0"
                                 Width="34" Height="34" CornerRadius="17"
-                                Background="#3B6CF5">
+                                Background="#0369A1">
                             <TextBlock x:Name="FooterInitialText"
                                        Text="T" Foreground="White" FontWeight="Bold"
                                        HorizontalAlignment="Center" VerticalAlignment="Center"/>
@@ -192,8 +192,8 @@
                                     Spacing="0"
                                     Margin="10,0,0,0">
                             <TextBlock x:Name="FooterUsernameText"
-                                       Text="Teacher" Foreground="White" FontSize="13" FontWeight="SemiBold"/>
-                            <TextBlock Text="Signed in" Foreground="#8F9BD0" FontSize="11"/>
+                                       Text="Teacher" Foreground="#0C4A6E" FontSize="13" FontWeight="SemiBold"/>
+                            <TextBlock Text="Signed in" Foreground="#475569" FontSize="11"/>
                         </StackPanel>
 
                         <Button Grid.Column="2"
@@ -212,7 +212,7 @@
         <!-- CONTENT AREA -->
 
         <Border Grid.Column="1"
-                Background="#070B1F">
+                Background="#F0F9FF">
 
             <ContentControl x:Name="MainContent" Margin="0"/>
 
@@ -223,7 +223,7 @@
                     Grid.Column="1"
                     HorizontalAlignment="Right"
                     VerticalAlignment="Top"
-                    Margin="0,20,20,0"
+                    Margin="0,20,0,0"
                     Spacing="10"/>
 
     </Grid>
