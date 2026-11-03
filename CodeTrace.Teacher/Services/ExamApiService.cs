@@ -9,26 +9,38 @@ namespace CodeTrace.Teacher.Services;
 public class ExamApiService
 {
     private static readonly HttpClient _client = new()
-{
-   BaseAddress = new Uri(ApiConfig.BaseUrl + "/")
-};
+    {
+        BaseAddress = new Uri(ApiConfig.BaseUrl + "/")
+    };
+
+    // Every request carries the logged-in teacher's id
+    private static HttpRequestMessage Build(HttpMethod method, string url, HttpContent? content = null)
+    {
+        var request = new HttpRequestMessage(method, url) { Content = content };
+        request.Headers.Add("X-Teacher-Id", TeacherSession.TeacherId.ToString());
+        return request;
+    }
 
     public async Task<List<Exam>> GetAllAsync()
     {
-        var result = await _client.GetFromJsonAsync<List<Exam>>("api/Exams");
+        using var response = await _client.SendAsync(Build(HttpMethod.Get, "api/Exams"));
+        response.EnsureSuccessStatusCode();
+        var result = await response.Content.ReadFromJsonAsync<List<Exam>>();
         return result ?? new List<Exam>();
     }
 
     public async Task<Exam?> CreateAsync(Exam exam)
     {
-        var response = await _client.PostAsJsonAsync("api/Exams", exam);
+        using var response = await _client.SendAsync(
+            Build(HttpMethod.Post, "api/Exams", JsonContent.Create(exam)));
         response.EnsureSuccessStatusCode();
         return await response.Content.ReadFromJsonAsync<Exam>();
     }
 
     public async Task<Exam?> UpdateAsync(Exam exam)
     {
-        var response = await _client.PutAsJsonAsync($"api/Exams/{exam.Id}", exam);
+        using var response = await _client.SendAsync(
+            Build(HttpMethod.Put, $"api/Exams/{exam.Id}", JsonContent.Create(exam)));
         if (!response.IsSuccessStatusCode)
             return null;
 
@@ -37,7 +49,7 @@ public class ExamApiService
 
     public async Task DeleteAsync(int id)
     {
-        var response = await _client.DeleteAsync($"api/Exams/{id}");
+        using var response = await _client.SendAsync(Build(HttpMethod.Delete, $"api/Exams/{id}"));
         response.EnsureSuccessStatusCode();
     }
 }

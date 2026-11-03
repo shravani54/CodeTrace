@@ -30,7 +30,11 @@ public class AuthApiService
         if (!response.IsSuccessStatusCode)
             return null;
 
-        return await response.Content.ReadFromJsonAsync<LoginResult>();
+        var result = await response.Content.ReadFromJsonAsync<LoginResult>();
+        if (result != null)
+            TeacherSession.TeacherId = result.Id;   // remember who logged in
+
+        return result;
     }
 
     // Creates a teacher account. Returns the account, or null plus a message for the screen.
@@ -52,6 +56,8 @@ public class AuthApiService
             if (response.IsSuccessStatusCode)
             {
                 var result = await response.Content.ReadFromJsonAsync<LoginResult>();
+                if (result != null)
+                    TeacherSession.TeacherId = result.Id;
                 return (result, "");
             }
 

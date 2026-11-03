@@ -21,5 +21,8 @@ public class Exam
     // When the teacher created the exam (UTC). The exam is deleted 24 hours after this.
     public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
 
+    // The teacher who created this exam (null for exams made before this feature)
+    public int? TeacherId { get; set; }
+
     public List<ExamIDE> AllowedIDEs { get; set; } = new();
 }
