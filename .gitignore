@@ -1,0 +1,24 @@
+
+# Build folders
+bin/
+obj/
+
+# .NET build outputs
+**/bin/
+**/obj/
+
+# Publish and deployment files
+**/publish/
+**/deploy/
+
+# ZIP files
+*.zip
+
+# Visual Studio
+.vs/
+*.user
+*.suo
+
+# Temporary files
+*.tmp
+*.log

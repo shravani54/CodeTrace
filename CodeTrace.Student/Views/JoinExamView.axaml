@@ -1,0 +1,329 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             x:Class="CodeTrace.Student.Views.JoinExamView"
+             Background="#F0F9FF">
+
+    <UserControl.Resources>
+        <!-- Heading colour (overrides the app-level dark theme value for this view) -->
+        <SolidColorBrush x:Key="HeadingText" Color="#0C4A6E"/>
+
+        <!-- TextBox: dark text on white in every state -->
+        <SolidColorBrush x:Key="TextControlForeground" Color="#0F172A"/>
+        <SolidColorBrush x:Key="TextControlForegroundPointerOver" Color="#0F172A"/>
+        <SolidColorBrush x:Key="TextControlForegroundFocused" Color="#0F172A"/>
+        <SolidColorBrush x:Key="TextControlForegroundDisabled" Color="#94A3B8"/>
+        <SolidColorBrush x:Key="TextControlPlaceholderForeground" Color="#64748B"/>
+        <SolidColorBrush x:Key="TextControlPlaceholderForegroundPointerOver" Color="#64748B"/>
+        <SolidColorBrush x:Key="TextControlPlaceholderForegroundFocused" Color="#64748B"/>
+
+        <!-- TextBox: white background and sky-blue borders in every state -->
+        <SolidColorBrush x:Key="TextControlBackground" Color="#FFFFFF"/>
+        <SolidColorBrush x:Key="TextControlBackgroundPointerOver" Color="#FFFFFF"/>
+        <SolidColorBrush x:Key="TextControlBackgroundFocused" Color="#FFFFFF"/>
+        <SolidColorBrush x:Key="TextControlBackgroundDisabled" Color="#F1F5F9"/>
+        <SolidColorBrush x:Key="TextControlBorderBrush" Color="#BAE6FD"/>
+        <SolidColorBrush x:Key="TextControlBorderBrushPointerOver" Color="#7DD3FC"/>
+        <SolidColorBrush x:Key="TextControlBorderBrushFocused" Color="#0EA5E9"/>
+
+        <!-- ComboBox: dark text on white in every state -->
+        <SolidColorBrush x:Key="ComboBoxForeground" Color="#0F172A"/>
+        <SolidColorBrush x:Key="ComboBoxForegroundPointerOver" Color="#0F172A"/>
+        <SolidColorBrush x:Key="ComboBoxForegroundPressed" Color="#0F172A"/>
+        <SolidColorBrush x:Key="ComboBoxForegroundFocused" Color="#0F172A"/>
+        <SolidColorBrush x:Key="ComboBoxForegroundFocusedPressed" Color="#0F172A"/>
+        <SolidColorBrush x:Key="ComboBoxForegroundDisabled" Color="#94A3B8"/>
+        <SolidColorBrush x:Key="ComboBoxBackground" Color="#FFFFFF"/>
+        <SolidColorBrush x:Key="ComboBoxBackgroundPointerOver" Color="#FFFFFF"/>
+        <SolidColorBrush x:Key="ComboBoxBackgroundPressed" Color="#FFFFFF"/>
+        <SolidColorBrush x:Key="ComboBoxBackgroundDisabled" Color="#F1F5F9"/>
+        <SolidColorBrush x:Key="ComboBoxDropDownBackground" Color="#FFFFFF"/>
+        <SolidColorBrush x:Key="ComboBoxBorderBrush" Color="#BAE6FD"/>
+        <SolidColorBrush x:Key="ComboBoxBorderBrushPointerOver" Color="#7DD3FC"/>
+        <SolidColorBrush x:Key="ComboBoxBorderBrushPressed" Color="#0EA5E9"/>
+        <SolidColorBrush x:Key="ComboBoxBorderBrushFocused" Color="#0EA5E9"/>
+    </UserControl.Resources>
+
+    <UserControl.Styles>
+        <!-- Fallback in case your own theme overrides the resources above -->
+        <Style Selector="TextBox, TextBox:pointerover, TextBox:focus">
+            <Setter Property="Foreground" Value="#0F172A"/>
+            <Setter Property="CaretBrush" Value="#0C4A6E"/>
+            <Setter Property="SelectionBrush" Value="#7DD3FC"/>
+            <Setter Property="CornerRadius" Value="10"/>
+        </Style>
+        <!-- The typed text itself: dark in every state, even if the theme forces white -->
+        <Style Selector="TextBox /template/ TextPresenter#PART_TextPresenter">
+            <Setter Property="TextElement.Foreground" Value="#0F172A"/>
+        </Style>
+        <Style Selector="TextBox:focus /template/ TextPresenter#PART_TextPresenter">
+            <Setter Property="TextElement.Foreground" Value="#0F172A"/>
+        </Style>
+        <Style Selector="TextBox:focus /template/ Border#PART_BorderElement">
+            <Setter Property="Background" Value="#FFFFFF"/>
+            <Setter Property="BorderBrush" Value="#0EA5E9"/>
+        </Style>
+        <Style Selector="ComboBox">
+            <Setter Property="CornerRadius" Value="10"/>
+        </Style>
+        <Style Selector="ComboBoxItem">
+            <Setter Property="Foreground" Value="#0F172A"/>
+        </Style>
+        <Style Selector="ComboBoxItem:pointerover /template/ ContentPresenter#PART_ContentPresenter">
+            <Setter Property="Background" Value="#E0F2FE"/>
+        </Style>
+        <Style Selector="ComboBoxItem:selected /template/ ContentPresenter#PART_ContentPresenter">
+            <Setter Property="Background" Value="#BAE6FD"/>
+        </Style>
+
+        <!-- Card -->
+        <Style Selector="Border.card">
+            <Setter Property="Background" Value="#FFFFFF"/>
+            <Setter Property="BorderBrush" Value="#BAE6FD"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="CornerRadius" Value="20"/>
+            <Setter Property="BoxShadow" Value="0 18 44 0 #260EA5E9"/>
+        </Style>
+
+        <!-- Field labels -->
+        <Style Selector="TextBlock.fieldLabel">
+            <Setter Property="Foreground" Value="#0C4A6E"/>
+            <Setter Property="FontSize" Value="13"/>
+            <Setter Property="FontWeight" Value="SemiBold"/>
+        </Style>
+
+        <!-- Connect: solid deep sky blue -->
+        <Style Selector="Button.connect">
+            <Setter Property="Background" Value="#0369A1"/>
+            <Setter Property="Foreground" Value="#FFFFFF"/>
+            <Setter Property="FontWeight" Value="SemiBold"/>
+            <Setter Property="CornerRadius" Value="12"/>
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+        </Style>
+        <Style Selector="Button.connect:pointerover /template/ ContentPresenter#PART_ContentPresenter">
+            <Setter Property="Background" Value="#075985"/>
+            <Setter Property="TextElement.Foreground" Value="#FFFFFF"/>
+        </Style>
+
+        <!-- Join: sky blue with dark navy text -->
+        <Style Selector="Button.primary">
+            <Setter Property="Background" Value="#38BDF8"/>
+            <Setter Property="Foreground" Value="#082F49"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="CornerRadius" Value="12"/>
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+        </Style>
+        <Style Selector="Button.primary:pointerover /template/ ContentPresenter#PART_ContentPresenter">
+            <Setter Property="Background" Value="#0EA5E9"/>
+            <Setter Property="TextElement.Foreground" Value="#082F49"/>
+        </Style>
+        <Style Selector="Button.primary:disabled /template/ ContentPresenter#PART_ContentPresenter">
+            <Setter Property="Background" Value="#E0F2FE"/>
+            <Setter Property="TextElement.Foreground" Value="#475569"/>
+        </Style>
+
+        <!-- Refresh: outlined -->
+        <Style Selector="Button.secondary">
+            <Setter Property="Background" Value="#FFFFFF"/>
+            <Setter Property="Foreground" Value="#0369A1"/>
+            <Setter Property="BorderBrush" Value="#7DD3FC"/>
+            <Setter Property="BorderThickness" Value="1.5"/>
+            <Setter Property="FontWeight" Value="SemiBold"/>
+            <Setter Property="CornerRadius" Value="12"/>
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+        </Style>
+        <Style Selector="Button.secondary:pointerover /template/ ContentPresenter#PART_ContentPresenter">
+            <Setter Property="Background" Value="#E0F2FE"/>
+            <Setter Property="BorderBrush" Value="#38BDF8"/>
+            <Setter Property="TextElement.Foreground" Value="#0369A1"/>
+        </Style>
+    </UserControl.Styles>
+
+    <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
+        <Grid Margin="32">
+
+            <Grid ColumnDefinitions="460,72,480"
+                  HorizontalAlignment="Center" VerticalAlignment="Center">
+
+                <!-- Left: branding panel -->
+                <StackPanel Grid.Column="0" VerticalAlignment="Center" Spacing="0">
+
+                    <StackPanel Orientation="Horizontal" Spacing="14" Margin="0,0,0,44">
+                        <ContentControl Width="52" Height="52" Content="logo"
+                                        ContentTemplate="{DynamicResource LogoMark}"/>
+                        <StackPanel VerticalAlignment="Center" Spacing="1">
+                            <TextBlock Text="CodeTrace" FontSize="24" FontWeight="Bold"
+                                       Foreground="{DynamicResource HeadingText}"/>
+                            <TextBlock Text="Secure Programming Examination System" FontSize="12"
+                                       Foreground="#475569"/>
+                        </StackPanel>
+                    </StackPanel>
+
+                    <TextBlock FontSize="52" FontWeight="Bold" LineHeight="60" Foreground="#0C4A6E">
+                        <Run Text="Ready. Set."/>
+                        <LineBreak/>
+                        <Run Text="Code." Foreground="#0284C7"/>
+                    </TextBlock>
+
+                    <TextBlock Text="Join your exam in three quick steps." FontSize="16"
+                               Foreground="#475569" Margin="0,14,0,22"/>
+
+                    <StackPanel Spacing="14">
+                        <StackPanel Orientation="Horizontal" Spacing="14">
+                            <Border Width="28" Height="28" CornerRadius="14" Background="#E0F2FE"
+                                    BorderBrush="#7DD3FC" BorderThickness="1">
+                                <TextBlock Text="1" FontSize="13" FontWeight="Bold" Foreground="#0369A1"
+                                           HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                            </Border>
+                            <TextBlock Text="Enter the server IP shared by your teacher" FontSize="15"
+                                       Foreground="#334155" VerticalAlignment="Center"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" Spacing="14">
+                            <Border Width="28" Height="28" CornerRadius="14" Background="#E0F2FE"
+                                    BorderBrush="#7DD3FC" BorderThickness="1">
+                                <TextBlock Text="2" FontSize="13" FontWeight="Bold" Foreground="#0369A1"
+                                           HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                            </Border>
+                            <TextBlock Text="Add your full name and roll number" FontSize="15"
+                                       Foreground="#334155" VerticalAlignment="Center"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" Spacing="14">
+                            <Border Width="28" Height="28" CornerRadius="14" Background="#E0F2FE"
+                                    BorderBrush="#7DD3FC" BorderThickness="1">
+                                <TextBlock Text="3" FontSize="13" FontWeight="Bold" Foreground="#0369A1"
+                                           HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                            </Border>
+                            <TextBlock Text="Pick your exam and press Join" FontSize="15"
+                                       Foreground="#334155" VerticalAlignment="Center"/>
+                        </StackPanel>
+                    </StackPanel>
+
+                    <!-- Laptop illustration with shield badge -->
+                    <Grid Width="380" Height="246" HorizontalAlignment="Left" Margin="0,36,0,0">
+
+                        <!-- Screen -->
+                        <Border Width="320" Height="186" Margin="18,0,0,0"
+                                HorizontalAlignment="Left" VerticalAlignment="Top"
+                                CornerRadius="16,16,6,6" Background="#FFFFFF"
+                                BorderBrush="#38BDF8" BorderThickness="2"
+                                BoxShadow="0 10 32 0 #3338BDF8" Padding="20,16">
+                            <StackPanel Spacing="9">
+                                <StackPanel Orientation="Horizontal" Spacing="6">
+                                    <Ellipse Width="9" Height="9" Fill="#FF5F57"/>
+                                    <Ellipse Width="9" Height="9" Fill="#FEBC2E"/>
+                                    <Ellipse Width="9" Height="9" Fill="#28C840"/>
+                                </StackPanel>
+                                <Border Height="6" Width="140" CornerRadius="3" Background="#0EA5E9"
+                                        HorizontalAlignment="Left" Margin="0,8,0,0"/>
+                                <Border Height="6" Width="200" CornerRadius="3" Background="#BAE6FD"
+                                        HorizontalAlignment="Left" Margin="16,0,0,0"/>
+                                <Border Height="6" Width="110" CornerRadius="3" Background="#0369A1"
+                                        HorizontalAlignment="Left" Margin="16,0,0,0"/>
+                                <Border Height="6" Width="160" CornerRadius="3" Background="#BAE6FD"
+                                        HorizontalAlignment="Left" Margin="32,0,0,0"/>
+                                <Border Height="6" Width="90" CornerRadius="3" Background="#38BDF8"
+                                        HorizontalAlignment="Left" Margin="32,0,0,0"/>
+                                <Border Height="6" Width="130" CornerRadius="3" Background="#BAE6FD"
+                                        HorizontalAlignment="Left" Margin="16,0,0,0"/>
+                            </StackPanel>
+                        </Border>
+
+                        <!-- Laptop base -->
+                        <Border Width="356" Height="14" Margin="0,184,0,0"
+                                HorizontalAlignment="Left" VerticalAlignment="Top"
+                                CornerRadius="2,2,14,14" Background="#BAE6FD"
+                                BorderBrush="#7DD3FC" BorderThickness="1">
+                            <Border Width="64" Height="5" CornerRadius="0,0,5,5"
+                                    Background="#E0F2FE" HorizontalAlignment="Center"
+                                    VerticalAlignment="Top"/>
+                        </Border>
+
+                        <!-- Shield with check -->
+                        <Viewbox Width="92" Height="104" HorizontalAlignment="Right"
+                                 VerticalAlignment="Bottom">
+                            <Canvas Width="24" Height="27">
+                                <Path Data="M12 1 L21.5 4.6 V12 C21.5 18 17.4 22.8 12 25.4 C6.6 22.8 2.5 18 2.5 12 V4.6 Z"
+                                      Stroke="#FFFFFF" StrokeThickness="1.2" StrokeJoin="Round">
+                                    <Path.Fill>
+                                        <LinearGradientBrush StartPoint="0%,0%" EndPoint="100%,100%">
+                                            <GradientStop Color="#38BDF8" Offset="0"/>
+                                            <GradientStop Color="#0284C7" Offset="1"/>
+                                        </LinearGradientBrush>
+                                    </Path.Fill>
+                                </Path>
+                                <Path Data="M7.6 12.8 L10.8 16 L16.6 9.6" Stroke="White" StrokeThickness="2"
+                                      StrokeLineCap="Round" StrokeJoin="Round"/>
+                            </Canvas>
+                        </Viewbox>
+
+                    </Grid>
+
+                </StackPanel>
+
+                <!-- Right: join card -->
+                <Border Grid.Column="2" VerticalAlignment="Center"
+                        Classes="card" Padding="34">
+                    <StackPanel Spacing="6">
+
+                        <StackPanel Orientation="Horizontal" Spacing="12">
+                            <ContentControl Width="46" Height="46" Content="logo"
+                                            ContentTemplate="{DynamicResource LogoMark}"/>
+                            <StackPanel VerticalAlignment="Center" Spacing="1">
+                                <TextBlock Text="CodeTrace" FontSize="20" FontWeight="Bold"
+                                           Foreground="{DynamicResource HeadingText}"/>
+                                <TextBlock Text="Secure Programming Examination System" FontSize="11"
+                                           Foreground="#475569"/>
+                            </StackPanel>
+                        </StackPanel>
+
+                        <Border Height="1" Background="#BAE6FD" Margin="0,12,0,12"/>
+
+                        <TextBlock Text="Join an examination" FontSize="17" FontWeight="Bold"
+                                   Foreground="#0C4A6E" Margin="0,0,0,4"/>
+
+                        <TextBlock Text="Server IP Address" Classes="fieldLabel" Margin="0,6,0,4"/>
+                        <TextBox x:Name="ServerBox" Height="42" MaxLength="21"
+                                 PlaceholderText="e.g. 10.1.180.25"/>
+
+                        <TextBlock Text="Full Name" Classes="fieldLabel" Margin="0,10,0,4"/>
+                        <TextBox x:Name="NameBox" Height="42" MaxLength="60"
+                                 PlaceholderText="e.g. Type Your name"/>
+
+                        <TextBlock Text="Roll Number" Classes="fieldLabel" Margin="0,10,0,4"/>
+                        <TextBox x:Name="RollBox" Height="42" MaxLength="10"
+                                 PlaceholderText="e.g. 2024045 (digits only)"/>
+
+                        <Button x:Name="ConnectButton" Content="Connect" Classes="connect"
+                                HorizontalAlignment="Stretch" Height="42" Margin="0,12,0,0"
+                                Click="ConnectButton_Click"/>
+
+                        <TextBlock Text="Select Examination" Classes="fieldLabel" Margin="0,10,0,4"/>
+                        <ComboBox x:Name="ExamComboBox" Height="42" HorizontalAlignment="Stretch"
+                                  IsEnabled="False"/>
+
+                        <TextBlock x:Name="StatusText" FontSize="13" TextWrapping="Wrap" Margin="0,8,0,0"
+                                   Foreground="#475569"/>
+
+                        <Button x:Name="JoinButton" Content="Join Examination" Classes="primary"
+                                HorizontalAlignment="Stretch" Height="44" Margin="0,12,0,0"
+                                IsEnabled="False" Click="JoinButton_Click"/>
+
+                        <Button x:Name="RefreshButton" Content="Refresh (F5)" Classes="secondary"
+                                HorizontalAlignment="Stretch" Height="40" Margin="0,6,0,0"
+                                Click="RefreshButton_Click"/>
+
+                        <StackPanel Orientation="Horizontal" Spacing="8"
+                                    HorizontalAlignment="Center" Margin="0,10,0,0">
+                            <Path Data="M12 2 L20 5 V11 C20 16 16.5 20 12 22 C7.5 20 4 16 4 11 V5 Z"
+                                  Fill="#0284C7" Stretch="Uniform" Width="12" Height="14"
+                                  VerticalAlignment="Center"/>
+                            <TextBlock Text="Authorized Students Only" FontSize="12" Foreground="#475569"/>
+                        </StackPanel>
+
+                    </StackPanel>
+                </Border>
+
+            </Grid>
+        </Grid>
+    </ScrollViewer>
+
+</UserControl>

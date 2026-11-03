@@ -1,0 +1,63 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             x:Class="CodeTrace.Student.Views.ExamSessionView">
+
+    <Border Classes="listCard" Margin="16,12" Padding="22,12" VerticalAlignment="Top">
+
+        <Grid ColumnDefinitions="Auto,*,Auto,Auto" VerticalAlignment="Center">
+
+            <!-- Logo, exam name and student -->
+            <StackPanel Grid.Column="0" Orientation="Horizontal" Spacing="14"
+                        VerticalAlignment="Center" Margin="0,0,32,0" MaxWidth="440">
+
+                <ContentControl Width="44" Height="44" Content="logo"
+                                ContentTemplate="{DynamicResource LogoMark}"
+                                VerticalAlignment="Center"/>
+
+                <Border Width="1" Height="34" Background="#26356E" VerticalAlignment="Center"/>
+
+                <StackPanel Spacing="2" VerticalAlignment="Center" MinWidth="170" MaxWidth="320">
+                    <TextBlock x:Name="ExamNameText" Classes="pageTitle" FontSize="18"
+                               TextTrimming="CharacterEllipsis"/>
+                    <TextBlock x:Name="StudentNameText" Classes="pageSubtitle" FontSize="12"
+                               TextTrimming="CharacterEllipsis"/>
+                </StackPanel>
+            </StackPanel>
+
+            <!-- Allowed IDEs and status message -->
+            <StackPanel Grid.Column="1" Orientation="Horizontal" Spacing="12" VerticalAlignment="Center">
+                <TextBlock Text="Launch IDE:" Classes="fieldLabel" VerticalAlignment="Center"/>
+                <StackPanel x:Name="IDEButtonsPanel" Orientation="Horizontal" Spacing="8"
+                            VerticalAlignment="Center"/>
+                <TextBlock x:Name="StatusText"
+                           FontSize="12"
+                           Foreground="#8F9BC9"
+                           MaxWidth="380"
+                           TextWrapping="Wrap"
+                           VerticalAlignment="Center"/>
+            </StackPanel>
+
+            <!-- Timer -->
+            <Border Grid.Column="2" Classes="chip" MinWidth="104"
+                    VerticalAlignment="Center" Margin="20,0">
+                <TextBlock x:Name="TimerText" Text="60:00"
+                           FontSize="18" FontWeight="Bold"
+                           FontFamily="Cascadia Mono, Consolas, Menlo, monospace"
+                           HorizontalAlignment="Center"/>
+            </Border>
+
+            <!-- Submit -->
+            <Button Grid.Column="3"
+                    x:Name="SubmitButton"
+                    Content="Submit Examination"
+                    Classes="primary"
+                    MinWidth="170" Height="40"
+                    HorizontalContentAlignment="Center"
+                    VerticalAlignment="Center"
+                    Click="SubmitButton_Click"/>
+
+        </Grid>
+
+    </Border>
+
+</UserControl>

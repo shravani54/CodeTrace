@@ -1,0 +1,267 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        x:Class="CodeTrace.Student.MainWindow"
+        Title="CodeTrace - Student"
+        Icon="/Assets/logo.ico"
+        WindowState="FullScreen"
+        SystemDecorations="None"
+        CanResize="False"
+        WindowStartupLocation="CenterScreen"
+        RequestedThemeVariant="Dark"
+        FontFamily="Segoe UI Variable, Segoe UI, Inter, Arial"
+        Background="{DynamicResource PageBackground}"
+        Foreground="#F1F5FF">
+
+    <Window.Resources>
+
+        <!-- CodeTrace logo: now loaded from Assets/logo.png -->
+        <DataTemplate x:Key="LogoMark">
+            <Image Source="/Assets/logo.png"
+                   Stretch="Uniform"
+                   RenderOptions.BitmapInterpolationMode="HighQuality"/>
+        </DataTemplate>
+
+        <LinearGradientBrush x:Key="PageBackground" StartPoint="0%,0%" EndPoint="100%,100%">
+            <GradientStop Color="#070C1C" Offset="0"/>
+            <GradientStop Color="#0A1238" Offset="0.5"/>
+            <GradientStop Color="#0E1A5E" Offset="1"/>
+        </LinearGradientBrush>
+        <LinearGradientBrush x:Key="AccentBrush" StartPoint="0%,0%" EndPoint="100%,100%">
+            <GradientStop Color="#3B6BFF" Offset="0"/>
+            <GradientStop Color="#5B86FF" Offset="1"/>
+        </LinearGradientBrush>
+        <SolidColorBrush x:Key="HeadingText" Color="#F1F5FF"/>
+
+        <CornerRadius x:Key="ControlCornerRadius">12</CornerRadius>
+        <CornerRadius x:Key="OverlayCornerRadius">12</CornerRadius>
+
+        <!-- Text boxes -->
+        <SolidColorBrush x:Key="TextControlBackground" Color="#0A1030"/>
+        <SolidColorBrush x:Key="TextControlBackgroundPointerOver" Color="#0C1338"/>
+        <SolidColorBrush x:Key="TextControlBackgroundFocused" Color="#0A1030"/>
+        <SolidColorBrush x:Key="TextControlBackgroundDisabled" Color="#0C1236"/>
+        <SolidColorBrush x:Key="TextControlBorderBrush" Color="#26356E"/>
+        <SolidColorBrush x:Key="TextControlBorderBrushPointerOver" Color="#3A4F9A"/>
+        <SolidColorBrush x:Key="TextControlBorderBrushFocused" Color="#4F7BFF"/>
+        <SolidColorBrush x:Key="TextControlBorderBrushDisabled" Color="#1F2C5E"/>
+        <SolidColorBrush x:Key="TextControlForeground" Color="#F1F5FF"/>
+        <SolidColorBrush x:Key="TextControlForegroundPointerOver" Color="#F1F5FF"/>
+        <SolidColorBrush x:Key="TextControlForegroundFocused" Color="#F1F5FF"/>
+        <SolidColorBrush x:Key="TextControlForegroundDisabled" Color="#AEB9DE"/>
+        <SolidColorBrush x:Key="TextControlPlaceholderForeground" Color="#7B87B8"/>
+        <SolidColorBrush x:Key="TextControlPlaceholderForegroundPointerOver" Color="#8794C4"/>
+        <SolidColorBrush x:Key="TextControlPlaceholderForegroundFocused" Color="#6B77A8"/>
+        <SolidColorBrush x:Key="TextControlPlaceholderForegroundDisabled" Color="#6B77A8"/>
+
+        <!-- Combo box (every state) -->
+        <SolidColorBrush x:Key="ComboBoxBackground" Color="#0A1030"/>
+        <SolidColorBrush x:Key="ComboBoxBackgroundPointerOver" Color="#0C1338"/>
+        <SolidColorBrush x:Key="ComboBoxBackgroundPressed" Color="#0C1338"/>
+        <SolidColorBrush x:Key="ComboBoxBackgroundDisabled" Color="#0C1236"/>
+        <SolidColorBrush x:Key="ComboBoxBackgroundUnfocused" Color="#0A1030"/>
+        <SolidColorBrush x:Key="ComboBoxBorderBrush" Color="#26356E"/>
+        <SolidColorBrush x:Key="ComboBoxBorderBrushPointerOver" Color="#3A4F9A"/>
+        <SolidColorBrush x:Key="ComboBoxBorderBrushPressed" Color="#4F7BFF"/>
+        <SolidColorBrush x:Key="ComboBoxBorderBrushDisabled" Color="#1F2C5E"/>
+        <SolidColorBrush x:Key="ComboBoxForeground" Color="#F1F5FF"/>
+        <SolidColorBrush x:Key="ComboBoxForegroundPointerOver" Color="#FFFFFF"/>
+        <SolidColorBrush x:Key="ComboBoxForegroundPressed" Color="#FFFFFF"/>
+        <SolidColorBrush x:Key="ComboBoxForegroundFocused" Color="#FFFFFF"/>
+        <SolidColorBrush x:Key="ComboBoxForegroundFocusedPressed" Color="#FFFFFF"/>
+        <SolidColorBrush x:Key="ComboBoxForegroundDisabled" Color="#AEB9DE"/>
+        <SolidColorBrush x:Key="ComboBoxPlaceHolderForeground" Color="#7B87B8"/>
+        <SolidColorBrush x:Key="ComboBoxDropDownGlyphForeground" Color="#8FB4FF"/>
+        <SolidColorBrush x:Key="ComboBoxDropDownBackground" Color="#0E1638"/>
+        <SolidColorBrush x:Key="ComboBoxDropDownBorderBrush" Color="#2F4C94"/>
+        <Thickness x:Key="ComboBoxDropdownBorderPadding">4</Thickness>
+
+        <!-- Combo box items (list) -->
+        <SolidColorBrush x:Key="ComboBoxItemBackground" Color="Transparent"/>
+        <SolidColorBrush x:Key="ComboBoxItemBackgroundPointerOver" Color="#16205A"/>
+        <SolidColorBrush x:Key="ComboBoxItemBackgroundPressed" Color="#1C2B7A"/>
+        <SolidColorBrush x:Key="ComboBoxItemBackgroundSelected" Color="#1C2B7A"/>
+        <SolidColorBrush x:Key="ComboBoxItemBackgroundSelectedPointerOver" Color="#22348F"/>
+        <SolidColorBrush x:Key="ComboBoxItemBackgroundSelectedPressed" Color="#22348F"/>
+        <SolidColorBrush x:Key="ComboBoxItemBackgroundDisabled" Color="Transparent"/>
+        <SolidColorBrush x:Key="ComboBoxItemForeground" Color="#E6ECFF"/>
+        <SolidColorBrush x:Key="ComboBoxItemForegroundPointerOver" Color="#FFFFFF"/>
+        <SolidColorBrush x:Key="ComboBoxItemForegroundPressed" Color="#FFFFFF"/>
+        <SolidColorBrush x:Key="ComboBoxItemForegroundSelected" Color="#FFFFFF"/>
+        <SolidColorBrush x:Key="ComboBoxItemForegroundSelectedPointerOver" Color="#FFFFFF"/>
+        <SolidColorBrush x:Key="ComboBoxItemForegroundSelectedPressed" Color="#FFFFFF"/>
+        <SolidColorBrush x:Key="ComboBoxItemForegroundDisabled" Color="#6B77A8"/>
+
+        <!-- Default buttons (Connect, IDE buttons) -->
+        <SolidColorBrush x:Key="ButtonBackground" Color="#141D4A"/>
+        <SolidColorBrush x:Key="ButtonBackgroundPointerOver" Color="#1B2766"/>
+        <SolidColorBrush x:Key="ButtonBackgroundPressed" Color="#101842"/>
+        <SolidColorBrush x:Key="ButtonBackgroundDisabled" Color="#0E1538"/>
+        <SolidColorBrush x:Key="ButtonForeground" Color="#F1F5FF"/>
+        <SolidColorBrush x:Key="ButtonForegroundPointerOver" Color="#FFFFFF"/>
+        <SolidColorBrush x:Key="ButtonForegroundPressed" Color="#F1F5FF"/>
+        <SolidColorBrush x:Key="ButtonForegroundDisabled" Color="#8E9BC8"/>
+        <SolidColorBrush x:Key="ButtonBorderBrush" Color="#2F4C94"/>
+        <SolidColorBrush x:Key="ButtonBorderBrushPointerOver" Color="#4F7BFF"/>
+        <SolidColorBrush x:Key="ButtonBorderBrushPressed" Color="#4F7BFF"/>
+        <SolidColorBrush x:Key="ButtonBorderBrushDisabled" Color="#1F2C5E"/>
+
+    </Window.Resources>
+
+    <Window.Styles>
+
+        <!-- Cards -->
+        <Style Selector="Border.card">
+            <Setter Property="Background" Value="#0E1638"/>
+            <Setter Property="BorderBrush" Value="#26356E"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="CornerRadius" Value="20"/>
+            <Setter Property="BoxShadow" Value="0 16 40 0 #60000000"/>
+        </Style>
+        <Style Selector="Border.listCard">
+            <Setter Property="Background" Value="#0E1638"/>
+            <Setter Property="BorderBrush" Value="#26356E"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="CornerRadius" Value="16"/>
+            <Setter Property="BoxShadow" Value="0 10 28 0 #50000000"/>
+        </Style>
+
+        <!-- Text -->
+        <Style Selector="TextBlock.pageTitle">
+            <Setter Property="Foreground" Value="#F1F5FF"/>
+            <Setter Property="FontWeight" Value="SemiBold"/>
+        </Style>
+        <Style Selector="TextBlock.pageSubtitle">
+            <Setter Property="Foreground" Value="#8F9BC9"/>
+            <Setter Property="FontSize" Value="14"/>
+        </Style>
+        <Style Selector="TextBlock.fieldLabel">
+            <Setter Property="Foreground" Value="#E3E9FF"/>
+            <Setter Property="FontSize" Value="13"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+        </Style>
+
+        <!-- Text boxes: bright text in every state -->
+        <Style Selector="TextBox">
+            <Setter Property="Foreground" Value="#F1F5FF"/>
+            <Setter Property="Padding" Value="14,0"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="CaretBrush" Value="#4DA3FF"/>
+            <Setter Property="SelectionBrush" Value="#3B6BFF"/>
+        </Style>
+        <Style Selector="TextBox:pointerover"><Setter Property="Foreground" Value="#F1F5FF"/></Style>
+        <Style Selector="TextBox:focus"><Setter Property="Foreground" Value="#FFFFFF"/></Style>
+        <Style Selector="TextBox:disabled"><Setter Property="Foreground" Value="#AEB9DE"/></Style>
+
+        <!-- Combo box -->
+        <Style Selector="ComboBox">
+            <Setter Property="Foreground" Value="#F1F5FF"/>
+            <Setter Property="Padding" Value="14,0"/>
+        </Style>
+        <Style Selector="ComboBox:disabled"><Setter Property="Foreground" Value="#AEB9DE"/></Style>
+        <Style Selector="ComboBoxItem">
+            <Setter Property="Foreground" Value="#E6ECFF"/>
+            <Setter Property="FontWeight" Value="Medium"/>
+            <Setter Property="Padding" Value="12,10"/>
+            <Setter Property="Margin" Value="2"/>
+            <Setter Property="CornerRadius" Value="8"/>
+        </Style>
+        <Style Selector="ComboBoxItem:pointerover /template/ ContentPresenter#PART_ContentPresenter">
+            <Setter Property="Background" Value="#16205A"/>
+            <Setter Property="TextElement.Foreground" Value="#FFFFFF"/>
+        </Style>
+        <Style Selector="ComboBoxItem:selected /template/ ContentPresenter#PART_ContentPresenter">
+            <Setter Property="Background" Value="#1C2B7A"/>
+            <Setter Property="TextElement.Foreground" Value="#FFFFFF"/>
+        </Style>
+        <Style Selector="ComboBoxItem:selected:pointerover /template/ ContentPresenter#PART_ContentPresenter">
+            <Setter Property="Background" Value="#22348F"/>
+            <Setter Property="TextElement.Foreground" Value="#FFFFFF"/>
+        </Style>
+
+        <!-- Buttons -->
+        <Style Selector="Button">
+            <Setter Property="FontWeight" Value="SemiBold"/>
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="CornerRadius" Value="10"/>
+        </Style>
+
+        <!-- Primary: Join Examination, Submit Examination (blue to violet) -->
+        <Style Selector="Button.primary">
+            <Setter Property="Background">
+                <LinearGradientBrush StartPoint="0%,0%" EndPoint="100%,0%">
+                    <GradientStop Color="#3B6BFF" Offset="0"/>
+                    <GradientStop Color="#6A5CFF" Offset="1"/>
+                </LinearGradientBrush>
+            </Setter>
+            <Setter Property="Foreground" Value="#FFFFFF"/>
+            <Setter Property="BorderBrush" Value="Transparent"/>
+            <Setter Property="BorderThickness" Value="0"/>
+        </Style>
+        <Style Selector="Button.primary:pointerover /template/ ContentPresenter#PART_ContentPresenter">
+            <Setter Property="Background">
+                <LinearGradientBrush StartPoint="0%,0%" EndPoint="100%,0%">
+                    <GradientStop Color="#2F5CF0" Offset="0"/>
+                    <GradientStop Color="#5A4CF0" Offset="1"/>
+                </LinearGradientBrush>
+            </Setter>
+            <Setter Property="TextElement.Foreground" Value="#FFFFFF"/>
+        </Style>
+        <Style Selector="Button.primary:pressed /template/ ContentPresenter#PART_ContentPresenter">
+            <Setter Property="Background" Value="#3A3FD0"/>
+            <Setter Property="TextElement.Foreground" Value="#FFFFFF"/>
+        </Style>
+        <Style Selector="Button.primary:disabled /template/ ContentPresenter#PART_ContentPresenter">
+            <Setter Property="Background" Value="#16204D"/>
+            <Setter Property="BorderBrush" Value="#26356E"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="TextElement.Foreground" Value="#8E9BC8"/>
+        </Style>
+
+        <!-- Secondary: Refresh (F5) -->
+        <Style Selector="Button.secondary">
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="Foreground" Value="#C9D2F0"/>
+            <Setter Property="BorderBrush" Value="#26356E"/>
+            <Setter Property="BorderThickness" Value="1"/>
+        </Style>
+        <Style Selector="Button.secondary:pointerover /template/ ContentPresenter#PART_ContentPresenter">
+            <Setter Property="Background" Value="#121B48"/>
+            <Setter Property="BorderBrush" Value="#3A4F9A"/>
+            <Setter Property="TextElement.Foreground" Value="#FFFFFF"/>
+        </Style>
+        <Style Selector="Button.secondary:pressed /template/ ContentPresenter#PART_ContentPresenter">
+            <Setter Property="Background" Value="#0E1538"/>
+        </Style>
+
+        <!-- IDE buttons (created in code) -->
+        <Style Selector="StackPanel#IDEButtonsPanel > Button">
+            <Setter Property="Padding" Value="16,8"/>
+            <Setter Property="FontWeight" Value="Medium"/>
+        </Style>
+
+        <!-- Timer chip -->
+        <Style Selector="Border.chip">
+            <Setter Property="Background" Value="#14234A"/>
+            <Setter Property="BorderBrush" Value="#2F4C94"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="CornerRadius" Value="999"/>
+            <Setter Property="Padding" Value="18,7"/>
+        </Style>
+        <Style Selector="Border.chip > TextBlock"><Setter Property="Foreground" Value="#6EA8FF"/></Style>
+        <Style Selector="Border.chip.warn">
+            <Setter Property="Background" Value="#3A2B0E"/>
+            <Setter Property="BorderBrush" Value="#7A5A1A"/>
+        </Style>
+        <Style Selector="Border.chip.warn > TextBlock"><Setter Property="Foreground" Value="#F0B24A"/></Style>
+        <Style Selector="Border.chip.danger">
+            <Setter Property="Background" Value="#3D1A17"/>
+            <Setter Property="BorderBrush" Value="#7A2E2A"/>
+        </Style>
+        <Style Selector="Border.chip.danger > TextBlock"><Setter Property="Foreground" Value="#FF6B6B"/></Style>
+
+    </Window.Styles>
+
+    <ContentControl x:Name="MainContent"/>
+
+</Window>
