@@ -1,0 +1,230 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             x:Class="CodeTrace.Teacher.TeacherDashboard">
+
+    <UserControl.Resources>
+        <LinearGradientBrush x:Key="NavGradient" StartPoint="0,0" EndPoint="1,0">
+            <GradientStop Color="#7DD3FC" Offset="0"/>
+            <GradientStop Color="#38BDF8" Offset="1"/>
+        </LinearGradientBrush>
+    </UserControl.Resources>
+
+    <UserControl.Styles>
+
+        <!-- NAV BUTTONS -->
+
+        <Style Selector="Button.navItem">
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="Foreground" Value="#0C4A6E"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="CornerRadius" Value="10"/>
+            <Setter Property="Height" Value="44"/>
+            <Setter Property="Padding" Value="14,0"/>
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="HorizontalAlignment" Value="Stretch"/>
+            <Setter Property="HorizontalContentAlignment" Value="Left"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="Cursor" Value="Hand"/>
+        </Style>
+
+        <Style Selector="Button.navItem:pointerover /template/ ContentPresenter#PART_ContentPresenter">
+            <Setter Property="Background" Value="#BAE6FD"/>
+            <Setter Property="Foreground" Value="#082F49"/>
+        </Style>
+
+        <Style Selector="Button.navItem:pressed /template/ ContentPresenter#PART_ContentPresenter">
+            <Setter Property="Background" Value="#7DD3FC"/>
+            <Setter Property="Foreground" Value="#082F49"/>
+        </Style>
+
+        <!-- Selected page (covers the class names usually used for this) -->
+
+        <Style Selector="Button.navItem.active, Button.navItem.selected, Button.navItem.current">
+            <Setter Property="Foreground" Value="#082F49"/>
+            <Setter Property="FontWeight" Value="SemiBold"/>
+            <Setter Property="Background" Value="{StaticResource NavGradient}"/>
+        </Style>
+
+        <Style Selector="Button.navItem.active /template/ ContentPresenter#PART_ContentPresenter, Button.navItem.selected /template/ ContentPresenter#PART_ContentPresenter, Button.navItem.current /template/ ContentPresenter#PART_ContentPresenter">
+            <Setter Property="Background" Value="{StaticResource NavGradient}"/>
+            <Setter Property="Foreground" Value="#082F49"/>
+        </Style>
+
+        <!-- SIGN OUT BUTTON -->
+
+        <Style Selector="Button.ghost">
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="Foreground" Value="#0369A1"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="CornerRadius" Value="10"/>
+            <Setter Property="Width" Value="40"/>
+            <Setter Property="Height" Value="40"/>
+            <Setter Property="Padding" Value="0"/>
+            <Setter Property="FontSize" Value="16"/>
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="Cursor" Value="Hand"/>
+        </Style>
+
+        <Style Selector="Button.ghost:pointerover /template/ ContentPresenter#PART_ContentPresenter">
+            <Setter Property="Background" Value="#BAE6FD"/>
+            <Setter Property="Foreground" Value="#082F49"/>
+        </Style>
+
+    </UserControl.Styles>
+
+    <Grid ColumnDefinitions="240,*">
+
+        <!-- SIDEBAR -->
+
+        <Border Grid.Column="0"
+                Background="#E0F2FE"
+                BorderBrush="#BAE6FD"
+                BorderThickness="0,0,1,0"
+                Padding="16">
+
+            <Grid RowDefinitions="Auto,*,Auto">
+
+                <StackPanel Grid.Row="0"
+                            Orientation="Horizontal"
+                            Spacing="10"
+                            Margin="8,10,8,30">
+
+                    <!-- Logo -->
+                    <Image Source="/Assets/logo.png"
+                           Width="40" Height="40"
+                           RenderOptions.BitmapInterpolationMode="HighQuality"/>
+
+                    <TextBlock Text="CodeTrace"
+                               Foreground="#0C4A6E"
+                               FontSize="20"
+                               FontWeight="Bold"
+                               VerticalAlignment="Center"/>
+
+                </StackPanel>
+
+                <StackPanel Grid.Row="1" Spacing="4">
+
+                    <TextBlock Text="MAIN"
+                               Foreground="#475569"
+                               FontSize="11"
+                               FontWeight="Bold"
+                               Margin="14,0,0,6"/>
+
+                    <Button x:Name="CreateExamNavButton"
+                            Content="📝  Create Examination"
+                            Classes="navItem"
+                            Click="CreateExamButton_Click"/>
+
+                    <Button x:Name="ManageExamsNavButton"
+                            Content="📋  Manage Examinations"
+                            Classes="navItem"
+                            Click="ManageExamsButton_Click"/>
+
+                    <Button x:Name="JoinRequestsNavButton"
+                            Content="🔔  Join Requests"
+                            Classes="navItem"
+                            Click="JoinRequestsButton_Click"/>
+
+                    <Button x:Name="ManageStudentsNavButton"
+                            Content="👥  Manage Students"
+                            Classes="navItem"
+                            Click="ManageStudentsButton_Click"/>
+
+                    <Button x:Name="StudentListNavButton"
+                            Content="📑  Approved Students"
+                            Classes="navItem"
+                            Click="StudentListButton_Click"/>
+
+                    <Button x:Name="MonitorStudentsNavButton"
+                            Content="🖥️  Monitor Students"
+                            Classes="navItem"
+                            Click="MonitorStudentsButton_Click"/>
+
+                    <Button x:Name="ViewSubmissionsNavButton"
+                            Content="📄  View Submissions"
+                            Classes="navItem"
+                            Click="ViewSubmissionsButton_Click"/>
+
+                    <TextBlock Text="SETTINGS"
+                               Foreground="#475569"
+                               FontSize="11"
+                               FontWeight="Bold"
+                               Margin="14,22,0,6"/>
+
+                    <Button x:Name="ManageIDEsNavButton"
+                            Content="⚙️  Manage IDEs"
+                            Classes="navItem"
+                            Click="ManageIDEsButton_Click"/>
+
+                    <Button x:Name="ProfileNavButton"
+                            Content="👤  Profile"
+                            Classes="navItem"
+                            Click="ProfileButton_Click"/>
+
+                    <Button x:Name="SignOutNavButton"
+                            Content="🚪  Sign out"
+                            Classes="navItem"
+                            Click="LogoutButton_Click"/>
+
+                </StackPanel>
+
+                <Border Grid.Row="2"
+                        Background="#FFFFFF"
+                        BorderBrush="#BAE6FD"
+                        BorderThickness="1"
+                        CornerRadius="12"
+                        Padding="12"
+                        Margin="0,0,0,4">
+                    <Grid ColumnDefinitions="Auto,*,Auto">
+
+                        <Border Grid.Column="0"
+                                Width="34" Height="34" CornerRadius="17"
+                                Background="#0369A1">
+                            <TextBlock x:Name="FooterInitialText"
+                                       Text="T" Foreground="White" FontWeight="Bold"
+                                       HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+
+                        <StackPanel Grid.Column="1"
+                                    VerticalAlignment="Center"
+                                    Spacing="0"
+                                    Margin="10,0,0,0">
+                            <TextBlock x:Name="FooterUsernameText"
+                                       Text="Teacher" Foreground="#0C4A6E" FontSize="13" FontWeight="SemiBold"/>
+                            <TextBlock Text="Signed in" Foreground="#475569" FontSize="11"/>
+                        </StackPanel>
+
+                        <Button Grid.Column="2"
+                                Content="⏻"
+                                Classes="ghost"
+                                ToolTip.Tip="Sign out"
+                                Click="LogoutButton_Click"/>
+
+                    </Grid>
+                </Border>
+
+            </Grid>
+
+        </Border>
+
+        <!-- CONTENT AREA -->
+
+        <Border Grid.Column="1"
+                Background="#F0F9FF">
+
+            <ContentControl x:Name="MainContent" Margin="0"/>
+
+        </Border>
+
+        <!-- Notifications: drawn on top of every page, top-right corner -->
+        <StackPanel x:Name="ToastPanel"
+                    Grid.Column="1"
+                    HorizontalAlignment="Right"
+                    VerticalAlignment="Top"
+                    Margin="0,20,0,0"
+                    Spacing="10"/>
+
+    </Grid>
+
+</UserControl>

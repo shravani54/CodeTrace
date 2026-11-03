@@ -1,0 +1,373 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             x:Class="CodeTrace.Teacher.Views.AllowedStudentsView">
+
+    <UserControl.Resources>
+
+        <LinearGradientBrush x:Key="AccentGradient" StartPoint="0%,50%" EndPoint="100%,50%">
+            <GradientStop Color="#7DD3FC" Offset="0"/>
+            <GradientStop Color="#38BDF8" Offset="1"/>
+        </LinearGradientBrush>
+
+        <!-- Text boxes sit inside a white input card: dark text, transparent box, in every state -->
+
+        <SolidColorBrush x:Key="TextControlForeground" Color="#0F172A"/>
+        <SolidColorBrush x:Key="TextControlForegroundPointerOver" Color="#0F172A"/>
+        <SolidColorBrush x:Key="TextControlForegroundFocused" Color="#0F172A"/>
+        <SolidColorBrush x:Key="TextControlForegroundDisabled" Color="#94A3B8"/>
+
+        <SolidColorBrush x:Key="TextControlBackground" Color="Transparent"/>
+        <SolidColorBrush x:Key="TextControlBackgroundPointerOver" Color="Transparent"/>
+        <SolidColorBrush x:Key="TextControlBackgroundFocused" Color="Transparent"/>
+
+        <SolidColorBrush x:Key="TextControlBorderBrush" Color="Transparent"/>
+        <SolidColorBrush x:Key="TextControlBorderBrushPointerOver" Color="Transparent"/>
+        <SolidColorBrush x:Key="TextControlBorderBrushFocused" Color="Transparent"/>
+
+        <SolidColorBrush x:Key="TextControlPlaceholderForeground" Color="#64748B"/>
+        <SolidColorBrush x:Key="TextControlPlaceholderForegroundPointerOver" Color="#64748B"/>
+        <SolidColorBrush x:Key="TextControlPlaceholderForegroundFocused" Color="#64748B"/>
+
+    </UserControl.Resources>
+
+    <UserControl.Styles>
+
+        <!-- TEXT -->
+
+        <Style Selector="TextBlock.pageTitle">
+            <Setter Property="FontSize" Value="34"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="Foreground" Value="#0C4A6E"/>
+        </Style>
+
+        <Style Selector="TextBlock.pageSubtitle">
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="Foreground" Value="#475569"/>
+        </Style>
+
+        <Style Selector="TextBlock.sectionTitle">
+            <Setter Property="FontSize" Value="18"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="Foreground" Value="#0C4A6E"/>
+        </Style>
+
+        <Style Selector="TextBlock.fieldLabel">
+            <Setter Property="Foreground" Value="#0C4A6E"/>
+            <Setter Property="FontWeight" Value="SemiBold"/>
+            <Setter Property="FontSize" Value="13"/>
+        </Style>
+
+        <Style Selector="TextBlock.hint">
+            <Setter Property="Foreground" Value="#475569"/>
+            <Setter Property="FontSize" Value="12"/>
+        </Style>
+
+        <!-- CARD, INPUT, DIVIDER -->
+
+        <Style Selector="Border.card">
+            <Setter Property="Background" Value="#FFFFFF"/>
+            <Setter Property="BorderBrush" Value="#BAE6FD"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="CornerRadius" Value="20"/>
+            <Setter Property="Padding" Value="32"/>
+            <Setter Property="BoxShadow" Value="0 16 44 0 #260EA5E9"/>
+        </Style>
+
+        <Style Selector="Border.inputCard">
+            <Setter Property="Background" Value="#FFFFFF"/>
+            <Setter Property="BorderBrush" Value="#BAE6FD"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="CornerRadius" Value="10"/>
+            <Setter Property="Padding" Value="6,0"/>
+        </Style>
+
+        <Style Selector="Border.inputCard:pointerover">
+            <Setter Property="BorderBrush" Value="#7DD3FC"/>
+        </Style>
+
+        <Style Selector="Border.inputCard:focus-within">
+            <Setter Property="BorderBrush" Value="#0EA5E9"/>
+            <Setter Property="BorderThickness" Value="1.5"/>
+        </Style>
+
+        <Style Selector="Border.divider">
+            <Setter Property="Height" Value="1"/>
+            <Setter Property="Background" Value="#BAE6FD"/>
+            <Setter Property="Margin" Value="0,4"/>
+        </Style>
+
+        <!-- TEXTBOX -->
+
+        <Style Selector="TextBox">
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="Foreground" Value="#0F172A"/>
+            <Setter Property="CaretBrush" Value="#0C4A6E"/>
+            <Setter Property="SelectionBrush" Value="#7DD3FC"/>
+            <Setter Property="SelectionForegroundBrush" Value="#0F172A"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="Padding" Value="10,0"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="PlaceholderForeground" Value="#64748B"/>
+        </Style>
+
+        <Style Selector="TextBox:pointerover">
+            <Setter Property="Foreground" Value="#0F172A"/>
+            <Setter Property="CaretBrush" Value="#0C4A6E"/>
+        </Style>
+
+        <Style Selector="TextBox:focus">
+            <Setter Property="Foreground" Value="#0F172A"/>
+            <Setter Property="CaretBrush" Value="#0C4A6E"/>
+            <Setter Property="SelectionBrush" Value="#7DD3FC"/>
+            <Setter Property="SelectionForegroundBrush" Value="#0F172A"/>
+        </Style>
+
+        <!-- The typed text itself: dark in every state, even if the theme forces white -->
+        <Style Selector="TextBox /template/ TextPresenter#PART_TextPresenter">
+            <Setter Property="TextElement.Foreground" Value="#0F172A"/>
+        </Style>
+
+        <Style Selector="TextBox:focus /template/ TextPresenter#PART_TextPresenter">
+            <Setter Property="TextElement.Foreground" Value="#0F172A"/>
+        </Style>
+
+        <Style Selector="TextBox:pointerover /template/ Border#PART_BorderElement">
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="BorderThickness" Value="0"/>
+        </Style>
+
+        <Style Selector="TextBox:focus /template/ Border#PART_BorderElement">
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="BorderThickness" Value="0"/>
+        </Style>
+
+        <!-- BUTTONS -->
+
+        <Style Selector="Button.action">
+            <Setter Property="Foreground" Value="#082F49"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="CornerRadius" Value="10"/>
+            <Setter Property="Padding" Value="18,0"/>
+            <Setter Property="Height" Value="44"/>
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="FontWeight" Value="SemiBold"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="Background" Value="{StaticResource AccentGradient}"/>
+        </Style>
+
+        <Style Selector="Button.action:pointerover /template/ ContentPresenter#PART_ContentPresenter">
+            <Setter Property="Background" Value="{StaticResource AccentGradient}"/>
+            <Setter Property="Foreground" Value="#082F49"/>
+            <Setter Property="Opacity" Value="0.9"/>
+        </Style>
+
+        <Style Selector="Button.action:pressed /template/ ContentPresenter#PART_ContentPresenter">
+            <Setter Property="Background" Value="{StaticResource AccentGradient}"/>
+            <Setter Property="Foreground" Value="#082F49"/>
+            <Setter Property="Opacity" Value="0.75"/>
+        </Style>
+
+        <Style Selector="Button.action:disabled /template/ ContentPresenter#PART_ContentPresenter">
+            <Setter Property="Background" Value="{StaticResource AccentGradient}"/>
+            <Setter Property="Foreground" Value="#082F49"/>
+            <Setter Property="Opacity" Value="0.55"/>
+        </Style>
+
+        <Style Selector="Button.danger">
+            <Setter Property="Background" Value="#FFF1F2"/>
+            <Setter Property="Foreground" Value="#BE123C"/>
+            <Setter Property="BorderBrush" Value="#FECDD3"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="CornerRadius" Value="10"/>
+            <Setter Property="Padding" Value="18,0"/>
+            <Setter Property="Height" Value="44"/>
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="FontWeight" Value="SemiBold"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+        </Style>
+
+        <Style Selector="Button.danger:pointerover /template/ ContentPresenter#PART_ContentPresenter">
+            <Setter Property="Background" Value="#FFE4E6"/>
+            <Setter Property="BorderBrush" Value="#FDA4AF"/>
+            <Setter Property="Foreground" Value="#9F1239"/>
+        </Style>
+
+        <Style Selector="Button.danger:pressed /template/ ContentPresenter#PART_ContentPresenter">
+            <Setter Property="Background" Value="#FECDD3"/>
+            <Setter Property="Foreground" Value="#9F1239"/>
+        </Style>
+
+        <Style Selector="Button.rowRemove">
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="Foreground" Value="#BE123C"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="CornerRadius" Value="8"/>
+            <Setter Property="Padding" Value="12,6"/>
+            <Setter Property="FontSize" Value="13"/>
+            <Setter Property="Cursor" Value="Hand"/>
+        </Style>
+
+        <Style Selector="Button.rowRemove:pointerover /template/ ContentPresenter#PART_ContentPresenter">
+            <Setter Property="Background" Value="#FFE4E6"/>
+            <Setter Property="Foreground" Value="#9F1239"/>
+        </Style>
+
+        <!-- STUDENT ROWS (built in code into RowsPanel) -->
+
+        <Style Selector="StackPanel#RowsPanel TextBlock">
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="Foreground" Value="#0F172A"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+        </Style>
+
+        <Style Selector="StackPanel#RowsPanel > Grid">
+            <Setter Property="Background" Value="Transparent"/>
+        </Style>
+
+        <Style Selector="StackPanel#RowsPanel > Grid:pointerover">
+            <Setter Property="Background" Value="#F0F9FF"/>
+        </Style>
+
+        <Style Selector="StackPanel#RowsPanel > Border">
+            <Setter Property="CornerRadius" Value="10"/>
+            <Setter Property="Padding" Value="0,8"/>
+        </Style>
+
+        <Style Selector="StackPanel#RowsPanel > Border:pointerover">
+            <Setter Property="Background" Value="#F0F9FF"/>
+        </Style>
+
+    </UserControl.Styles>
+
+    <Border Background="#F0F9FF" ClipToBounds="True">
+
+        <Grid>
+
+            <!-- Decorative circles, same as Create Examination -->
+
+            <Grid IsHitTestVisible="False">
+                <Ellipse Width="560" Height="560"
+                         HorizontalAlignment="Right" VerticalAlignment="Top"
+                         Margin="0,-320,-170,0" Fill="#BAE6FD" Opacity="0.55"/>
+                <Ellipse Width="500" Height="420"
+                         HorizontalAlignment="Left" VerticalAlignment="Bottom"
+                         Margin="-300,0,0,-260" Fill="#E0F2FE" Opacity="0.9"/>
+            </Grid>
+
+            <ScrollViewer>
+
+                <StackPanel Margin="36,32,36,36" MaxWidth="1000" HorizontalAlignment="Stretch">
+
+                    <!-- HEADER -->
+
+                    <StackPanel Orientation="Horizontal" Spacing="10">
+                        <TextBlock Text="Approved" Classes="pageTitle"/>
+                        <TextBlock Text="Students" Classes="pageTitle" Foreground="#0369A1"/>
+                    </StackPanel>
+
+                    <TextBlock Text="A student whose roll number is on this list is approved automatically when they connect."
+                               Classes="pageSubtitle"
+                               TextWrapping="Wrap"
+                               Margin="0,6,0,24"/>
+
+                    <!-- MAIN CARD -->
+
+                    <Border Classes="card">
+
+                        <StackPanel Spacing="14">
+
+                            <Grid ColumnDefinitions="*,Auto,Auto">
+
+                                <StackPanel VerticalAlignment="Center">
+                                    <TextBlock Text="Student list" Classes="sectionTitle"/>
+                                    <TextBlock x:Name="CountText" Classes="pageSubtitle" Margin="0,4,0,0"/>
+                                </StackPanel>
+
+                                <Button Grid.Column="1"
+                                        x:Name="ImportButton"
+                                        Classes="action"
+                                        Content="📥  Import Excel / CSV"
+                                        Margin="0,0,10,0"
+                                        Click="ImportButton_Click"/>
+
+                                <Button Grid.Column="2"
+                                        x:Name="ClearButton"
+                                        Classes="danger"
+                                        Content="Clear all"
+                                        Click="ClearButton_Click"/>
+
+                            </Grid>
+
+                            <TextBlock Classes="hint" TextWrapping="Wrap"
+                                       Text="The file needs two columns: Name and Roll Number. Put the headings in the first row."/>
+
+                            <Border Classes="divider"/>
+
+                            <!-- ADD MANUALLY -->
+
+                            <TextBlock Text="Add a student manually" Classes="fieldLabel"/>
+
+                            <Grid ColumnDefinitions="*,200,Auto" ColumnSpacing="12">
+
+                                <Border Classes="inputCard" Height="50">
+                                    <TextBox x:Name="NameBox" MaxLength="60" PlaceholderText="Student name (optional)"/>
+                                </Border>
+
+                                <Border Grid.Column="1" Classes="inputCard" Height="50">
+                                    <TextBox x:Name="RollBox" MaxLength="10" PlaceholderText="Roll number (digits)"/>
+                                </Border>
+
+                                <Button Grid.Column="2"
+                                        x:Name="AddButton"
+                                        Classes="action"
+                                        Height="50"
+                                        MinWidth="90"
+                                        Content="Add"
+                                        Click="AddButton_Click"/>
+
+                            </Grid>
+
+                            <TextBlock x:Name="StatusText"
+                                       FontSize="13"
+                                       Foreground="#0C4A6E"
+                                       TextWrapping="Wrap"
+                                       IsVisible="False"/>
+
+                            <Border Classes="divider"/>
+
+                            <!-- Table header -->
+                            <Grid ColumnDefinitions="50,*,160,100" Margin="8,4,8,0">
+                                <TextBlock Grid.Column="0" Text="No." Classes="fieldLabel" Foreground="#64748B"/>
+                                <TextBlock Grid.Column="1" Text="Name" Classes="fieldLabel" Foreground="#64748B"/>
+                                <TextBlock Grid.Column="2" Text="Roll Number" Classes="fieldLabel" Foreground="#64748B"/>
+                            </Grid>
+
+                            <Border Classes="divider"/>
+
+                            <StackPanel x:Name="RowsPanel" Spacing="2"/>
+
+                            <TextBlock x:Name="EmptyText"
+                                       Text="No students on the list yet. Import a file or add roll numbers above."
+                                       Classes="pageSubtitle"
+                                       HorizontalAlignment="Center"
+                                       Margin="0,16,0,16"
+                                       IsVisible="False"/>
+
+                        </StackPanel>
+
+                    </Border>
+
+                </StackPanel>
+
+            </ScrollViewer>
+
+        </Grid>
+
+    </Border>
+
+</UserControl>

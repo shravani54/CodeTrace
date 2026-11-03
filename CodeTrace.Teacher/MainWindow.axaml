@@ -1,0 +1,15 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        x:Class="CodeTrace.Teacher.MainWindow"
+        Title="CodeTrace - Teacher"
+        Width="1100"
+        Height="700"
+        MinWidth="900"
+        MinHeight="600"
+        Background="#F0F9FF"
+        WindowStartupLocation="CenterScreen"
+        WindowState="Maximized">
+
+    <ContentControl x:Name="MainContent"/>
+
+</Window>

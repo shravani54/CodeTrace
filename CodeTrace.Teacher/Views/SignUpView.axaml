@@ -1,0 +1,215 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             x:Class="CodeTrace.Teacher.Views.SignUpView">
+
+  <UserControl.Resources>
+    <!-- TextBox: dark text on white in every state -->
+    <SolidColorBrush x:Key="TextControlForeground" Color="#0F172A"/>
+    <SolidColorBrush x:Key="TextControlForegroundPointerOver" Color="#0F172A"/>
+    <SolidColorBrush x:Key="TextControlForegroundFocused" Color="#0F172A"/>
+    <SolidColorBrush x:Key="TextControlForegroundDisabled" Color="#94A3B8"/>
+    <SolidColorBrush x:Key="TextControlPlaceholderForeground" Color="#64748B"/>
+    <SolidColorBrush x:Key="TextControlPlaceholderForegroundPointerOver" Color="#64748B"/>
+    <SolidColorBrush x:Key="TextControlPlaceholderForegroundFocused" Color="#64748B"/>
+
+    <!-- TextBox: white background in every state -->
+    <SolidColorBrush x:Key="TextControlBackground" Color="#FFFFFF"/>
+    <SolidColorBrush x:Key="TextControlBackgroundPointerOver" Color="#FFFFFF"/>
+    <SolidColorBrush x:Key="TextControlBackgroundFocused" Color="#FFFFFF"/>
+    <SolidColorBrush x:Key="TextControlBackgroundDisabled" Color="#F1F5F9"/>
+  </UserControl.Resources>
+
+  <UserControl.Styles>
+
+    <Style Selector="TextBox.field">
+      <Setter Property="Height" Value="46"/>
+      <Setter Property="CornerRadius" Value="10"/>
+      <Setter Property="VerticalContentAlignment" Value="Center"/>
+      <Setter Property="FontSize" Value="14"/>
+      <Setter Property="Padding" Value="12,0"/>
+      <Setter Property="Background" Value="#FFFFFF"/>
+      <Setter Property="Foreground" Value="#0F172A"/>
+      <Setter Property="CaretBrush" Value="#0C4A6E"/>
+      <Setter Property="SelectionBrush" Value="#7DD3FC"/>
+      <Setter Property="BorderBrush" Value="#BAE6FD"/>
+      <Setter Property="BorderThickness" Value="1"/>
+    </Style>
+
+    <!-- The typed text itself: dark in every state, even if the theme forces white -->
+    <Style Selector="TextBox.field /template/ TextPresenter#PART_TextPresenter">
+      <Setter Property="TextElement.Foreground" Value="#0F172A"/>
+    </Style>
+
+    <Style Selector="TextBox.field:focus /template/ TextPresenter#PART_TextPresenter">
+      <Setter Property="TextElement.Foreground" Value="#0F172A"/>
+    </Style>
+
+    <Style Selector="TextBox.field:pointerover /template/ Border#PART_BorderElement">
+      <Setter Property="BorderBrush" Value="#7DD3FC"/>
+    </Style>
+
+    <Style Selector="TextBox.field:focus /template/ Border#PART_BorderElement">
+      <Setter Property="Background" Value="#FFFFFF"/>
+      <Setter Property="BorderBrush" Value="#0EA5E9"/>
+      <Setter Property="BorderThickness" Value="1.5"/>
+    </Style>
+
+    <Style Selector="TextBlock.label">
+      <Setter Property="FontSize" Value="12"/>
+      <Setter Property="FontWeight" Value="SemiBold"/>
+      <Setter Property="Foreground" Value="#0C4A6E"/>
+      <Setter Property="Margin" Value="0,14,0,7"/>
+    </Style>
+
+    <!-- Small live hints under the fields -->
+    <Style Selector="TextBlock.hint">
+      <Setter Property="FontSize" Value="12"/>
+      <Setter Property="Foreground" Value="#64748B"/>
+      <Setter Property="TextWrapping" Value="Wrap"/>
+      <Setter Property="Margin" Value="2,6,0,0"/>
+    </Style>
+
+    <Style Selector="TextBlock.rule">
+      <Setter Property="FontSize" Value="12"/>
+      <Setter Property="Foreground" Value="#64748B"/>
+    </Style>
+
+    <Style Selector="Button.signin">
+      <Setter Property="Height" Value="50"/>
+      <Setter Property="CornerRadius" Value="10"/>
+      <Setter Property="HorizontalAlignment" Value="Stretch"/>
+      <Setter Property="HorizontalContentAlignment" Value="Center"/>
+      <Setter Property="VerticalContentAlignment" Value="Center"/>
+      <Setter Property="Foreground" Value="#082F49"/>
+      <Setter Property="FontSize" Value="15"/>
+      <Setter Property="FontWeight" Value="SemiBold"/>
+      <Setter Property="Cursor" Value="Hand"/>
+      <Setter Property="Background">
+        <LinearGradientBrush StartPoint="0%,50%" EndPoint="100%,50%">
+          <GradientStop Color="#7DD3FC" Offset="0"/>
+          <GradientStop Color="#38BDF8" Offset="1"/>
+        </LinearGradientBrush>
+      </Setter>
+    </Style>
+
+    <Style Selector="Button.signin:pointerover /template/ ContentPresenter">
+      <Setter Property="Opacity" Value="0.9"/>
+    </Style>
+
+    <Style Selector="Button.signin:disabled /template/ ContentPresenter">
+      <Setter Property="Opacity" Value="0.55"/>
+    </Style>
+
+  </UserControl.Styles>
+
+  <Grid ClipToBounds="True" Background="#F0F9FF">
+
+    <Grid IsHitTestVisible="False">
+      <Ellipse Width="560" Height="560"
+               HorizontalAlignment="Right" VerticalAlignment="Top"
+               Margin="0,-320,-170,0" Fill="#BAE6FD" Opacity="0.55"/>
+      <Ellipse Width="500" Height="420"
+               HorizontalAlignment="Left" VerticalAlignment="Bottom"
+               Margin="-300,0,0,-260" Fill="#E0F2FE" Opacity="0.9"/>
+    </Grid>
+
+    <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
+
+      <Border Width="460"
+              Margin="0,32"
+              VerticalAlignment="Center"
+              HorizontalAlignment="Center"
+              CornerRadius="20"
+              Padding="32"
+              Background="#FFFFFF"
+              BorderBrush="#BAE6FD"
+              BorderThickness="1"
+              BoxShadow="0 16 44 0 #260EA5E9">
+
+        <StackPanel>
+
+          <StackPanel Orientation="Horizontal" Spacing="12">
+            <Border Width="44" Height="44" CornerRadius="10" Background="#0369A1">
+              <TextBlock Text="CT" FontSize="16" FontWeight="Bold" Foreground="White"
+                         HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            </Border>
+
+            <StackPanel VerticalAlignment="Center" Spacing="3">
+              <TextBlock Text="CodeTrace" FontSize="19" FontWeight="Bold" Foreground="#0C4A6E"/>
+              <TextBlock Text="Secure Programming Examination System" FontSize="10" Foreground="#475569"/>
+            </StackPanel>
+          </StackPanel>
+
+          <Border Height="1" Background="#BAE6FD" Margin="0,22,0,6"/>
+
+          <TextBlock Text="Create Teacher Account" FontSize="16" FontWeight="SemiBold"
+                     Foreground="#0C4A6E" Margin="0,12,0,0"/>
+
+          <!-- FULL NAME -->
+          <TextBlock Text="Full Name" Classes="label"/>
+          <TextBox x:Name="FullNameBox" Classes="field" MaxLength="60"
+                   PlaceholderText="e.g. Prof. Sharma"/>
+
+          <!-- USERNAME -->
+          <TextBlock Text="Username" Classes="label"/>
+          <TextBox x:Name="UsernameBox" Classes="field" MaxLength="30"
+                   PlaceholderText="Start with a letter; letters, numbers, . or _"/>
+          <TextBlock x:Name="UsernameHint" Classes="hint"
+                     Text="3 to 30 characters. Must start with a letter."/>
+
+          <!-- PASSWORD + live rules -->
+          <TextBlock Text="Password" Classes="label"/>
+          <TextBox x:Name="PasswordBox" Classes="field revealPasswordButton"
+                   MaxLength="64"
+                   PasswordChar="•" PlaceholderText="Create a strong password"/>
+
+          <Border Background="#F0F9FF" BorderBrush="#BAE6FD" BorderThickness="1"
+                  CornerRadius="10" Padding="14,10" Margin="0,8,0,0">
+            <StackPanel Spacing="4">
+              <TextBlock Text="Your password must have:" FontSize="12" FontWeight="SemiBold"
+                         Foreground="#0C4A6E"/>
+              <TextBlock x:Name="RuleLength" Classes="rule"/>
+              <TextBlock x:Name="RuleUpper" Classes="rule"/>
+              <TextBlock x:Name="RuleLower" Classes="rule"/>
+              <TextBlock x:Name="RuleDigit" Classes="rule"/>
+              <TextBlock x:Name="RuleSpecial" Classes="rule"/>
+              <TextBlock x:Name="RuleSpace" Classes="rule"/>
+            </StackPanel>
+          </Border>
+
+          <!-- CONFIRM -->
+          <TextBlock Text="Confirm Password" Classes="label"/>
+          <TextBox x:Name="ConfirmBox" Classes="field revealPasswordButton"
+                   MaxLength="64"
+                   PasswordChar="•" PlaceholderText="Type the password again"/>
+          <TextBlock x:Name="MatchHint" Classes="hint" IsVisible="False"/>
+
+          <Grid MinHeight="22" Margin="0,12,0,12">
+            <TextBlock x:Name="StatusText" FontSize="12" TextWrapping="Wrap"
+                       VerticalAlignment="Center" Foreground="#475569"/>
+            <ProgressBar x:Name="SignUpProgress" IsIndeterminate="True" IsVisible="False"
+                         Height="3" VerticalAlignment="Bottom"
+                         Foreground="#0EA5E9" Background="#E0F2FE"/>
+          </Grid>
+
+          <Button x:Name="CreateButton" Classes="signin" IsDefault="True"
+                  Content="Create Account" Click="CreateButton_Click"/>
+
+          <StackPanel Orientation="Horizontal" HorizontalAlignment="Center"
+                      Spacing="6" Margin="0,16,0,0">
+            <TextBlock Text="Already have an account?" FontSize="12" Foreground="#475569"
+                       VerticalAlignment="Center"/>
+            <Button Content="Sign in" Click="BackToLogin_Click"
+                    Background="Transparent" BorderThickness="0" Padding="2,0"
+                    Foreground="#0369A1" FontSize="12" FontWeight="SemiBold" Cursor="Hand"/>
+          </StackPanel>
+
+        </StackPanel>
+
+      </Border>
+
+    </ScrollViewer>
+
+  </Grid>
+
+</UserControl>
